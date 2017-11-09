@@ -1,0 +1,9 @@
+{
+	"id" : "thermoAlternateView",
+	"name" : "thermoAlternateView",
+	"description" : "Vue alternative du plugin thermostat",
+	"licence" : "AGPL",
+	"author" : "SupraDolph",
+	"require" : "3.0",
+	"category" : "wellness"
+}
