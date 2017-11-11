@@ -21,12 +21,47 @@
 }
 
 .thermo-temperature,
-.thermo-widget-name {
+.thermo-widget-name,
+.thermo-temperature-ext {
     color: #444444;
 }
 
 .thermo-consigne {
     color: white;
+}
+
+.thermo-temperature-ext {
+    width: 60px;
+}
+
+.thermo-temp-externe {
+    font-family: 'Saira', sans-serif;
+    display: inline-flex;
+    float: right;
+    width: 25%;
+    height: 40px;
+    color: #444444;
+    position: absolute;
+    top: calc(100% - 4.4em - 10px);
+    left: calc(100% - 25% - 5px);
+}
+
+.thermo-temp-externe-mobile {
+    top: calc(100% - 40px);
+    left: calc(100% - 70px - 5px);
+    width: 70px;
+}
+
+.thermo-img {
+    height: 100%;
+    width: 30%;
+    margin-right: 5px;
+    fill: #61B872;
+    padding-bottom: 3px;
+}
+
+.thermo-img-mobile {
+    width: 20px;
 }
 
 .thermo-button {

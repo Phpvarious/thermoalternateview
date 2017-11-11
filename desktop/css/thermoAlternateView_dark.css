@@ -10,7 +10,8 @@
     height: 40%;
 }
 
-.thermoDark-top-side-right {
+.thermoDark-top-side-right,
+.thermoDark-top-side-right-mobile  {
     font-family: 'Work Sans', sans-serif;
     font-size: 2.5em;
     height: 20%;
@@ -21,14 +22,24 @@
     margin-right: 16px;
 }
 
-.thermoDark-top-side-right>div:first-child {
+.thermoDark-top-side-right>div:first-child,
+.thermoDark-top-side-right-mobile>div:first-child {
     font-size: 0.4em;
     margin-right: 10px;
 }
+.thermoDark-top-side-right-mobile {
+    width: 100%;
+    float: none;
+}
 
-.thermoDark-degre {
+.thermoDark-degre,
+.thermoDark-degre-mobile {
     font-family: 'Work Sans', sans-serif;
     font-size: 0.7em;
+}
+
+.thermoDark-degre-mobile {
+    margin: 0 auto 0 0;
 }
 
 .thermoDark-widget-name {
@@ -44,13 +55,17 @@
     color: #FEFEFE;
 }
 
+.thermoDark-temperature-mobile {
+    margin: 0 0 0 auto;
+}
+
 .thermoDark-temp-externe {
     display: inline-flex;
 }
 
 .thermoDark-img {
     height: 100%;
-    width: 20%;
+    width: 30%;
     margin-right: 10px;
     fill: #61B872;
     padding-bottom: 3px;
@@ -124,6 +139,22 @@
     position: absolute;
     top: calc(50% + 24px - 16px);
     transform: translateY(-50%);
+}
+
+.thermoDark-mode-mobile {
+    width: 100%;
+    display: inline-flex;
+    position: sticky;
+    top: 100%;
+}
+
+.thermoDark-mode-mobile > span{
+    width: auto;
+    height: auto;
+    margin: auto;
+}
+.thermoDark-mode-mobile svg{
+    width: 40px;
 }
 
 .thermoDark-right-side {

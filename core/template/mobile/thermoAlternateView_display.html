@@ -55,7 +55,7 @@
             #thermo-mode-mobile#
         </div>
         <div class="thermo-back">
-            <div class="thermo-button button-plus" data-cmd_id="#consigne-id#" data-cmd_val="#consigne-value#">+</div>
+            <div class="thermo-button thermo-button-plus" data-cmd_id="#consigne-id#" data-cmd_val="#consigne-value#">+</div>
             <div class="thermo-temperature">
                 <span>#tempInterieure1#</span>
                 <span class="thermo-degre">#tempInterieure2#</span>
@@ -64,13 +64,20 @@
                 <span>#tempConsigne1#</span>
                 <span class="thermo-degre">#tempConsigne2#</span>
             </div>
-            <div class="thermo-button button-moins" data-cmd_id="#consigne-id#" data-cmd_val="#consigne-value#">-</div>
-            <svg class="mode-icon" data-cmd_id="#statut-id#">
+            <div class="thermo-button thermo-button-moins" data-cmd_id="#consigne-id#" data-cmd_val="#consigne-value#">-</div>
+            <svg class="thermo-mode-icon" data-cmd_id="#statut-id#">
                 <use xlink:href="#chauffe-icon#" />
             </svg>
-            <svg class="thermo-button lock-icon" data-cmd_id="#lock-id#" data-cmd_id2="#lock-id2#">
+            <svg class="thermo-button thermo-lock-icon" data-cmd_id="#lock-id#" data-cmd_id2="#lock-id2#">
                 <use xlink:href="#lock-icon#" />
             </svg>
+        </div>
+        <div style="display:#tempExterieure-visible#" class="thermo-temp-externe thermo-temp-externe-mobile">
+            <svg class="thermo-img thermo-img-mobile">
+                <use xlink:href="#shape-icon-externe" />
+            </svg>
+            <span class="thermo-temperature-ext" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span>
+            <span>°</span>
         </div>
     </div>
 </div>
@@ -88,6 +95,7 @@
         
                 param.uid = "#uid#";
                 param.tempInterieureId = "#tempInterieure-id#";
+                param.tempExterieureId = "#tempExterieure-id#";
                 param.consigneId = "#consigne-id#";
                 param.statutId = "#statut-id#";
                 param.lockId = "#lock-id#";

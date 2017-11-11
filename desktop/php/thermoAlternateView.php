@@ -111,12 +111,17 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Template}}</label>
         <div class="col-sm-3">
-
             <select required class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="template">
                 <option value="" disabled selected>{{Sélectionnez un Visuel}}</option>
                 <option value="default">Light (Défaut)</option>
                 <option value="dark">Dark</option>
             </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">{{Température extérieure visible}}</label>
+        <div class="col-sm-3">
+            <input type="checkbox" required class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="isvisibletempext">
         </div>
     </div>
 </fieldset>

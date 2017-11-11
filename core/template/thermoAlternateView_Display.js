@@ -2,10 +2,10 @@ function initialize(parametres, template) {
 
     if (template === undefined) {
         template = "";
-    }else {
+    } else {
         template = template.capitalize();
     }
-    
+
     if (template === "Dark") {
         initialize_Dark_Template(parametres, template);
     } else {
@@ -27,7 +27,7 @@ function initialize(parametres, template) {
     //Plus / Moins
     $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-button").click(function () {
         var cmdId = $(this).attr("data-cmd_id");
-        var cmdId2 = $(this).attr("data-cmd_id2");
+        //var cmdId2 = $(this).attr("data-cmd_id2");
         var consigne = $(this).attr("data-cmd_val");
 
         if ($(this).hasClass("thermo" + template + "-button-plus")) {
@@ -61,10 +61,10 @@ function initialize(parametres, template) {
                 jeedom.cmd.execute({
                     id: cmdId
                 });
-                if (cmdId2 != undefined) {
-                    $(this).attr("data-cmd_id", cmdId2);
-                    $(this).attr("data-cmd_id2", cmdId);
-                }
+                //if (cmdId2 != undefined) {
+                //$(this).attr("data-cmd_id", cmdId2);
+                //$(this).attr("data-cmd_id2", cmdId);
+                //}
             }
         }
 
@@ -116,6 +116,11 @@ function initialize_Default_Template(parametres) {
                     });
                     break;
 
+                case parametres.tempExterieureId:
+                    var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-temperature-ext");
+                    $domElement.text(this.value);
+                    break;
+
                 case parametres.consigneId:
                     var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-consigne").children();
                     $domElement.text("");
@@ -134,8 +139,13 @@ function initialize_Default_Template(parametres) {
                     break;
 
                 case parametres.lockId:
-                    this.value === 1 ? $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-lock-icon use").attr("xlink:href", "#shape-lock-on") : $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-lock-icon use").attr("xlink:href", "#shape-lock-off");
+                    var $lockIcon = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-lock-icon");
+                    var lockId1 = $lockIcon.attr("data-cmd_id");
+                    var lockId2 = $lockIcon.attr("data-cmd_id2");
 
+                    $lockIcon.attr("data-cmd_id", lockId2);
+                    $lockIcon.attr("data-cmd_id2", lockId1);
+                    this.value === 1 ? $lockIcon.find("use").attr("xlink:href", "#shape-lock-on") : $lockIcon.find("use").attr("xlink:href", "#shape-lock-off");
                     break;
 
                 case parametres.modeId:
@@ -162,9 +172,11 @@ function initialize_Dark_Template(parametres, template) {
     }
 
     //Ajout des labels sur les modes
-    $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-mode-label").each(function () {
-        $(this).after("<span>" + $(this).attr("data-mode").capitalize() + "</span>");
-    });
+    if (parametres.mobile !== true) {
+        $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-mode-label").each(function () {
+            $(this).after("<span>" + $(this).attr("data-mode").capitalize() + "</span>");
+        });
+    }
 
     //Mise à jour des valeurs
     $('body').on('cmd::update', function (_event, _options) {
@@ -218,6 +230,7 @@ function fitTextTemp(template) {
     //Taille du texte
     $(".thermo" + template + "-temperature").fitText(0.165);
     $(".thermo" + template + "-consigne").fitText(0.165);
+    $(".thermo" + template + "-temperature-ext").fitText(0.165);
 }
 
 String.prototype.capitalize = function () {
