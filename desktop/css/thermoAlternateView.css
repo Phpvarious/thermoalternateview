@@ -105,8 +105,8 @@
     transform: translateX(-50%) translateY(-50%);
 }
 
-.mode-icon,
-.lock-icon {
+.thermo-mode-icon,
+.thermo-lock-icon {
     margin: 0 0 0 5px;
     width: 20%;
     height: 10%;
@@ -126,23 +126,23 @@
     float: right;
 }
 
-.switch-off,
-.switch-on {
+.thermo-switch-off,
+.thermo-switch-on {
     display: block;
     text-align: center;
 }
 
-.switch-off {
+.thermo-switch-off {
     cursor: pointer;
 }
 
-.mode-switch {
+.thermo-mode-switch {
     width: 35%;
     height: 30px;
     /* A refondre */
 }
 
-.mode-label {
+.thermo-mode-label {
     width: 45%;
     height: 25px;
     /* A refondre */
@@ -150,7 +150,7 @@
     fill: #444444;
 }
 
-.mode-label-on {
+.thermo-mode-label-on {
     fill: #61B872;
 }
 

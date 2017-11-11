@@ -96,6 +96,7 @@ class thermoAlternateView extends eqLogic
         $version = jeedom::versionAlias($_version);
 
         $idThermostat = $this->getConfiguration('thermostat');
+        $template = $this->getConfiguration('template');
         $thermostat = eqLogic::byId($idThermostat);
         /*$confThermostat = json_decode($thermostat->configuration);
         //$tempInterieure = cmd::byString($confThermostat->temperature_indoor)->execCmd();
@@ -179,11 +180,11 @@ class thermoAlternateView extends eqLogic
             }
 
             if ($mode == $modeActionName) {
-                $htmlModes = $htmlModes . '<span class="switch-on thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeActionName . '" class="mode-label mode-label-on"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg class="mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="#shape-switch-on" /></svg></span>';
-                $htmlModesMobile = $htmlModesMobile . '<span class="switch-on"><svg data-mode="' . $modeActionName . '" class="mode-label mode-label-on"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
+                $htmlModes = $htmlModes . '<span class="thermo-switch-on thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeActionName . '" class="thermo-mode-label thermo-mode-label-on"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="#shape-switch-on" /></svg></span>';
+                $htmlModesMobile = $htmlModesMobile . '<span class="thermo-switch-on"><svg data-mode="' . $modeActionName . '" class="thermo-mode-label thermo-mode-label-on"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
             } else {
-                $htmlModes = $htmlModes . '<span class="switch-off thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeActionName . '" class="mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg class="mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="#shape-switch-off" /></svg></span>';
-                $htmlModesMobile = $htmlModesMobile . '<span class="switch-off"><svg data-mode="' . $modeActionName . '" class="mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
+                $htmlModes = $htmlModes . '<span class="thermo-switch-off thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeActionName . '" class="thermo-mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="#shape-switch-off" /></svg></span>';
+                $htmlModesMobile = $htmlModesMobile . '<span class="thermo-switch-off"><svg data-mode="' . $modeActionName . '" class="thermo-mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
             }
         }
 
@@ -195,6 +196,14 @@ class thermoAlternateView extends eqLogic
             $replace['#lock-icon#'] = '#shape-lock-off';
             $replace['#lock-id#'] = $cmdLockId;
             $replace['#lock-id2#'] = $cmdUnlockId;
+        }
+
+        if (empty($template) || $template === "default") {
+            $template = '';
+        }else {
+            $htmlModes = str_replace("thermo-","thermo" . $template . "-", $htmlModes);
+            $htmlModesMobile = str_replace("thermo-","thermo" . ucfirst($template) . "-", $htmlModesMobile);
+            $template = '_' . $template;
         }
 
         $replace["#statut-id#"] = $cmdStatutId;
@@ -219,9 +228,6 @@ class thermoAlternateView extends eqLogic
         $replace['#tempConsigne2#'] = $decimale;
         $replace['#consigne-value#'] = $tempConsigne;
 
-        if (empty($template)) {
-            $template = '_dark';
-        }
 
         return template_replace($replace, getTemplate('core', $version, thermoAlternateView_display . $template, 'thermoAlternateView'));
     }

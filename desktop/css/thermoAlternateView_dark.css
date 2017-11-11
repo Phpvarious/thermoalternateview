@@ -1,13 +1,16 @@
-/* Orbitron ? */
+@font-face {
+    font-family: Work Sans;
+    src: url(../../3rparty/fonts/Work_Sans/WorkSans-ExtraLight.ttf);
+}
 
-.thermo-consigne {
+.thermoDark-consigne {
     font-family: 'Work Sans', sans-serif;
     font-size: 5em;
     line-height: 0.9;
     height: 40%;
 }
 
-.thermo-top-side-right {
+.thermoDark-top-side-right {
     font-family: 'Work Sans', sans-serif;
     font-size: 2.5em;
     height: 20%;
@@ -18,17 +21,17 @@
     margin-right: 16px;
 }
 
-.thermo-top-side-right > div:first-child {
+.thermoDark-top-side-right>div:first-child {
     font-size: 0.4em;
-        margin-right: 10px;
+    margin-right: 10px;
 }
 
-.thermo-degre {
+.thermoDark-degre {
     font-family: 'Work Sans', sans-serif;
     font-size: 0.7em;
 }
 
-.thermo-widget-name {
+.thermoDark-widget-name {
     color: #959595;
     background-color: #191919;
     padding-left: 16px;
@@ -37,15 +40,15 @@
     vertical-align: middle;
 }
 
-.thermo-consigne {
+.thermoDark-consigne {
     color: #FEFEFE;
 }
 
-.thermo-temp-externe {
+.thermoDark-temp-externe {
     display: inline-flex;
 }
 
-.thermo-img {
+.thermoDark-img {
     height: 100%;
     width: 20%;
     margin-right: 10px;
@@ -53,7 +56,7 @@
     padding-bottom: 3px;
 }
 
-.thermo-button {
+.thermoDark-button {
     height: 40px;
     width: 100%;
     cursor: pointer;
@@ -61,12 +64,12 @@
     margin: 8px 0;
 }
 
-.thermo-button:hover {
+.thermoDark-button:hover {
     color: #61B872;
     fill: #61B872;
 }
 
-.thermo-button-statistics {
+.thermoDark-button-statistics {
     height: 2.2em;
     width: 2.2em;
     cursor: pointer;
@@ -76,21 +79,21 @@
     left: calc(100% - 2.2em - 16px);
 }
 
-.thermo-button-statistics:hover {
+.thermoDark-button-statistics:hover {
     fill: #61B872;
 }
 
-.thermo-cover {
-    -webkit-box-shadow: 0px 0px 8px 3px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 8px 3px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 8px 3px rgba(0,0,0,0.75);
+.thermoDark-cover {
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.75);
     background: #1D1D1D;
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-.thermo-back {
+.thermoDark-back {
     height: 66.67%;
     text-align: center;
     position: absolute;
@@ -99,12 +102,12 @@
     transform: translateX(-50%) translateY(-50%);
 }
 
-.thermo-back > div {
+.thermoDark-back>div {
     display: inline-flex;
 }
 
-.mode-icon,
-.lock-icon {
+.thermoDark-mode-icon,
+.thermoDark-lock-icon {
     margin: 0 0 0 5px;
     width: 20%;
     height: 10%;
@@ -112,58 +115,52 @@
     float: right;
 }
 
-.mode-icon {
+.thermoDark-mode-icon {
     fill: #61B872
 }
 
-.thermo-mode {
+.thermoDark-mode {
     width: 33.33%;
     position: absolute;
     top: calc(50% + 24px - 16px);
     transform: translateY(-50%);
 }
 
-.thermo-right-side {
+.thermoDark-right-side {
     position: absolute;
     top: calc(50% + 24px - 16px);
     left: 66.7%;
     transform: translateX(-16px) translateY(-50%);
 }
 
-.thermo-statistics {
+.thermoDark-statistics {
     width: 33.33%;
     float: right;
 }
 
-.switch-off {
+.thermoDark-switch-off {
     cursor: pointer;
 }
 
-.switch-off,
-.switch-on {
+.thermoDark-switch-off,
+.thermoDark-switch-on {
     background-color: #595959;
     border-radius: 8px;
     margin: 4px 15px 4px 15px;
     display: inline-block;
 }
 
-.switch-on {
+.thermoDark-switch-on {
     background-color: #3B3B3B;
-
     color: #BFBFBF;
 }
 
-.switch-off > p:first-letter, .switch-on > p:first-letter {
-    text-transform:capitalize;
+.thermoDark-switch-off>p:first-letter,
+.thermoDark-switch-on>p:first-letter {
+    text-transform: capitalize;
 }
 
-.mode-switch {
-    width: 35%;
-    height: 30px;
-    /* A refondre */
-}
-
-.mode-label {
+.thermoDark-mode-label {
     width: 30%;
     height: 20px;
     vertical-align: middle;
@@ -171,55 +168,18 @@
     fill: #FEFEFE;
 }
 
-.mode-label-on {
+.thermoDark-mode-label-on {
     fill: #61B872;
 }
 
-.thermo-tooltip {
-    position: relative;
-    display: inline-block;
-}
-
-.thermo-tooltip .thermo-tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -60px;
-    opacity: 0;
-    transition: opacity 1s 1s;
-}
-
-.thermo-tooltip .thermo-tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-}
-
-.thermo-tooltip:hover .thermo-tooltiptext {
-    visibility: visible;
-    opacity: 1;
-}
-.thermo-row-2 > div {
+.thermoDark-row-2>div {
     height: 50%;
 }
 
-.thermo-col-2 > div {
+.thermoDark-col-2>div {
     width: 50%;
 }
 
-.thermo-flex {
+.thermoDark-flex {
     display: inline-flex;
 }

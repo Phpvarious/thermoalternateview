@@ -97,15 +97,25 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
        <div class="form-group">
         <label class="col-sm-3 control-label">{{Thermostat}}</label>
         <div class="col-sm-3">
-            <!-- <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="thermostat" placeholder="ID Thermostat"/> -->
 
-            <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="thermostat">
-                <option value="">{{Sélectionnez un thermostat}}</option>
+            <select required class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="thermostat">
+                <option value="" disabled selected>{{Sélectionnez un thermostat}}</option>
                 <?php
-                    foreach (eqLogic::byType("Thermostat") as $eqLogic) {
-                        echo '<option value="' . $eqLogic->getId() . '">' . $eqLogic->getName() . '</option>';
-                    }
+                foreach (eqLogic::byType("Thermostat") as $eqLogic) {
+                    echo '<option value="' . $eqLogic->getId() . '">' . $eqLogic->getName() . '</option>';
+                }
                 ?>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">{{Template}}</label>
+        <div class="col-sm-3">
+
+            <select required class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="template">
+                <option value="" disabled selected>{{Sélectionnez un Visuel}}</option>
+                <option value="default">Light (Défaut)</option>
+                <option value="dark">Dark</option>
             </select>
         </div>
     </div>
