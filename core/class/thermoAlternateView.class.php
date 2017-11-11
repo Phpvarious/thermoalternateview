@@ -116,9 +116,12 @@ class thermoAlternateView extends eqLogic
         $cmdStatutId = 0;
         $cmdModeId = 0;
         $cmdTempInterId = 0;
+        $cmdTempExterId = 0;
         $cmdLockId = 0;
         $cmdUnlockId = 0;
         $cmdThermostatId = 0;
+        $tempInterieure = 0;
+        $tempExterieure = 0;
         $modes = array();
         $htmlModes = "";
         $htmlModesMobile = "";
@@ -157,6 +160,10 @@ class thermoAlternateView extends eqLogic
                     $cmdTempInterId = $commande->getId();
                     $tempInterieure = $commande->execCmd();
                     break;
+                    case "temperature_outdoor":
+                    $cmdTempExterId = $commande->getId();
+                    $tempExterieure= $commande->execCmd();
+                    break;
                 case "order":
                     $tempConsigne = $commande->execCmd();
                     break;
@@ -172,11 +179,11 @@ class thermoAlternateView extends eqLogic
             }
 
             if ($mode == $modeActionName) {
-                $htmlModes = $htmlModes . '<span class="switch-on thermo-tooltip"><span class="thermo-tooltiptext">' . $modeActionName . '</span><svg data-mode="' . $modeActionName . '" class="mode-label mode-label-on"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg class="mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="#shape-switch-on" /></svg></span>';
-                $htmlModesMobile = $htmlModesMobile . '<span style="display:block;text-align:center;" class="switch-on"><svg data-mode="' . $modeActionName . '" class="mode-label mode-label-on"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
+                $htmlModes = $htmlModes . '<span class="switch-on thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeActionName . '" class="mode-label mode-label-on"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg class="mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="#shape-switch-on" /></svg></span>';
+                $htmlModesMobile = $htmlModesMobile . '<span class="switch-on"><svg data-mode="' . $modeActionName . '" class="mode-label mode-label-on"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
             } else {
-                $htmlModes = $htmlModes . '<span class="switch-off thermo-tooltip"><span class="thermo-tooltiptext">' . $modeActionName . '</span><svg data-mode="' . $modeActionName . '" class="mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg class="mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="#shape-switch-off" /></svg></span>';
-                $htmlModesMobile = $htmlModesMobile . '<span style="display:block;text-align:center;" class="switch-off"><svg data-mode="' . $modeActionName . '" class="mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
+                $htmlModes = $htmlModes . '<span class="switch-off thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeActionName . '" class="mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg class="mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="#shape-switch-off" /></svg></span>';
+                $htmlModesMobile = $htmlModesMobile . '<span class="switch-off"><svg data-mode="' . $modeActionName . '" class="mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
             }
         }
 
@@ -202,13 +209,21 @@ class thermoAlternateView extends eqLogic
         $replace['#tempInterieure1#'] = $entier;
         $replace['#tempInterieure2#'] = $decimale;
         $replace['#tempInterieure-id#'] = $cmdTempInterId;
+        $replace['#temperature-value#'] = $tempInterieure;        
+
+        $replace['#tempExterieure-id#'] = $cmdTempExterId;
+        $replace['#tempExterieure-value#'] = $tempExterieure; 
 
         list($entier, $decimale) = explode(".", $tempConsigne);
         $replace['#tempConsigne1#'] = $entier;
         $replace['#tempConsigne2#'] = $decimale;
         $replace['#consigne-value#'] = $tempConsigne;
 
-        return template_replace($replace, getTemplate('core', $version, 'thermoAlternateView_display', 'thermoAlternateView'));
+        if (empty($template)) {
+            $template = '_dark';
+        }
+
+        return template_replace($replace, getTemplate('core', $version, thermoAlternateView_display . $template, 'thermoAlternateView'));
     }
      
 

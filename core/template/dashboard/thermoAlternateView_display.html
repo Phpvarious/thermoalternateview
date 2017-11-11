@@ -90,6 +90,7 @@
 </div>
 
 <script type="text/javascript">
+
     if (!$("script[src='plugins/thermoAlternateView/core/template/thermoAlternateView_Display.js']").length) {
         $(
             '<script type="text/javascript" src="plugins/thermoAlternateView/core/template/thermoAlternateView_Display.js"><//script>'
@@ -101,10 +102,12 @@
 
         param.uid = "#uid#";
         param.tempInterieureId = "#tempInterieure-id#";
+        param.tempExterieureId = "#tempExterieure-id#";
         param.consigneId = "#consigne-id#";
         param.statutId = "#statut-id#";
         param.lockId = "#lock-id#";
         param.modeId = "#mode-id#";
+
 
         initialize(param);
 
