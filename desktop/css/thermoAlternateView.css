@@ -1,179 +1,228 @@
+@font-face {
+    font-family: Saira;
+    src: url(../../3rparty/fonts/Saira/Saira-Regular.ttf);
+}
 
-  .thermo-consigne,
-    .thermo-temperature {
-        font-family: 'Saira', sans-serif;
-        text-shadow: -1px 0 #444444, 0 1px #444444, 1px 0 #444444, 0 -1px #444444;
-        font-size: 4em;
-        line-height: 1.3em;
-        height: 40%;
-        clear: both;
-    }
+.thermo-consigne,
+.thermo-temperature {
+    font-family: 'Saira', sans-serif;
+    text-shadow: -1px 0 #444444, 0 1px #444444, 1px 0 #444444, 0 -1px #444444;
+    font-size: 4em;
+    line-height: 1.3em;
+    height: 40%;
+    clear: both;
+}
 
-    .thermo-degre {
-        font-family: 'Saira', sans-serif;
-        text-shadow: -1px 0 #444444, 0 1px #444444, 1px 0 #444444, 0 -1px #444444;
-        font-size: 0.5em;
-        float: right
-    }
+.thermo-degre {
+    font-family: 'Saira', sans-serif;
+    text-shadow: -1px 0 #444444, 0 1px #444444, 1px 0 #444444, 0 -1px #444444;
+    font-size: 0.5em;
+    float: right
+}
 
-    .thermo-temperature, .thermo-widget-name {
-        color: #444444;
-    }
+.thermo-temperature,
+.thermo-widget-name,
+.thermo-temperature-ext {
+    color: #444444;
+}
 
-    .thermo-consigne {
-        color: white;
-    }
+.thermo-consigne {
+    color: white;
+}
 
-    .thermo-button {
-        font-family: 'Saira', sans-serif;
-        font-size: 2.5em;
-        margin-left: 5px;
-        float: left;
-        height: 10%;
-        width: 10%;
-        cursor: pointer;
-        color: #444444;
-        /* A refondre */
-        line-height: 20px;
-    }
+.thermo-temperature-ext {
+    width: 60px;
+}
 
-    .thermo-button:hover {
-        color: #61B872;
-        fill: #61B872;
-    }
+.thermo-temp-externe {
+    font-family: 'Saira', sans-serif;
+    display: inline-flex;
+    float: right;
+    width: 25%;
+    height: 40px;
+    color: #444444;
+    position: absolute;
+    top: calc(100% - 4.4em - 10px);
+    left: calc(100% - 25% - 5px);
+}
 
-    .thermo-button-statistics {
-        height: 2.2em;
-        width: 2.2em;
-        cursor: pointer;
-        fill: #444444;
-        position: absolute;
-        top: calc(100% - 2.2em - 5px);
-        left: calc(100% - 2.2em - 5px);
-    }
+.thermo-temp-externe-mobile {
+    top: calc(100% - 40px);
+    left: calc(100% - 70px - 5px);
+    width: 70px;
+}
 
-    .thermo-button-statistics:hover {
-        fill: #61B872;
-    }
+.thermo-img {
+    height: 100%;
+    width: 30%;
+    margin-right: 5px;
+    fill: #61B872;
+    padding-bottom: 3px;
+}
 
-    .thermo-cover {
-        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9f9f9+0,ffffff+100 */
-        background: #f9f9f9;
-        /* Old browsers */
-        background: -moz-linear-gradient(top, #f9f9f9 0%, #ffffff 100%);
-        /* FF3.6-15 */
-        background: -webkit-linear-gradient(top, #f9f9f9 0%, #ffffff 100%);
-        /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(to bottom, #f9f9f9 0%, #ffffff 100%);
-        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#ffffff', GradientType=0);
-        /* IE6-9 */
-        border: 1px solid #444444;
-        border-width: 1px 4px 4px 1px;
-        border-radius: 5px;
-        width: 100%;
-        height: 100%;
-        position: relative;
-    }
+.thermo-img-mobile {
+    width: 20px;
+}
 
-    .thermo-back {
-        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,e5e5e5+100;White+3D */
-        background: #ffffff;
-        /* Old browsers */
-        background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
-        /* FF3.6-15 */
-        background: -webkit-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
-        /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
-        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5', GradientType=0);
-        /* IE6-9 */
-        border: 1px solid #444444;
-        border-width: 2px 1px 1px 2px;
-        border-radius: 5px;
-        width: 33.33%;
-        height: 66.67%;
-        text-align: center;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-    }
+.thermo-button {
+    font-family: 'Saira', sans-serif;
+    font-size: 2.5em;
+    margin-left: 5px;
+    float: left;
+    height: 10%;
+    width: 10%;
+    cursor: pointer;
+    color: #444444;
+    /* A refondre */
+    line-height: 20px;
+}
 
-    .mode-icon, .lock-icon {
-        margin: 0 0 0 5px;
-        width: 20%;
-        height: 10%;
-        fill: #444444;
-        float: right;
-    }
+.thermo-button:hover {
+    color: #61B872;
+    fill: #61B872;
+}
 
-    .thermo-mode {
-        width: 33.33%;
-        float: left;
-    }
+.thermo-button-statistics {
+    height: 2.2em;
+    width: 2.2em;
+    cursor: pointer;
+    fill: #444444;
+    position: absolute;
+    top: calc(100% - 2.2em - 5px);
+    left: calc(100% - 2.2em - 5px);
+}
 
-    .thermo-statistics {
-        width: 33.33%;
-        float: right;
-    }
+.thermo-button-statistics:hover {
+    fill: #61B872;
+}
 
-    .switch-off {
-        cursor: pointer;
-    }
+.thermo-cover {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9f9f9+0,ffffff+100 */
+    background: #f9f9f9;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #f9f9f9 0%, #ffffff 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #f9f9f9 0%, #ffffff 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #f9f9f9 0%, #ffffff 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#ffffff', GradientType=0);
+    /* IE6-9 */
+    border: 1px solid #444444;
+    border-width: 1px 4px 4px 1px;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
 
-    .mode-switch {
-        width: 35%;
-        height: 30px;
-        /* A refondre */
-    }
+.thermo-back {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,e5e5e5+100;White+3D */
+    background: #ffffff;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5', GradientType=0);
+    /* IE6-9 */
+    border: 1px solid #444444;
+    border-width: 2px 1px 1px 2px;
+    border-radius: 5px;
+    width: 33.33%;
+    height: 66.67%;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
 
-    .mode-label {
-        width: 45%;
-        height: 25px;
-        /* A refondre */
-        line-height: 30px;
-        fill: #444444;
-    }
+.thermo-mode-icon,
+.thermo-lock-icon {
+    margin: 0 0 0 5px;
+    width: 20%;
+    height: 10%;
+    fill: #444444;
+    float: right;
+}
 
-    .mode-label-on {
-        fill: #61B872;
-    }
+.thermo-mode {
+    width: 33.33%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
-    .thermo-tooltip {
-        position: relative;
-        display: inline-block;
-    }
-    
-    .thermo-tooltip .thermo-tooltiptext {
-        visibility: hidden;
-        width: 120px;
-        background-color: #555;
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 0;
-        position: absolute;
-        z-index: 1;
-        bottom: 125%;
-        left: 50%;
-        margin-left: -60px;
-        opacity: 0;
-        transition: opacity 1s 1s;
-    }
-    
-    .thermo-tooltip .thermo-tooltiptext::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: #555 transparent transparent transparent;
-    }
-    
-    .thermo-tooltip:hover .thermo-tooltiptext {
-        visibility: visible;
-        opacity: 1;
-    }
+.thermo-statistics {
+    width: 33.33%;
+    float: right;
+}
+
+.thermo-switch-off,
+.thermo-switch-on {
+    display: block;
+    text-align: center;
+}
+
+.thermo-switch-off {
+    cursor: pointer;
+}
+
+.thermo-mode-switch {
+    width: 35%;
+    height: 30px;
+    /* A refondre */
+}
+
+.thermo-mode-label {
+    width: 45%;
+    height: 25px;
+    /* A refondre */
+    line-height: 30px;
+    fill: #444444;
+}
+
+.thermo-mode-label-on {
+    fill: #61B872;
+}
+
+.thermo-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.thermo-tooltip .thermo-tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s 1s;
+}
+
+.thermo-tooltip .thermo-tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.thermo-tooltip:hover .thermo-tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
