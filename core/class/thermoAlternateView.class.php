@@ -97,19 +97,8 @@ class thermoAlternateView extends eqLogic
 
         $idThermostat = $this->getConfiguration('thermostat');
         $template = $this->getConfiguration('template');
+        $isVisibleTempExt = $this->getConfiguration('isvisibletempext');        
         $thermostat = eqLogic::byId($idThermostat);
-        /*$confThermostat = json_decode($thermostat->configuration);
-        //$tempInterieure = cmd::byString($confThermostat->temperature_indoor)->execCmd();
-        $tempInterieure = $confThermostat->lastTempIn;
-        list($entier, $decimale) = explode(".", $tempInterieure);
-        $replace['#tempInterieure1#'] = $entier;
-        $replace['#tempInterieure2#'] = $decimale;
-
-        $tempConsigne = $confThermostat->lastOrder;
-        list($entier, $decimale) = explode(".", $tempConsigne);
-        $replace['#tempConsigne1#'] = $entier;
-        $replace['#tempConsigne2#'] = $decimale;
-        $replace['#consigne-value#'] = $tempConsigne;*/
 
         $islocked = 0;
         $mode = "";
@@ -221,7 +210,8 @@ class thermoAlternateView extends eqLogic
         $replace['#temperature-value#'] = $tempInterieure;        
 
         $replace['#tempExterieure-id#'] = $cmdTempExterId;
-        $replace['#tempExterieure-value#'] = $tempExterieure; 
+        $replace['#tempExterieure-value#'] = $tempExterieure;
+        $replace['#tempExterieure-visible#'] = $isVisibleTempExt == "1" ? "bloc" : "none"; 
 
         list($entier, $decimale) = explode(".", $tempConsigne);
         $replace['#tempConsigne1#'] = $entier;
