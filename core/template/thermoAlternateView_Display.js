@@ -208,7 +208,13 @@ function initialize_Dark_Template(parametres, template) {
                     break;
 
                 case parametres.lockId:
-                    this.value === 1 ? $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-lock-icon use").attr("xlink:href", "#shape-lock-on") : $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-lock-icon use").attr("xlink:href", "#shape-lock-off");
+                    var $lockIcon = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-lock-icon");
+                    var lockId1 = $lockIcon.attr("data-cmd_id");
+                    var lockId2 = $lockIcon.attr("data-cmd_id2");
+
+                    $lockIcon.attr("data-cmd_id", lockId2);
+                    $lockIcon.attr("data-cmd_id2", lockId1);
+                    this.value === 1 ? $lockIcon.find("use").attr("xlink:href", "#shape-lock-on") : $lockIcon.find("use").attr("xlink:href", "#shape-lock-off");
 
                     break;
 
