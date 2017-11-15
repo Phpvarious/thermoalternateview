@@ -97,7 +97,11 @@ class thermoAlternateView extends eqLogic
 
         $idThermostat = $this->getConfiguration('thermostat');
         $template = $this->getConfiguration('template');
-        $isVisibleTempExt = $this->getConfiguration('isvisibletempext');        
+        $isVisibleTempExt = $this->getConfiguration('isvisibletempext');
+        $isEnableBackColorStd = $this->getConfiguration('isEnableBackColorStd');
+        $isDisabledMode = $this->getConfiguration('isDisabledMode');
+        $isDefalutFlameColor = $this->getConfiguration('isDefalutFlameColor');
+        $flameColor = $this->getConfiguration('flameColor');
         $thermostat = eqLogic::byId($idThermostat);
 
         $islocked = 0;
@@ -150,7 +154,7 @@ class thermoAlternateView extends eqLogic
                     $cmdTempInterId = $commande->getId();
                     $tempInterieure = $commande->execCmd();
                     break;
-                    case "temperature_outdoor":
+                case "temperature_outdoor":
                     $cmdTempExterId = $commande->getId();
                     $tempExterieure= $commande->execCmd();
                     break;
@@ -161,22 +165,25 @@ class thermoAlternateView extends eqLogic
         }
         $modesCompatibles = array('confort', 'eco', 'absent', 'off', 'vacances');
 
-        foreach ($modes as $modeActionName => $modeActionId) {
-            if (in_array($modeActionName, $modesCompatibles)) {
-                $modeIcon = $modeActionName;
-            } else {
-                $modeIcon = 'other';
-            }
+        if ($isDisabledMode != "1") {
+            foreach ($modes as $modeActionName => $modeActionId) {
+                if (in_array($modeActionName, $modesCompatibles)) {
+                    $modeIcon = $modeActionName;
+                } else {
+                    $modeIcon = 'other';
+                }
 
-            if ($mode == $modeActionName) {
-                $htmlModes = $htmlModes . '<span class="thermo-switch-on thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeActionName . '" class="thermo-mode-label thermo-mode-label-on"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="#shape-switch-on" /></svg></span>';
-                $htmlModesMobile = $htmlModesMobile . '<span class="thermo-switch-on"><svg data-mode="' . $modeActionName . '" class="thermo-mode-label thermo-mode-label-on"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
-            } else {
-                $htmlModes = $htmlModes . '<span class="thermo-switch-off thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeActionName . '" class="thermo-mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="#shape-switch-off" /></svg></span>';
-                $htmlModesMobile = $htmlModesMobile . '<span class="thermo-switch-off"><svg data-mode="' . $modeActionName . '" class="thermo-mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
+                if ($mode == $modeActionName) {
+                    $htmlModes = $htmlModes . '<span class="thermo-switch-on thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeActionName . '" class="thermo-mode-label thermo-mode-label-on"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="#shape-switch-on" /></svg></span>';
+                    $htmlModesMobile = $htmlModesMobile . '<span class="thermo-switch-on"><svg data-mode="' . $modeActionName . '" class="thermo-mode-label thermo-mode-label-on"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
+                } else {
+                    $htmlModes = $htmlModes . '<span class="thermo-switch-off thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeActionName . '" class="thermo-mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="#shape-switch-off" /></svg></span>';
+                    $htmlModesMobile = $htmlModesMobile . '<span class="thermo-switch-off"><svg data-mode="' . $modeActionName . '" class="thermo-mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
+                }
             }
         }
 
+        //Icone de verrouillage
         if ($islocked == 1) {
             $replace['#lock-icon#'] = '#shape-lock-on';
             $replace['#lock-id#'] = $cmdUnlockId;
@@ -187,14 +194,26 @@ class thermoAlternateView extends eqLogic
             $replace['#lock-id2#'] = $cmdUnlockId;
         }
 
+        //Couleur du widget
+        empty($template) || $template === "default" ? $cssTempate = '': $cssTempate = ucfirst($template);
+        $replace['#thermo-cover#'] = $isEnableBackColorStd == "1" ? "" : "thermo". $cssTempate ."-cover-color";
+        $replace['#thermo-widget-name#'] = $isEnableBackColorStd == "1" ? "" : "thermo". $cssTempate ."-widget-name";
+        $replace['#thermo-back#'] = $isEnableBackColorStd == "1" ? "" : "thermo". $cssTempate ."-back-color";
+
+        //Couleur de la flamme
+        $replace['#thermo-flameColor#'] = $isDefalutFlameColor == "1" ? "" : "fill:" . $flameColor;
+        
+
+        //Modes de chauffe
         if (empty($template) || $template === "default") {
             $template = '';
-        }else {
-            $htmlModes = str_replace("thermo-","thermo" . $template . "-", $htmlModes);
-            $htmlModesMobile = str_replace("thermo-","thermo" . ucfirst($template) . "-", $htmlModesMobile);
+        } else {
+            $htmlModes = str_replace("thermo-", "thermo" . $template . "-", $htmlModes);
+            $htmlModesMobile = str_replace("thermo-", "thermo" . ucfirst($template) . "-", $htmlModesMobile);
             $template = '_' . $template;
         }
 
+        //Commandes Info
         $replace["#statut-id#"] = $cmdStatutId;
         $replace["#mode-id#"] = $cmdModeId;
         $replace['#thermo-mode#'] = $htmlModes;
@@ -207,20 +226,37 @@ class thermoAlternateView extends eqLogic
         $replace['#tempInterieure1#'] = $entier;
         $replace['#tempInterieure2#'] = $decimale;
         $replace['#tempInterieure-id#'] = $cmdTempInterId;
-        $replace['#temperature-value#'] = $tempInterieure;        
+        $replace['#temperature-value#'] = $tempInterieure;
 
         $replace['#tempExterieure-id#'] = $cmdTempExterId;
         $replace['#tempExterieure-value#'] = $tempExterieure;
-        $replace['#tempExterieure-visible#'] = $isVisibleTempExt == "1" ? "bloc" : "none"; 
+        $replace['#tempExterieure-visible#'] = $isVisibleTempExt == "1" ? "bloc" : "none";
 
         list($entier, $decimale) = explode(".", $tempConsigne);
         $replace['#tempConsigne1#'] = $entier;
         $replace['#tempConsigne2#'] = $decimale;
         $replace['#consigne-value#'] = $tempConsigne;
 
+        $parameters = $this->getDisplay('parameters');
+        if (is_array($parameters)) {
+            foreach ($parameters as $key => $value) {
+                $replace['#' . $key . '#'] = $value;
+            }
+        }
 
-        return template_replace($replace, getTemplate('core', $version, thermoAlternateView_display . $template, 'thermoAlternateView'));
+        return template_replace($replace, getTemplate('core', $version, 'thermoAlternateView_display' . $template, 'thermoAlternateView'));
     }
+
+    public static $_widgetPossibility = array('custom' => array(
+        'visibility' => true,
+        'displayName' => true,
+        'optionalParameters' => false,
+        'background-color' => true,
+        'background-opacity' => true,
+        'text-color' => true,
+        'border-radius' => true,
+        'border' => true,
+    ));
      
 
     /*     * **********************Getteur Setteur*************************** */
