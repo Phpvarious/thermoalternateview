@@ -23,7 +23,7 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
    </div>
 
    <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
-    <legend>{{Mes thermoAlternateViews}}</legend>
+    <legend>{{Mes thermoAlternateView}}</legend>
   <legend><i class="fa fa-cog"></i>  {{Gestion}}</legend>
   <div class="eqLogicThumbnailContainer">
       <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
@@ -39,7 +39,7 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
     <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Configuration}}</center></span>
   </div>
   </div>
-  <legend><i class="fa fa-table"></i> {{Mes thermoAlternateViews}}</legend>
+  <legend><i class="fa fa-table"></i> {{Configuration des widgets}}</legend>
 <div class="eqLogicThumbnailContainer">
     <?php
     foreach ($eqLogics as $eqLogic) {
