@@ -14,7 +14,8 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
                 <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
                 <?php
                 foreach ($eqLogics as $eqLogic) {
-                    echo '<li class="cursor li_eqLogic" data-eqLogic_id="' . $eqLogic->getId() . '"><a>' . $eqLogic->getHumanName(true) . '</a></li>';
+                    $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
+                    echo '<li class="cursor li_eqLogic" data-eqLogic_id="' . $eqLogic->getId() . '"  style="' . $opacity . '"><a>' . $eqLogic->getHumanName(true) . '</a></li>';
                 }
 ?>
            </ul>
@@ -42,7 +43,8 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
 <div class="eqLogicThumbnailContainer">
     <?php
     foreach ($eqLogics as $eqLogic) {
-        echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
+        $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
+        echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
         echo "<center>";
         echo '<img src="plugins/thermoAlternateView/plugin_info/thermoAlternateView_icon.png" height="105" width="95" />';
         echo "</center>";
@@ -59,7 +61,7 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
 
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-tachometer"></i> {{Equipement}}</a></li>
-            <li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-list-alt"></i> {{Commandes}}</a></li>
+            <!-- <li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-list-alt"></i> {{Commandes}}</a></li> -->
         </ul>
 
         <div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
@@ -120,25 +122,45 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
     </div>
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Température extérieure visible}}</label>
-        <div class="col-sm-3">
-            <input type="checkbox" required class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="isvisibletempext">
+        <div class="col-sm-3 form-check-input">
+            <input type="checkbox" required class="eqLogicAttr" data-l1key="configuration" data-l2key="isvisibletempext" checked>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">{{Utiliser la couleur de fond du widget}}</label>
+        <div class="col-sm-3 form-check-input">
+            <input type="checkbox" required class="eqLogicAttr" data-l1key="configuration" data-l2key="isEnableBackColorStd">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">{{Masquer les modes}}</label>
+        <div class="col-sm-3 form-check-input">
+            <input type="checkbox" required class="eqLogicAttr" data-l1key="configuration" data-l2key="isDisabledMode">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">{{Couleur de flamme}}</label>
+        <div class="col-sm-3 form-check-input">
+            <label>Defaut <input type="checkbox" class="eqLogicAttr flame-color-default" data-l1key="configuration" data-l2key="isDefalutFlameColor" checked></label>
+            <input type="color" class="eqLogicAttr flame-color" data-l1key="configuration" data-l2key="flameColor">
         </div>
     </div>
 </fieldset>
 </form>
 </div>
-      <div role="tabpanel" class="tab-pane" id="commandtab">
-<a class="btn btn-success btn-sm cmdAction pull-right" data-action="add"><i class="fa fa-plus-circle"></i> {{Commandes}}</a><br/><br/>
-<table id="table_cmd" class="table table-bordered table-condensed">
-    <thead>
-        <tr>
-            <th>{{Nom}}</th><th>{{Type}}</th><th>{{Action}}</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
-</div>
+
+<!--     <div role="tabpanel" class="tab-pane" id="commandtab">
+        <a class="btn btn-success btn-sm cmdAction pull-right" data-action="add"><i class="fa fa-plus-circle"></i> {{Commandes}}</a><br/><br/>
+        <table id="table_cmd" class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>{{Nom}}</th><th>{{Type}}</th><th>{{Action}}</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div> -->
 </div>
 
 </div>

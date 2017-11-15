@@ -1,3 +1,5 @@
+<script type="text/javascript" src="plugins/thermoAlternateView/core/template/thermoAlternateView_Display.js"></script>
+
 <div class="eqLogic-widget eqLogic allowResize" style="width: #width#;height: #height#;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style# "
     data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#">
 
@@ -68,8 +70,8 @@
         </symbol>
     </svg>
 
-    <div class="thermoDark-cover">
-        <div class="widget-name thermoDark-widget-name">
+    <div class="thermoDark-cover #thermo-cover#">
+        <div style="#hideEqLogicName#" class="widget-name #thermo-widget-name#">
             <a href="index.php?v=d&amp;p=thermoAlternateView&amp;m=thermoAlternateView&amp;id=#id#" style="font-size : 1.2em;">#name#</a>
             <span style="font-size: 0.85em;position: relative;top:-2px;"></span>
         </div>
@@ -85,7 +87,7 @@
                 </div>
             </div>
             <div class="thermoDark-flex">
-                <span class="thermoDark-temperature" >#temperature-value#</span>
+                <span class="thermoDark-temperature">#temperature-value#</span>
                 <span class="thermoDark-degre">°</span>
             </div>
         </div>
@@ -112,7 +114,7 @@
             <svg class="thermoDark-button thermoDark-lock-icon" data-cmd_id="#lock-id#" data-cmd_id2="#lock-id2#">
                 <use xlink:href="#lock-icon#" />
             </svg>
-            <svg class="thermoDark-mode-icon" data-cmd_id="#statut-id#">
+            <svg style="#thermo-flameColor#" class="thermoDark-mode-icon" data-cmd_id="#statut-id#">
                 <use xlink:href="#chauffe-icon#" />
             </svg>
         </div>
@@ -125,13 +127,18 @@
 </div>
 
 <script type="text/javascript">
-    if (!$("script[src='plugins/thermoAlternateView/core/template/thermoAlternateView_Display.js']").length) {
-        $(
-            '<script type="text/javascript" src="plugins/thermoAlternateView/core/template/thermoAlternateView_Display.js"><//script>'
-        ).appendTo("head");
-    }
+    $(document).change(function (e) {
+
+        if (e.target.dataset.eqlogic_uid === "#uid#") {
+            initDisplay#uid#();
+        }
+    });
 
     $(document).ready(function () {
+        initDisplay#uid#();
+    });
+
+    function initDisplay#uid#() {
         var param = {};
 
         param.uid = "#uid#";
@@ -143,6 +150,5 @@
         param.modeId = "#mode-id#";
 
         initialize(param, "dark");
-
-    });
+    }
 </script>
