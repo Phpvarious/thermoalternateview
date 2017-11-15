@@ -2,21 +2,25 @@
     // Utilisez IntelliSense pour en savoir plus sur les attributs possibles.
     // Pointez pour afficher la description des attributs existants.
     // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
+    //${workspaceRoot}
     "version": "0.2.0",
     "configurations": [
+
         {
-            "type": "chrome",
+            "name": "Listen for XDebug",
+            "type": "php",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceRoot}"
+            "port": 9000,
+            "localSourceRoot": "/Volumes/jeedom/",
+            "serverSourceRoot": "/var/www/html/"
         },
         {
-            "type": "chrome",
+            "name": "Launch currently open script",
+            "type": "php",
             "request": "launch",
-            "name": "Jeedom",
-            "url": "http://192.168.0.35",
-            "webRoot": "${workspaceRoot}"
+            "program": "${file}",
+            "cwd": "${fileDirname}",
+            "port": 9000
         }
     ]
 }
