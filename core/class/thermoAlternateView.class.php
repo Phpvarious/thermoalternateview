@@ -163,7 +163,7 @@ class thermoAlternateView extends eqLogic
                     break;
             }
         }
-        $modesCompatibles = array('confort', 'eco', 'absent', 'off', 'vacances');
+        $modesCompatibles = array('confort', 'eco', 'absent', 'off', 'vacances', 'nuit', 'jour');
 
         if ($isDisabledMode != "1") {
             foreach ($modes as $modeActionName => $modeActionId) {
