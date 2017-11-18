@@ -100,8 +100,12 @@ class thermoAlternateView extends eqLogic
         $isVisibleTempExt = $this->getConfiguration('isvisibletempext');
         $isEnableBackColorStd = $this->getConfiguration('isEnableBackColorStd');
         $isDisabledMode = $this->getConfiguration('isDisabledMode');
-        $isDefalutFlameColor = $this->getConfiguration('isDefalutFlameColor');
+        $isDefaultFlameColor = $this->getConfiguration('isDefaultFlameColor');
         $flameColor = $this->getConfiguration('flameColor');
+        $isDefaultWaitColor = $this->getConfiguration('isDefaultWaitColor');
+        $waitColor = $this->getConfiguration('waitColor');
+        $isDefaultLockColor = $this->getConfiguration('isDefaultLockColor');
+        $lockColor = $this->getConfiguration('lockColor');
         $thermostat = eqLogic::byId($idThermostat);
 
         $islocked = 0;
@@ -111,6 +115,10 @@ class thermoAlternateView extends eqLogic
         $cmdModeId = 0;
         $cmdTempInterId = 0;
         $cmdTempExterId = 0;
+        $tempConsigneId = 0;
+        $cmdThermostatHisto = "";        
+        $cmdTempInterHisto = "";
+        $cmdTempExterHisto = "";
         $cmdLockId = 0;
         $cmdUnlockId = 0;
         $cmdThermostatId = 0;
@@ -153,13 +161,17 @@ class thermoAlternateView extends eqLogic
                 case "temperature":
                     $cmdTempInterId = $commande->getId();
                     $tempInterieure = $commande->execCmd();
+                    $cmdTempInterHisto = $commande->getIsHistorized();
                     break;
                 case "temperature_outdoor":
                     $cmdTempExterId = $commande->getId();
                     $tempExterieure= $commande->execCmd();
+                    $cmdTempExterHisto = $commande->getIsHistorized();                    
                     break;
                 case "order":
+                    $tempConsigneId = $commande->getId();
                     $tempConsigne = $commande->execCmd();
+                    $cmdConsigneHisto = $commande->getIsHistorized();
                     break;
             }
         }
@@ -194,6 +206,10 @@ class thermoAlternateView extends eqLogic
             $replace['#lock-id2#'] = $cmdUnlockId;
         }
 
+        //Couleur du cadenna
+        $replace['#thermo-islockColor#'] = $isDefaultLockColor == "1" || $islocked == 0 ? "" : "fill:" . $lockColor;
+        $replace['#thermo-lockColor#'] = $isDefaultLockColor == "1" ? "" : $lockColor;
+
         //Couleur du widget
         empty($template) || $template === "default" ? $cssTempate = '': $cssTempate = ucfirst($template);
         $replace['#thermo-cover#'] = $isEnableBackColorStd == "1" ? "" : "thermo". $cssTempate ."-cover-color";
@@ -201,8 +217,10 @@ class thermoAlternateView extends eqLogic
         $replace['#thermo-back#'] = $isEnableBackColorStd == "1" ? "" : "thermo". $cssTempate ."-back-color";
 
         //Couleur de la flamme
-        $replace['#thermo-flameColor#'] = $isDefalutFlameColor == "1" ? "" : "fill:" . $flameColor;
+        $replace['#thermo-flameColor#'] = $isDefaultFlameColor == "1" ? "" : $flameColor;
         
+        //Couleur du mode suspendu
+        $replace['#thermo-waitColor#'] = $isDefaultWaitColor == "1" ? "" : $waitColor;
 
         //Modes de chauffe
         if (empty($template) || $template === "default") {
@@ -218,24 +236,46 @@ class thermoAlternateView extends eqLogic
         $replace["#mode-id#"] = $cmdModeId;
         $replace['#thermo-mode#'] = $htmlModes;
         $replace['#thermo-mode-mobile#'] = $htmlModesMobile;
-        $replace['#consigne-id#'] = $cmdThermostatId;
-        $replace['#chauffe-icon#'] = $statut == "Arrêté" ? "" : "#shape-icon-flame";
+        $replace['#thermostat-id#'] = $cmdThermostatId;
         $replace['#statistics-url#'] = "window.location = '/index.php?v=d&m=thermostat&p=panel&object_id=" . $thermostat->getObject_id() . "'";
         
+        //Statut
+        switch ($statut) {
+            case "Chauffage":
+                $replace['#statut-icon#'] = "#shape-icon-flame";
+                $replace['#statut-color#'] = $isDefaultFlameColor == "1" ? "" : "fill:" . $flameColor;
+                break;
+
+            case "Suspendu":
+                $replace['#statut-icon#'] = "#shape-icon-wait";
+                $replace['#statut-color#'] = $isDefaultWaitColor == "1" ? "" : "fill:" . $waitColor;
+                break;
+
+            default:
+                $replace['#statut-icon#'] = "";
+                $replace['#statut-color#'] = "";
+        }
+
         list($entier, $decimale) = explode(".", $tempInterieure);
         $replace['#tempInterieure1#'] = $entier;
         $replace['#tempInterieure2#'] = $decimale;
         $replace['#tempInterieure-id#'] = $cmdTempInterId;
         $replace['#temperature-value#'] = $tempInterieure;
+        $replace['#temperature-histo#'] = $cmdTempInterHisto == "1" ? "history cursor" : "";        
 
         $replace['#tempExterieure-id#'] = $cmdTempExterId;
         $replace['#tempExterieure-value#'] = $tempExterieure;
         $replace['#tempExterieure-visible#'] = $isVisibleTempExt == "1" ? "bloc" : "none";
+        $replace['#tempExterieure-histo#'] = $cmdTempExterHisto == "1" ? "history cursor" : "";      
+        
 
         list($entier, $decimale) = explode(".", $tempConsigne);
         $replace['#tempConsigne1#'] = $entier;
         $replace['#tempConsigne2#'] = $decimale;
+        $replace['#consigne-id#'] = $tempConsigneId;        
         $replace['#consigne-value#'] = $tempConsigne;
+        $replace['#consigne-histo#'] = $cmdConsigneHisto == "1" ? "history cursor" : "";      
+        
 
         $parameters = $this->getDisplay('parameters');
         if (is_array($parameters)) {
