@@ -54,8 +54,13 @@ function addCmdToTable(_cmd) {
 
 $(document).ready(function () {
 
-    $(".flame-color-default").change(function () {
-        $(".flame-color").css('visibility', $(this).is(':checked') ? 'hidden' : 'visible');
+    $(".color-default").each(function () {
+        $(this).closest('.form-check-input').find('input[type=color]').css('visibility', $(this).is(':checked') ? 'hidden' : 'visible');
+    });  
+
+
+    $(".color-default").change(function () {
+        $(this).closest('.form-check-input').find('input[type=color]').css('visibility', $(this).is(':checked') ? 'hidden' : 'visible');
         
     });
 });

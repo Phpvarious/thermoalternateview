@@ -134,8 +134,23 @@ function initialize_Default_Template(parametres) {
                     break;
 
                 case parametres.statutId:
-                    this.value === "Arrêté" ? $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-mode-icon use").attr("xlink:href", "") : $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-mode-icon use").attr("xlink:href", "#shape-icon-flame");
+                    var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-mode-icon");
 
+                    switch (this.value) {
+                        case "Chauffage":
+                            $domElement.find("use").attr("xlink:href", "#shape-icon-flame");
+                            $domElement.css("fill", parametres.flameColor);
+                            break;
+
+                        case "Suspendu":
+                            $domElement.find("use").attr("xlink:href", "#shape-icon-wait");
+                            console.log(parametres.waitColor);
+                            $domElement.css("fill", parametres.waitColor);
+                            break;
+
+                        default:
+                            $domElement.find("use").attr("xlink:href", "");
+                    }
                     break;
 
                 case parametres.lockId:
@@ -145,7 +160,14 @@ function initialize_Default_Template(parametres) {
 
                     $lockIcon.attr("data-cmd_id", lockId2);
                     $lockIcon.attr("data-cmd_id2", lockId1);
-                    this.value === 1 ? $lockIcon.find("use").attr("xlink:href", "#shape-lock-on") : $lockIcon.find("use").attr("xlink:href", "#shape-lock-off");
+                    if (this.value === 1) {
+                        $lockIcon.find("use").attr("xlink:href", "#shape-lock-on");
+                        $lockIcon.css("fill", parametres.lockColor);
+                    }
+                    else { 
+                        $lockIcon.find("use").attr("xlink:href", "#shape-lock-off");
+                        $lockIcon.css("fill", "");
+                    }
                     break;
 
                 case parametres.modeId:
@@ -161,7 +183,7 @@ function initialize_Default_Template(parametres) {
 
     setTimeout(() => {
         fitTextTemp("");
-    }, 100);
+    }, 300);
 
 }
 
@@ -203,8 +225,22 @@ function initialize_Dark_Template(parametres, template) {
                     break;
 
                 case parametres.statutId:
-                    this.value === "Arrêté" ? $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-mode-icon use").attr("xlink:href", "") : $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-mode-icon use").attr("xlink:href", "#shape-icon-flame");
+                    var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-mode-icon");
 
+                    switch (this.value) {
+                        case "Chauffage":
+                            $domElement.find("use").attr("xlink:href", "#shape-icon-flame");
+                            $domElement.css("fill", parametres.flameColor);
+                            break;
+
+                        case "Suspendu":
+                            $domElement.find("use").attr("xlink:href", "#shape-icon-wait");
+                            $domElement.css("fill", parametres.waitColor);
+                            break;
+
+                        default:
+                            $domElement.find("use").attr("xlink:href", "");
+                    }
                     break;
 
                 case parametres.lockId:
@@ -214,7 +250,14 @@ function initialize_Dark_Template(parametres, template) {
 
                     $lockIcon.attr("data-cmd_id", lockId2);
                     $lockIcon.attr("data-cmd_id2", lockId1);
-                    this.value === 1 ? $lockIcon.find("use").attr("xlink:href", "#shape-lock-on") : $lockIcon.find("use").attr("xlink:href", "#shape-lock-off");
+                    if (this.value === 1) {
+                        $lockIcon.find("use").attr("xlink:href", "#shape-lock-on");
+                        $lockIcon.css("fill", parametres.lockColor);
+                    }
+                    else { 
+                        $lockIcon.find("use").attr("xlink:href", "#shape-lock-off");
+                        $lockIcon.css("fill", "");
+                    }
 
                     break;
 
