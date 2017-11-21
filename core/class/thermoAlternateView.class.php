@@ -108,6 +108,8 @@ class thermoAlternateView extends eqLogic
         $lockColor = $this->getConfiguration('lockColor');
         $thermostat = eqLogic::byId($idThermostat);
 
+        $nextEvent = thermoAlternateView::getNextEventCalendar($thermostat);
+
         $islocked = 0;
         $mode = "";
         $statut = ""; // Arrêté
@@ -276,6 +278,9 @@ class thermoAlternateView extends eqLogic
         $replace['#consigne-value#'] = $tempConsigne;
         $replace['#consigne-histo#'] = $cmdConsigneHisto == "1" ? "history cursor" : "";      
         
+        $replace['#thermo-eqLogicId#'] = $idThermostat;      
+        $replace['#thermo-nextOccurence#'] = $nextEvent;      
+        
 
         $parameters = $this->getDisplay('parameters');
         if (is_array($parameters)) {
@@ -286,6 +291,91 @@ class thermoAlternateView extends eqLogic
 
         return template_replace($replace, getTemplate('core', $version, 'thermoAlternateView_display' . $template, 'thermoAlternateView'));
     }
+
+    public static function getNextEventCalendar($thermostat) {
+
+        $return = "";
+
+        try {
+            $calendar_events = thermoAlternateView::getLinkCalendar($thermostat);
+
+            //Récupération des évènements du calendrier
+            $startDate = date('Y-m-d H:i:s', strtotime('-1 days ' . date('Y-m-d H:i:s')));
+            $endDate = date('Y-m-d H:i:s', strtotime('+2 days ' . date('Y-m-d H:i:s')));
+            $events = calendar_event::calculeEvents($calendar_events, $startDate, $endDate);
+
+            //Récupération de l'évènement en court
+            $now = new DateTime();
+            $prevEventEnd = new DateTime(date('Y-m-d H:i:s', strtotime('+10 days ' . date('Y-m-d H:i:s'))));
+
+            foreach ($events as $event) {
+                $eventStart = new DateTime($event['start']);
+                $eventEnd = new DateTime($event['end']);
+                if ( $eventStart <= $now && $eventEnd > $now ) {
+                    $return = $event['end'];
+                    break;
+                }
+                else {
+                    if ( $eventStart >= $now && $prevEventEnd < $now ) {
+                        $return = $event['start'];
+                        break;
+                    }
+                }
+                $prevEventEnd = $eventEnd;
+            }
+        }
+        catch (Exception $e){
+        }
+    
+        return "Prochaine consigne " . thermoAlternateView::getHumanDelai($return);
+
+    }
+
+    private static function getHumanDelai($date){
+        $return = "";
+        $now = new DateTime();
+        $dateRef = new DateTime($date);
+
+        $diffDays = (int)$dateRef->format('d') - (int)$now->format('d');
+
+        switch( $diffDays ) {
+            case 0:
+                $return = "à " . $dateRef->format('H:i');
+                break;
+            case +1:
+            $return = "demain à " . $dateRef->format('H:i');
+                break;
+        }
+
+        return $return;
+    }
+
+    private static function getLinkCalendar($thermostat) {
+		try {
+			$plugin = plugin::byId('calendar');
+			if (!is_object($plugin) || $plugin->isActive() != 1) {
+			    throw new Exception("Le plugin agenda n'est pas installé !");
+			}
+		} catch (Exception $e) {
+			throw new Exception("Le plugin agenda n'est pas installé !");            
+		}
+		if (!class_exists('calendar_event')) {
+			throw new Exception("Le plugin agenda n'est pas installé !");
+		}
+		$return = array();
+		foreach ($thermostat->getCmd(null, 'modeAction', null, true) as $mode) {
+			foreach (calendar_event::searchByCmd($mode->getId()) as $event) {
+				$return[$event->getId()] = $event;
+			}
+		}
+		$thermostat_cmd = $thermostat->getCmd(null, 'thermostat');
+		if (is_object($thermostat_cmd)) {
+			foreach (calendar_event::searchByCmd($thermostat_cmd->getId()) as $event) {
+				$return[$event->getId()] = $event;
+			}
+		}
+		return $return;
+	}
 
     public static $_widgetPossibility = array('custom' => array(
         'visibility' => true,

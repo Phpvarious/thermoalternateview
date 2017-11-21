@@ -131,6 +131,9 @@ function initialize_Default_Template(parametres) {
                     });
 
                     $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-button-plus, .eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-button-moins").attr("data-cmd_val", this.value);
+
+                    //Prochaine consigne
+                    setNextEventCalendar(parametres.eqLogicId, $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-next-consigne"));
                     break;
 
                 case parametres.statutId:
@@ -219,9 +222,14 @@ function initialize_Dark_Template(parametres, template) {
 
                 case parametres.consigneId:
                     var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-consigne > span").first();
+                    //Consigne
                     $domElement.text(this.value);
 
+                    //Boutons +/-
                     $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-button-plus, .eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-button-moins").attr("data-cmd_val", this.value);
+
+                    //Prochaine consigne
+                    setNextEventCalendar(parametres.eqLogicId, $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-next-consigne"));
                     break;
 
                 case parametres.statutId:
@@ -284,4 +292,23 @@ function fitTextTemp(template) {
 
 String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+// Récupère l'heure de la prochaine consigne
+function setNextEventCalendar(eqLogicId, $domElement) {
+
+    $.ajax({
+        type: "POST",
+        url: "plugins/thermoAlternateView/core/ajax/thermoAlternateView.ajax.php",
+        data: {
+            action: "getNextEventCalendar",
+            eqLogic_id: eqLogicId
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data.state === 'ok') {
+                $domElement.text(data.result);
+            }
+        }
+    });
 }

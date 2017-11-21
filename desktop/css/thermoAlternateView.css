@@ -96,6 +96,14 @@
     fill: #61B872;
 }
 
+.thermo-next-consigne {
+    font-family: 'Saira', sans-serif;
+    color: #444444;
+    position: absolute;
+    top: calc(100% - 1em - 5px);
+    left: 5px;
+}
+
 .thermo-cover {
     width: 100%;
     height: 100%;
