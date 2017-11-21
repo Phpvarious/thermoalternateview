@@ -308,6 +308,11 @@ class thermoAlternateView extends eqLogic
             $now = new DateTime();
             $prevEventEnd = new DateTime(date('Y-m-d H:i:s', strtotime('+10 days ' . date('Y-m-d H:i:s'))));
 
+            //tri par date
+            usort($events, function($a, $b) {
+                return strtotime($a['start']) - strtotime($b['start']);
+            });
+
             foreach ($events as $event) {
                 $eventStart = new DateTime($event['start']);
                 $eventEnd = new DateTime($event['end']);
