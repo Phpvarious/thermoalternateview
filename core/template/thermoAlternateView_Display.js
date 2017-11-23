@@ -166,8 +166,7 @@ function initialize_Default_Template(parametres) {
                     if (this.value === 1) {
                         $lockIcon.find("use").attr("xlink:href", "#shape-lock-on");
                         $lockIcon.css("fill", parametres.lockColor);
-                    }
-                    else { 
+                    } else {
                         $lockIcon.find("use").attr("xlink:href", "#shape-lock-off");
                         $lockIcon.css("fill", "");
                     }
@@ -261,8 +260,7 @@ function initialize_Dark_Template(parametres, template) {
                     if (this.value === 1) {
                         $lockIcon.find("use").attr("xlink:href", "#shape-lock-on");
                         $lockIcon.css("fill", parametres.lockColor);
-                    }
-                    else { 
+                    } else {
                         $lockIcon.find("use").attr("xlink:href", "#shape-lock-off");
                         $lockIcon.css("fill", "");
                     }
@@ -296,19 +294,20 @@ String.prototype.capitalize = function () {
 
 // Récupère l'heure de la prochaine consigne
 function setNextEventCalendar(eqLogicId, $domElement) {
-
-    $.ajax({
-        type: "POST",
-        url: "plugins/thermoAlternateView/core/ajax/thermoAlternateView.ajax.php",
-        data: {
-            action: "getNextEventCalendar",
-            eqLogic_id: eqLogicId
-        },
-        dataType: 'json',
-        success: function (data) {
-            if (data.state === 'ok') {
-                $domElement.text(data.result);
+    if ($domElement.css('display') != "none") {
+        $.ajax({
+            type: "POST",
+            url: "plugins/thermoAlternateView/core/ajax/thermoAlternateView.ajax.php",
+            data: {
+                action: "getNextEventCalendar",
+                eqLogic_id: eqLogicId
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.state === 'ok') {
+                    $domElement.text(data.result);
+                }
             }
-        }
-    });
+        });
+    }
 }

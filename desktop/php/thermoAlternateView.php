@@ -106,7 +106,9 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
                                     <option value="" disabled selected>{{Sélectionnez un thermostat}}</option>
                                     <?php
                                     foreach (eqLogic::byType("Thermostat") as $eqLogic) {
-                                        echo '<option value="' . $eqLogic->getId() . '">' . $eqLogic->getName() . '</option>';
+                                        if ( $eqLogic->getIsEnable()) {
+                                            echo '<option value="' . $eqLogic->getId() . '">' . $eqLogic->getName() . '</option>';
+                                        }
                                     }
                                     ?>
                                 </select>
@@ -129,7 +131,13 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
             <div role="tabpanel" class="tab-pane" id="optiontab">
                 <form class="form-horizontal">
                     <fieldset>
-                    <legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i> {{Général}}</legend>
+                        <legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i> {{Général}}</legend>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">{{Unité}}</label>
+                            <div class="col-sm-3">
+                                <input type="text" id="thermoUnit" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="thermoUnit" placeholder="{{Unité du thermostat}}" />
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">{{Utiliser la couleur de fond du widget}}</label>
                             <div class="col-sm-3 form-check-input">
@@ -146,6 +154,12 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
                             <label class="col-sm-3 control-label">{{Masquer les modes}}</label>
                             <div class="col-sm-3 form-check-input">
                                 <input type="checkbox" required class="eqLogicAttr" data-l1key="configuration" data-l2key="isDisabledMode">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">{{Afficher la prochaine consigne (agenda)}}</label>
+                            <div class="col-sm-3 form-check-input">
+                                <input type="checkbox" required class="eqLogicAttr" data-l1key="configuration" data-l2key="isVisibleConsigne">
                             </div>
                         </div>
                         <div class="form-group">

@@ -94,12 +94,12 @@
                         <use xlink:href="#shape-icon-externe" />
                     </svg>
                     <span style="z-index:100;" class="thermoDark-temperature-ext #tempExterieure-histo#" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span>
-                    <span>°</span>
+                    <span>#thermo-unit#</span>
                 </div>
             </div>
             <div style="z-index:100;" class="thermoDark-flex #temperature-histo#" data-cmd_id="#tempInterieure-id#">
                 <span class="thermoDark-temperature">#temperature-value#</span>
-                <span class="thermoDark-degre">°</span>
+                <span class="thermoDark-degre">#thermo-unit#</span>
             </div>
         </div>
         <div class="thermoDark-mode">
@@ -113,7 +113,7 @@
             </div>
             <div class="thermoDark-consigne #consigne-histo#" data-cmd_id="#consigne-id#">
                 <span>#consigne-value#</span>
-                <span class="thermoDark-degre">°</span>
+                <span class="thermoDark-degre">#thermo-unit#</span>
             </div>
             <div>
                 <svg class="thermoDark-button thermoDark-button-moins" data-cmd_id="#thermostat-id#" data-cmd_val="#consigne-value#">
@@ -134,7 +134,7 @@
                 <use xlink:href="#shape-statistics" />
             </svg>
         </div>
-        <div class="thermoDark-next-consigne">
+        <div style="display:#nextConsigne-visible#" class="thermoDark-next-consigne">
             #thermo-nextOccurence#
         </div>
     </div>

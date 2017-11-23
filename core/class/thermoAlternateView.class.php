@@ -98,6 +98,7 @@ class thermoAlternateView extends eqLogic
         $idThermostat = $this->getConfiguration('thermostat');
         $template = $this->getConfiguration('template');
         $isVisibleTempExt = $this->getConfiguration('isvisibletempext');
+        $isVisibleConsigne = $this->getConfiguration('isVisibleConsigne');
         $isEnableBackColorStd = $this->getConfiguration('isEnableBackColorStd');
         $isDisabledMode = $this->getConfiguration('isDisabledMode');
         $isDefaultFlameColor = $this->getConfiguration('isDefaultFlameColor');
@@ -106,9 +107,9 @@ class thermoAlternateView extends eqLogic
         $waitColor = $this->getConfiguration('waitColor');
         $isDefaultLockColor = $this->getConfiguration('isDefaultLockColor');
         $lockColor = $this->getConfiguration('lockColor');
+        $thermoUnit = $this->getConfiguration('thermoUnit');
         $thermostat = eqLogic::byId($idThermostat);
 
-        $nextEvent = thermoAlternateView::getNextEventCalendar($thermostat);
 
         $islocked = 0;
         $mode = "";
@@ -184,7 +185,13 @@ class thermoAlternateView extends eqLogic
                 if (in_array($modeActionName, $modesCompatibles)) {
                     $modeIcon = $modeActionName;
                 } else {
-                    $modeIcon = 'other';
+                    switch ( $modeActionName ) {
+                        case 'vacance':
+                            $modeIcon = 'vacances'; 
+                            break;                       
+                        default:
+                            $modeIcon = 'other';
+                    }
                 }
 
                 if ($mode == $modeActionName) {
@@ -195,6 +202,13 @@ class thermoAlternateView extends eqLogic
                     $htmlModesMobile = $htmlModesMobile . '<span class="thermo-switch-off"><svg data-mode="' . $modeActionName . '" class="thermo-mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
                 }
             }
+        }
+
+        //Prochaine consigne
+        $replace['#nextConsigne-visible#'] = $isVisibleConsigne == "1" ? "bloc" : "none";
+
+        if ( $isVisibleConsigne == '1') {
+            $nextEvent = thermoAlternateView::getNextEventCalendar($thermostat);           
         }
 
         //Icone de verrouillage
@@ -236,6 +250,7 @@ class thermoAlternateView extends eqLogic
         //Commandes Info
         $replace["#statut-id#"] = $cmdStatutId;
         $replace["#mode-id#"] = $cmdModeId;
+        $replace["#thermo-unit#"] = $thermoUnit;
         $replace['#thermo-mode#'] = $htmlModes;
         $replace['#thermo-mode-mobile#'] = $htmlModesMobile;
         $replace['#thermostat-id#'] = $cmdThermostatId;
@@ -299,40 +314,47 @@ class thermoAlternateView extends eqLogic
         try {
             $calendar_events = thermoAlternateView::getLinkCalendar($thermostat);
 
-            //Récupération des évènements du calendrier
-            $startDate = date('Y-m-d H:i:s', strtotime('-1 days ' . date('Y-m-d H:i:s')));
-            $endDate = date('Y-m-d H:i:s', strtotime('+2 days ' . date('Y-m-d H:i:s')));
-            $events = calendar_event::calculeEvents($calendar_events, $startDate, $endDate);
+            if ( count($calendar_events) > 0 ) {
+                //Récupération des évènements du calendrier
+                $startDate = date('Y-m-d H:i:s', strtotime('-1 days ' . date('Y-m-d H:i:s')));
+                $endDate = date('Y-m-d H:i:s', strtotime('+2 days ' . date('Y-m-d H:i:s')));
+                $events = calendar_event::calculeEvents($calendar_events, $startDate, $endDate);
 
-            //Récupération de l'évènement en court
-            $now = new DateTime();
-            $prevEventEnd = new DateTime(date('Y-m-d H:i:s', strtotime('+10 days ' . date('Y-m-d H:i:s'))));
+                //Récupération de l'évènement en court
+                $now = new DateTime();
+                $prevEventEnd = new DateTime(date('Y-m-d H:i:s', strtotime('+10 days ' . date('Y-m-d H:i:s'))));
 
-            //tri par date
-            usort($events, function($a, $b) {
-                return strtotime($a['start']) - strtotime($b['start']);
-            });
+                //tri par date
+                usort($events, function($a, $b) {
+                    return strtotime($a['start']) - strtotime($b['start']);
+                });
 
-            foreach ($events as $event) {
-                $eventStart = new DateTime($event['start']);
-                $eventEnd = new DateTime($event['end']);
-                if ( $eventStart <= $now && $eventEnd > $now ) {
-                    $return = $event['end'];
-                    break;
-                }
-                else {
-                    if ( $eventStart >= $now && $prevEventEnd < $now ) {
-                        $return = $event['start'];
+                foreach ($events as $event) {
+                    $eventStart = new DateTime($event['start']);
+                    $eventEnd = new DateTime($event['end']);
+                    if ( $eventStart <= $now && $eventEnd > $now ) {
+                        $return = $event['end'];
                         break;
                     }
+                    else {
+                        if ( $eventStart >= $now && $prevEventEnd < $now ) {
+                            $return = $event['start'];
+                            break;
+                        }
+                    }
+                    $prevEventEnd = $eventEnd;
                 }
-                $prevEventEnd = $eventEnd;
+                $return = "Prochaine consigne " . thermoAlternateView::getHumanDelai($return);
+            }
+            else {
+                $return = "";
             }
         }
         catch (Exception $e){
+            $return = "";
         }
     
-        return "Prochaine consigne " . thermoAlternateView::getHumanDelai($return);
+        return $return;
 
     }
 

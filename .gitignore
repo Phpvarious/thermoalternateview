@@ -1,2 +1,6 @@
 .smbDelete*
 ._.gitignore
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/extensions.json

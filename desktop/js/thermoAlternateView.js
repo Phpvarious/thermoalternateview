@@ -1,4 +1,3 @@
-
 /* This file is part of Jeedom.
  *
  * Jeedom is free software: you can redistribute it and/or modify
@@ -16,13 +15,22 @@
  */
 
 
-$("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+$("#table_cmd").sortable({
+    axis: "y",
+    cursor: "move",
+    items: ".cmd",
+    placeholder: "ui-state-highlight",
+    tolerance: "intersect",
+    forcePlaceholderSize: true
+});
 /*
  * Fonction pour l'ajout de commande, appellé automatiquement par plugin.thermoAlternateView
  */
 function addCmdToTable(_cmd) {
     if (!isset(_cmd)) {
-        var _cmd = {configuration: {}};
+        var _cmd = {
+            configuration: {}
+        };
     }
     if (!isset(_cmd.configuration)) {
         _cmd.configuration = {};
@@ -56,11 +64,18 @@ $(document).ready(function () {
 
     $(".color-default").each(function () {
         $(this).closest('.form-check-input').find('input[type=color]').css('visibility', $(this).is(':checked') ? 'hidden' : 'visible');
-    });  
+    });
 
 
     $(".color-default").change(function () {
         $(this).closest('.form-check-input').find('input[type=color]').css('visibility', $(this).is(':checked') ? 'hidden' : 'visible');
+
+    });
+
+    $("#thermoUnit").change(function () {
         
+        if ($("#thermoUnit").val() === "") {
+            $("#thermoUnit").val("°");
+        }
     });
 });
