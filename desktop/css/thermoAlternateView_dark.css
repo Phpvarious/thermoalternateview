@@ -94,6 +94,13 @@
     left: calc(100% - 2.2em - 16px);
 }
 
+.thermoDark-next-consigne {
+    font-family: 'Work Sans', sans-serif;
+    position: absolute;
+    top: calc(100% - 1em - 16px);
+    left: 16px;
+}
+
 .thermoDark-button-statistics:hover {
     fill: #61B872;
 }

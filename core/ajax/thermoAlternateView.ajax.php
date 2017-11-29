@@ -19,11 +19,17 @@
 try {
     require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
     include_file('core', 'authentification', 'php');
+    include_file('core', 'thermoAlternateView', 'class', 'thermoAlternateView');
 
     if (!isConnect('admin')) {
         throw new Exception(__('401 - Accès non autorisé', __FILE__));
     }
 
+    if (init('action') == 'getNextEventCalendar') {
+        $thermostat = eqLogic::byId(init('eqLogic_id'));
+
+		ajax::success(thermoAlternateView::getNextEventCalendar($thermostat));
+	}
 
 
     throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));

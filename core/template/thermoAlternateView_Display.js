@@ -1,5 +1,8 @@
 function initialize(parametres, template) {
 
+    //Gestion des fichiers SVG (pour IE)
+    svg4everybody();
+
     if (template === undefined) {
         template = "";
     } else {
@@ -11,9 +14,8 @@ function initialize(parametres, template) {
     } else {
         initialize_Default_Template(parametres);
     }
-    //Position des boutons mode
-    //$(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-mode").css("margin-top", ($(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-cover").innerHeight() - $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-widget-name").innerHeight() - $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-mode").innerHeight()) / 2);
 
+    //Position des boutons mode
     $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-switch-off, .eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-switch-on").click(function () {
         var cmdId = $(this).find(".thermo" + template + "-mode-switch").attr("data-cmd_id");
         if (cmdId != undefined) {
@@ -27,7 +29,6 @@ function initialize(parametres, template) {
     //Plus / Moins
     $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-button").click(function () {
         var cmdId = $(this).attr("data-cmd_id");
-        //var cmdId2 = $(this).attr("data-cmd_id2");
         var consigne = $(this).attr("data-cmd_val");
 
         if ($(this).hasClass("thermo" + template + "-button-plus")) {
@@ -38,9 +39,6 @@ function initialize(parametres, template) {
                 id: cmdId,
                 value: {
                     slider: consigne
-                },
-                success: function (cmds) {
-                    //$self.attr("data-cmd_val", consigne)                    
                 }
             });
         } else {
@@ -52,19 +50,12 @@ function initialize(parametres, template) {
                     id: cmdId,
                     value: {
                         slider: consigne
-                    },
-                    success: function (cmds) {
-                        //$self.attr("data-cmd_val", consigne)
                     }
                 });
             } else {
                 jeedom.cmd.execute({
                     id: cmdId
                 });
-                //if (cmdId2 != undefined) {
-                //$(this).attr("data-cmd_id", cmdId2);
-                //$(this).attr("data-cmd_id2", cmdId);
-                //}
             }
         }
 
@@ -78,7 +69,7 @@ function toggleSwitchMode(switchElement, uid, template) {
     $(".eqLogic[data-eqlogic_uid=" + uid + "] .thermo" + template + "-switch-on").each(function () {
         $(this).removeClass("thermo" + template + "-switch-on");
         $(this).addClass("thermo" + template + "-switch-off");
-        $(this).find(".thermo" + template + "-mode-switch use").attr("xlink:href", "#shape-switch-off");
+        $(this).find(".thermo" + template + "-mode-switch use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-switch-off");
         $(this).find(".thermo" + template + "-mode-label").removeClass("thermo" + template + "-mode-label-on");
     });
 
@@ -86,7 +77,7 @@ function toggleSwitchMode(switchElement, uid, template) {
     var $parentSwitch = $(switchElement).closest(".thermo" + template + "-switch-off");
     $parentSwitch.removeClass("thermo" + template + "-switch-off");
     $parentSwitch.addClass("thermo" + template + "-switch-on");
-    $(switchElement).find("use").attr("xlink:href", "#shape-switch-on");
+    $(switchElement).find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-switch-on");
     $(switchElement).prevAll(".thermo" + template + "-mode-label").addClass("thermo" + template + "-mode-label-on");
 }
 
@@ -131,6 +122,9 @@ function initialize_Default_Template(parametres) {
                     });
 
                     $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-button-plus, .eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-button-moins").attr("data-cmd_val", this.value);
+
+                    //Prochaine consigne
+                    setNextEventCalendar(parametres.eqLogicId, $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-next-consigne"));
                     break;
 
                 case parametres.statutId:
@@ -138,14 +132,18 @@ function initialize_Default_Template(parametres) {
 
                     switch (this.value) {
                         case "Chauffage":
-                            $domElement.find("use").attr("xlink:href", "#shape-icon-flame");
+                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-icon-flame");
                             $domElement.css("fill", parametres.flameColor);
                             break;
 
                         case "Suspendu":
-                            $domElement.find("use").attr("xlink:href", "#shape-icon-wait");
-                            console.log(parametres.waitColor);
+                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-icon-wait");
                             $domElement.css("fill", parametres.waitColor);
+                            break;
+
+                        case "Climatisation":
+                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-icon-fan");
+                            $domElement.css("fill", parametres.fanColor);
                             break;
 
                         default:
@@ -161,17 +159,17 @@ function initialize_Default_Template(parametres) {
                     $lockIcon.attr("data-cmd_id", lockId2);
                     $lockIcon.attr("data-cmd_id2", lockId1);
                     if (this.value === 1) {
-                        $lockIcon.find("use").attr("xlink:href", "#shape-lock-on");
+                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-lock-on");
                         $lockIcon.css("fill", parametres.lockColor);
-                    }
-                    else { 
-                        $lockIcon.find("use").attr("xlink:href", "#shape-lock-off");
+                    } else {
+                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-lock-off");
                         $lockIcon.css("fill", "");
                     }
                     break;
 
                 case parametres.modeId:
-                    var $cmdMode = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] [data-mode=" + this.value.toLowerCase() + "]").nextAll(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-mode-switch");
+                    var escapeMode = this.value.toLowerCase().replace(/ /g, "");
+                    var $cmdMode = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] [data-mode=" + escapeMode + "]").nextAll(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-mode-switch");
                     toggleSwitchMode($cmdMode, parametres.uid, "");
                     break;
             }
@@ -196,7 +194,7 @@ function initialize_Dark_Template(parametres, template) {
     //Ajout des labels sur les modes
     if (parametres.mobile !== true) {
         $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-mode-label").each(function () {
-            $(this).after("<span>" + $(this).attr("data-mode").capitalize() + "</span>");
+            $(this).after("<span>" + $(this).attr("data-mode-humanname").capitalize() + "</span>");
         });
     }
 
@@ -219,9 +217,14 @@ function initialize_Dark_Template(parametres, template) {
 
                 case parametres.consigneId:
                     var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-consigne > span").first();
+                    //Consigne
                     $domElement.text(this.value);
 
+                    //Boutons +/-
                     $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-button-plus, .eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-button-moins").attr("data-cmd_val", this.value);
+
+                    //Prochaine consigne
+                    setNextEventCalendar(parametres.eqLogicId, $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-next-consigne"));
                     break;
 
                 case parametres.statutId:
@@ -229,14 +232,20 @@ function initialize_Dark_Template(parametres, template) {
 
                     switch (this.value) {
                         case "Chauffage":
-                            $domElement.find("use").attr("xlink:href", "#shape-icon-flame");
+                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-icon-flame");
                             $domElement.css("fill", parametres.flameColor);
                             break;
 
                         case "Suspendu":
-                            $domElement.find("use").attr("xlink:href", "#shape-icon-wait");
+                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-icon-wait");
                             $domElement.css("fill", parametres.waitColor);
                             break;
+
+                        case "Climatisation":
+                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-icon-fan");
+                            $domElement.css("fill", parametres.fanColor);
+                            break;
+
 
                         default:
                             $domElement.find("use").attr("xlink:href", "");
@@ -251,18 +260,18 @@ function initialize_Dark_Template(parametres, template) {
                     $lockIcon.attr("data-cmd_id", lockId2);
                     $lockIcon.attr("data-cmd_id2", lockId1);
                     if (this.value === 1) {
-                        $lockIcon.find("use").attr("xlink:href", "#shape-lock-on");
+                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-lock-on");
                         $lockIcon.css("fill", parametres.lockColor);
-                    }
-                    else { 
-                        $lockIcon.find("use").attr("xlink:href", "#shape-lock-off");
+                    } else {
+                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-lock-off");
                         $lockIcon.css("fill", "");
                     }
 
                     break;
 
                 case parametres.modeId:
-                    var $cmdMode = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] [data-mode=" + this.value.toLowerCase() + "]").nextAll(".thermo" + template + "-mode-switch");
+                    var escapeMode = this.value.toLowerCase().replace(/ /g, "");
+                    var $cmdMode = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] [data-mode=" + escapeMode + "]").nextAll(".thermo" + template + "-mode-switch");
                     toggleSwitchMode($cmdMode, parametres.uid, template);
                     break;
             }
@@ -284,4 +293,24 @@ function fitTextTemp(template) {
 
 String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+// Récupère l'heure de la prochaine consigne
+function setNextEventCalendar(eqLogicId, $domElement) {
+    if ($domElement.css('display') != "none") {
+        $.ajax({
+            type: "POST",
+            url: "plugins/thermoAlternateView/core/ajax/thermoAlternateView.ajax.php",
+            data: {
+                action: "getNextEventCalendar",
+                eqLogic_id: eqLogicId
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.state === 'ok') {
+                    $domElement.text(data.result);
+                }
+            }
+        });
+    }
 }
