@@ -103,6 +103,8 @@ class thermoAlternateView extends eqLogic
         $isDisabledMode = $this->getConfiguration('isDisabledMode');
         $isDefaultFlameColor = $this->getConfiguration('isDefaultFlameColor');
         $flameColor = $this->getConfiguration('flameColor');
+        $isDefaultFanColor = $this->getConfiguration('isDefaultFanColor');
+        $fanColor = $this->getConfiguration('fanColor');
         $isDefaultWaitColor = $this->getConfiguration('isDefaultWaitColor');
         $waitColor = $this->getConfiguration('waitColor');
         $isDefaultLockColor = $this->getConfiguration('isDefaultLockColor');
@@ -178,14 +180,16 @@ class thermoAlternateView extends eqLogic
                     break;
             }
         }
-        $modesCompatibles = array('confort', 'eco', 'absent', 'off', 'vacances', 'nuit', 'jour');
+        $modesCompatibles = array('confort', 'eco', 'absent', 'off', 'vacances', 'nuit', 'jour', 'confort-2', 'horsgel');
 
         if ($isDisabledMode != "1") {
             foreach ($modes as $modeActionName => $modeActionId) {
-                if (in_array($modeActionName, $modesCompatibles)) {
-                    $modeIcon = $modeActionName;
+                $modeEscapeActionName = str_replace(' ', '', $modeActionName);
+
+                if (in_array($modeEscapeActionName, $modesCompatibles)) {
+                    $modeIcon = $modeEscapeActionName;
                 } else {
-                    switch ( $modeActionName ) {
+                    switch ( $modeEscapeActionName ) {
                         case 'vacance':
                             $modeIcon = 'vacances'; 
                             break;                       
@@ -195,11 +199,11 @@ class thermoAlternateView extends eqLogic
                 }
 
                 if ($mode == $modeActionName) {
-                    $htmlModes = $htmlModes . '<span class="thermo-switch-on thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeActionName . '" class="thermo-mode-label thermo-mode-label-on"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="#shape-switch-on" /></svg></span>';
-                    $htmlModesMobile = $htmlModesMobile . '<span class="thermo-switch-on"><svg data-mode="' . $modeActionName . '" class="thermo-mode-label thermo-mode-label-on"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
+                    $htmlModes = $htmlModes . '<span class="thermo-switch-on thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeEscapeActionName . '" data-mode-humanname="' . $modeActionName . '" class="thermo-mode-label thermo-mode-label-on"><use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-' . $modeIcon . '" /></svg><svg class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-switch-on" /></svg></span>';
+                    $htmlModesMobile = $htmlModesMobile . '<span class="thermo-switch-on"><svg data-mode="' . $modeEscapeActionName . '" data-mode-humanname="' . $modeActionName . '" class="thermo-mode-label thermo-mode-label-on"><use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
                 } else {
-                    $htmlModes = $htmlModes . '<span class="thermo-switch-off thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeActionName . '" class="thermo-mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="#shape-switch-off" /></svg></span>';
-                    $htmlModesMobile = $htmlModesMobile . '<span class="thermo-switch-off"><svg data-mode="' . $modeActionName . '" class="thermo-mode-label"><use xlink:href="#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
+                    $htmlModes = $htmlModes . '<span class="thermo-switch-off thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeEscapeActionName . '" data-mode-humanname="' . $modeActionName . '" class="thermo-mode-label"><use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-' . $modeIcon . '" /></svg><svg class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-switch-off" /></svg></span>';
+                    $htmlModesMobile = $htmlModesMobile . '<span class="thermo-switch-off"><svg data-mode="' . $modeEscapeActionName . '" data-mode-humanname="' . $modeActionName . '" class="thermo-mode-label"><use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
                 }
             }
         }
@@ -238,6 +242,9 @@ class thermoAlternateView extends eqLogic
         //Couleur du mode suspendu
         $replace['#thermo-waitColor#'] = $isDefaultWaitColor == "1" ? "" : $waitColor;
 
+        //Couleur du mode climatisation
+        $replace['#thermo-fanColor#'] = $isDefaultFanColor == "1" ? "" : $fanColor;
+
         //Modes de chauffe
         if (empty($template) || $template === "default") {
             $template = '';
@@ -266,6 +273,11 @@ class thermoAlternateView extends eqLogic
             case "Suspendu":
                 $replace['#statut-icon#'] = "#shape-icon-wait";
                 $replace['#statut-color#'] = $isDefaultWaitColor == "1" ? "" : "fill:" . $waitColor;
+                break;
+
+            case "Climatisation":
+                $replace['#statut-icon#'] = "#shape-icon-fan";
+                $replace['#statut-color#'] = $isDefaultFanColor == "1" ? "" : "fill:" . $fanColor;
                 break;
 
             default:

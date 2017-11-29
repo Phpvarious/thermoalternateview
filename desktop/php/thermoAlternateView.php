@@ -170,6 +170,13 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-3 control-label">{{Couleur icône mode climatisation}}</label>
+                            <div class="col-sm-3 form-check-input">
+                                <label>Defaut <input type="checkbox" class="eqLogicAttr color-default" data-l1key="configuration" data-l2key="isDefaultFanColor" checked></label>
+                                <input type="color" class="eqLogicAttr" data-l1key="configuration" data-l2key="fanColor">
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">{{Couleur icône mode suspendu}}</label>
                             <div class="col-sm-3 form-check-input">
                                 <label>Defaut <input type="checkbox" class="eqLogicAttr color-default" data-l1key="configuration" data-l2key="isDefaultWaitColor" checked></label>
