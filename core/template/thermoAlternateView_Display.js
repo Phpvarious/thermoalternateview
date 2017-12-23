@@ -25,6 +25,15 @@ function initialize(parametres, template) {
         }
     });
 
+    //Statistiques
+    $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-statistics").click(function () {
+        $('#md_modal').dialog({title: "Statistiques"});
+        $("#md_modal").load(parametres.statisticsUrl + '&ajax=1', function (){ 
+            $("#md_modal .bs-sidebar").parent().hide();
+            $("#md_modal #div_object").parent().removeClass("col-lg-10").addClass("col-lg-12");
+        }).dialog('open');
+    });
+
 
     //Plus / Moins
     $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-button").click(function () {

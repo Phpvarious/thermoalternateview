@@ -261,7 +261,7 @@ class thermoAlternateView extends eqLogic
         $replace['#thermo-mode#'] = $htmlModes;
         $replace['#thermo-mode-mobile#'] = $htmlModesMobile;
         $replace['#thermostat-id#'] = $cmdThermostatId;
-        $replace['#statistics-url#'] = "window.location = '/index.php?v=d&m=thermostat&p=panel&object_id=" . $thermostat->getObject_id() . "'";
+        $replace['#statistics-url#'] = "index.php?v=d&m=thermostat&p=panel&object_id=" . $thermostat->getObject_id();
         
         //Statut
         switch ($statut) {
