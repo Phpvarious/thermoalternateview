@@ -38,7 +38,7 @@
             <span class="thermo-temperature-ext #tempExterieure-histo#" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span>
             <span>#thermo-unit#</span>
         </div>
-        <div class="thermo-statistics" onclick="#statistics-url#">
+        <div class="thermo-statistics">
             <svg class="thermo-button-statistics">
                 <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-statistics" />
             </svg>
@@ -76,6 +76,7 @@
         param.waitColor = "#thermo-waitColor#";
         param.fanColor = "#thermo-fanColor#";
         param.eqLogicId = "#thermo-eqLogicId#";
+        param.statisticsUrl = "#statistics-url#";
 
         initialize(param);
     }
