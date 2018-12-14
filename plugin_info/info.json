@@ -1,11 +1,11 @@
 {
 	"id" : "thermoAlternateView",
 	"name" : "thermoAlternateView",
-	"description" : "Vue alternative du plugin thermostat",
+	"description" : "Ce plugin est une alternative d'affichage au widget standard du plugin Thermostat. Il ne s'agit pas d'un thermostat autonome et n'est pas compatible avec d'autre thermostats.",
 	"licence" : "AGPL",
 	"author" : "SupraDolph",
 	"require" : "3.0",
-	"category" : "Confort",
+	"category" : "wellness",
 	"changelog" : "https://bitbucket.org/supradolph/jeedom-plugins-themoalternateview/wiki/#language##markdown-header-changelog",
 	"documentation" : "https://bitbucket.org/supradolph/jeedom-plugins-themoalternateview/wiki/#language#",
 	"language" : ["fr_FR","en_US"],
