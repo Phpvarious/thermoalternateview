@@ -2,14 +2,16 @@
 	"id" : "thermoAlternateView",
 	"name" : "thermoAlternateView",
 	"description" : "Ce plugin est une alternative d'affichage au widget standard du plugin Thermostat. Il ne s'agit pas d'un thermostat autonome et n'est pas compatible avec d'autre thermostats.",
+	"usage" : "Consultez la documentation ou le forum.",
 	"licence" : "AGPL",
 	"author" : "SupraDolph",
 	"require" : "3.0",
 	"category" : "wellness",
 	"changelog" : "https://bitbucket.org/supradolph/jeedom-plugins-themoalternateview/wiki/#language##markdown-header-changelog",
 	"documentation" : "https://bitbucket.org/supradolph/jeedom-plugins-themoalternateview/wiki/#language#",
-	"language" : ["fr_FR","en_US"],
+	"language" : ["fr_FR"],
 	"link" : {
 		"forum":"https://www.jeedom.com/forum/viewtopic.php?f=143&t=31408"
-	}
+	},
+	"compatibility" : ["miniplus","smart","rpi","docker","diy","mobile"]
 }

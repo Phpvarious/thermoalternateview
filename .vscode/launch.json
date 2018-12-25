@@ -7,12 +7,20 @@
     "configurations": [
 
         {
-            "name": "Listen for XDebug",
+            "name": "jeedom XDebug",
             "type": "php",
             "request": "launch",
             "port": 9000,
-            "localSourceRoot": "/Volumes/jeedom/",
+            "localSourceRoot": "/Volumes/jeedom-dev/",
             "serverSourceRoot": "/var/www/html/"
+        },
+        {
+            "name": "jeedom-dev XDebug",
+            "type": "php",
+            "request": "launch",
+            "port": 9000,
+            "localSourceRoot": "/Users/supradolph/jeedom-plugins-themoalternateview/",
+            "serverSourceRoot": "/var/www/html/plugins/themoAlternateView/"
         },
         {
             "name": "Launch currently open script",
