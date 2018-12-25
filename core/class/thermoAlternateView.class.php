@@ -248,10 +248,22 @@ class thermoAlternateView extends eqLogic
         //Modes de chauffe
         if (empty($template) || $template === "default") {
             $template = '';
+
+            if ($replace['#height#'] == "auto" && $replace['#width#'] == "auto") {
+                $replace['#height#'] = "300px";
+                $replace['#width#'] = "300px";
+            }
+            
         } else {
             $htmlModes = str_replace("thermo-", "thermo" . $template . "-", $htmlModes);
             $htmlModesMobile = str_replace("thermo-", "thermo" . ucfirst($template) . "-", $htmlModesMobile);
             $template = '_' . $template;
+
+            if ($replace['#height#'] == "auto" && $replace['#width#'] == "auto") {
+                $replace['#height#'] = "250px";
+                $replace['#width#'] = "380px";
+            }
+            
         }
 
         //Commandes Info
@@ -304,10 +316,9 @@ class thermoAlternateView extends eqLogic
         $replace['#consigne-id#'] = $tempConsigneId;        
         $replace['#consigne-value#'] = $tempConsigne;
         $replace['#consigne-histo#'] = $cmdConsigneHisto == "1" ? "history cursor" : "";      
-        
+    
         $replace['#thermo-eqLogicId#'] = $idThermostat;      
         $replace['#thermo-nextOccurence#'] = $nextEvent;      
-        
 
         $parameters = $this->getDisplay('parameters');
         if (is_array($parameters)) {
@@ -404,7 +415,8 @@ class thermoAlternateView extends eqLogic
 		$return = array();
 		foreach ($thermostat->getCmd(null, 'modeAction', null, true) as $mode) {
 			foreach (calendar_event::searchByCmd($mode->getId()) as $event) {
-				$return[$event->getId()] = $event;
+                if ($event->getCmd_param()["in_progress"] == 1)
+				    $return[$event->getId()] = $event;
 			}
 		}
 		$thermostat_cmd = $thermostat->getCmd(null, 'thermostat');
