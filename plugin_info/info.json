@@ -13,5 +13,5 @@
 	"link" : {
 		"forum":"https://www.jeedom.com/forum/viewtopic.php?f=143&t=31408"
 	},
-	"compatibility" : ["miniplus","smart","rpi","docker","diy","mobile"]
+	"compatibility" : ["miniplus","smart","rpi","docker","diy"]
 }
