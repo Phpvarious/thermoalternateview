@@ -110,6 +110,7 @@ class thermoAlternateView extends eqLogic
         $isDefaultLockColor = $this->getConfiguration('isDefaultLockColor');
         $lockColor = $this->getConfiguration('lockColor');
         $thermoUnit = $this->getConfiguration('thermoUnit');
+        $isVisibleEvent = $this->getConfiguration('isVisibleEvent');
         $thermostat = eqLogic::byId($idThermostat);
 
 
@@ -212,7 +213,7 @@ class thermoAlternateView extends eqLogic
         $replace['#nextConsigne-visible#'] = $isVisibleConsigne == "1" ? "bloc" : "none";
 
         if ( $isVisibleConsigne == '1') {
-            $nextEvent = thermoAlternateView::getNextEventCalendar($thermostat);           
+            $nextEvent = thermoAlternateView::getNextEventCalendar($thermostat, $isVisibleEvent);           
         }
 
         //Icone de verrouillage
@@ -330,7 +331,7 @@ class thermoAlternateView extends eqLogic
         return template_replace($replace, getTemplate('core', $version, 'thermoAlternateView_display' . $template, 'thermoAlternateView'));
     }
 
-    public static function getNextEventCalendar($thermostat) {
+    public static function getNextEventCalendar($thermostat, $displayName) {
 
         $return = "";
 
@@ -368,6 +369,9 @@ class thermoAlternateView extends eqLogic
                     $prevEventEnd = $eventEnd;
                 }
                 $return = "Prochaine consigne " . thermoAlternateView::getHumanDelai($return);
+
+                if ($displayName == true)
+                    $return = $return . " (" . trim($event["title"]) . ")";
             }
             else {
                 $return = "";
@@ -411,21 +415,34 @@ class thermoAlternateView extends eqLogic
 		}
 		if (!class_exists('calendar_event')) {
 			throw new Exception("Le plugin agenda n'est pas installé !");
-		}
-		$return = array();
+        }
+        /////// reste à filtrer par agenda actifs.
+		$eventsInProgress = array();
+		$eventsNotRunning = array();
 		foreach ($thermostat->getCmd(null, 'modeAction', null, true) as $mode) {
 			foreach (calendar_event::searchByCmd($mode->getId()) as $event) {
-                if ($event->getCmd_param()["in_progress"] == 1)
-				    $return[$event->getId()] = $event;
+                if ($event->getEqLogic()->getIsEnable() == 1) {
+                    if ($event->getCmd_param()["in_progress"] == 1)
+                        $eventsInProgress[$event->getId()] = $event;
+                    else
+                        $eventsNotRunning[$event->getId()] = $event;
+                }
 			}
-		}
+        }
+        /*
 		$thermostat_cmd = $thermostat->getCmd(null, 'thermostat');
 		if (is_object($thermostat_cmd)) {
 			foreach (calendar_event::searchByCmd($thermostat_cmd->getId()) as $event) {
-				$return[$event->getId()] = $event;
+                if ($event->getCmd_param()["in_progress"] == 1)
+                    $eventsInProgress[$event->getId()] = $event;
+                else
+                    $eventsNotRunning[$event->getId()] = $event;
 			}
-		}
-		return $return;
+        }
+        */
+
+        // Retourne les évènements en cours, sinon les autres (consigne entre deux évènements)
+		return (sizeof($eventsInProgress) > 0 ? $eventsInProgress : $eventsNotRunning);
 	}
 
     public static $_widgetPossibility = array('custom' => array(
