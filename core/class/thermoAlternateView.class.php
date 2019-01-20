@@ -98,6 +98,7 @@ class thermoAlternateView extends eqLogic
         $idThermostat = $this->getConfiguration('thermostat');
         $template = $this->getConfiguration('template');
         $isVisibleTempExt = $this->getConfiguration('isvisibletempext');
+        $isVisibleHygrometrie = $this->getConfiguration('isvisibleHygrometrie');
         $isVisibleConsigne = $this->getConfiguration('isVisibleConsigne');
         $isEnableBackColorStd = $this->getConfiguration('isEnableBackColorStd');
         $isDisabledMode = $this->getConfiguration('isDisabledMode');
@@ -121,15 +122,18 @@ class thermoAlternateView extends eqLogic
         $cmdModeId = 0;
         $cmdTempInterId = 0;
         $cmdTempExterId = 0;
+        $cmdHygrometrieId = 0;
         $tempConsigneId = 0;
         $cmdThermostatHisto = "";        
         $cmdTempInterHisto = "";
         $cmdTempExterHisto = "";
+        $cmdHygrometrieHisto = "";
         $cmdLockId = 0;
         $cmdUnlockId = 0;
         $cmdThermostatId = 0;
         $tempInterieure = 0;
         $tempExterieure = 0;
+        $hygrometrie = 0;
         $modes = array();
         $htmlModes = "";
         $htmlModesMobile = "";
@@ -174,6 +178,11 @@ class thermoAlternateView extends eqLogic
                     $tempExterieure= $commande->execCmd();
                     $cmdTempExterHisto = $commande->getIsHistorized();                    
                     break;
+                case "humidity":
+                    $cmdHygrometrieId = $commande->getId();
+                    $hygrometrie= $commande->execCmd();
+                    $cmdHygrometrieHisto = $commande->getIsHistorized();                    
+                    break;
                 case "order":
                     $tempConsigneId = $commande->getId();
                     $tempConsigne = $commande->execCmd();
@@ -181,14 +190,25 @@ class thermoAlternateView extends eqLogic
                     break;
             }
         }
-        $modesCompatibles = array('confort', 'eco', 'absent', 'off', 'vacances', 'nuit', 'jour', 'confort-2', 'horsgel');
+        $modesCompatibles = array(
+            'confort' => __('confort', __FILE__),
+            'eco' => __('eco', __FILE__),
+            'absent' => __('absent', __FILE__),
+            'off' => __('off', __FILE__),
+            'vacances' => __('vacances', __FILE__),
+            'nuit' => __('nuit', __FILE__),
+            'jour' => __('jour', __FILE__),
+            'confort-2' => __('confort-2', __FILE__),
+            'horsgel' => __('horsgel', __FILE__)
+        );
 
         if ($isDisabledMode != "1") {
             foreach ($modes as $modeActionName => $modeActionId) {
                 $modeEscapeActionName = str_replace(' ', '', $modeActionName);
 
-                if (in_array($modeEscapeActionName, $modesCompatibles)) {
-                    $modeIcon = $modeEscapeActionName;
+                $modeFr = array_search($modeEscapeActionName, $modesCompatibles);
+                if ($modeFr != false) {
+                    $modeIcon = $modeFr;
                 } else {
                     switch ( $modeEscapeActionName ) {
                         case 'vacance':
@@ -278,17 +298,17 @@ class thermoAlternateView extends eqLogic
         
         //Statut
         switch ($statut) {
-            case "Chauffage":
+            case __('Chauffage', __FILE__):
                 $replace['#statut-icon#'] = "#shape-icon-flame";
                 $replace['#statut-color#'] = $isDefaultFlameColor == "1" ? "" : "fill:" . $flameColor;
                 break;
 
-            case "Suspendu":
+            case __('Suspendu', __FILE__):
                 $replace['#statut-icon#'] = "#shape-icon-wait";
                 $replace['#statut-color#'] = $isDefaultWaitColor == "1" ? "" : "fill:" . $waitColor;
                 break;
 
-            case "Climatisation":
+            case __('Climatisation', __FILE__):
                 $replace['#statut-icon#'] = "#shape-icon-fan";
                 $replace['#statut-color#'] = $isDefaultFanColor == "1" ? "" : "fill:" . $fanColor;
                 break;
@@ -298,6 +318,7 @@ class thermoAlternateView extends eqLogic
                 $replace['#statut-color#'] = "";
         }
 
+        //Températures
         list($entier, $decimale) = explode(".", $tempInterieure);
         $replace['#tempInterieure1#'] = $entier;
         $replace['#tempInterieure2#'] = $decimale;
@@ -307,9 +328,14 @@ class thermoAlternateView extends eqLogic
 
         $replace['#tempExterieure-id#'] = $cmdTempExterId;
         $replace['#tempExterieure-value#'] = $tempExterieure;
-        $replace['#tempExterieure-visible#'] = $isVisibleTempExt == "1" ? "bloc" : "none";
+        $replace['#tempExterieure-visible#'] = $isVisibleTempExt == "1" ? "block" : "none";
         $replace['#tempExterieure-histo#'] = $cmdTempExterHisto == "1" ? "history cursor" : "";      
         
+        //Humidité
+        $replace['#hygrometrie-id#'] = $cmdHygrometrieId;
+        $replace['#hygrometrie-value#'] = $hygrometrie;
+        $replace['#hygrometrie-visible#'] = $isVisibleHygrometrie == "1" ? "block" : "none";
+        $replace['#hygrometrie-histo#'] = $cmdHygrometrieHisto == "1" ? "history cursor" : "";  
 
         list($entier, $decimale) = explode(".", $tempConsigne);
         $replace['#tempConsigne1#'] = $entier;
@@ -368,7 +394,7 @@ class thermoAlternateView extends eqLogic
                     }
                     $prevEventEnd = $eventEnd;
                 }
-                $return = "Prochaine consigne " . thermoAlternateView::getHumanDelai($return);
+                $return = __('Prochaine consigne', __FILE__) . " " . thermoAlternateView::getHumanDelai($return);
 
                 if ($displayName == true)
                     $return = $return . " (" . trim($event["title"]) . ")";
@@ -394,10 +420,10 @@ class thermoAlternateView extends eqLogic
 
         switch( $diffDays ) {
             case 0:
-                $return = "à " . $dateRef->format('H:i');
+                $return = __('à', __FILE__) . " " . $dateRef->format('H:i');
                 break;
             case +1:
-            $return = "demain à " . $dateRef->format('H:i');
+            $return =  __('demain à', __FILE__) . " " . $dateRef->format('H:i');
                 break;
         }
 

@@ -9,7 +9,7 @@
 	"category" : "wellness",
 	"changelog" : "https://bitbucket.org/supradolph/jeedom-plugins-themoalternateview/wiki/#language##markdown-header-changelog",
 	"documentation" : "https://bitbucket.org/supradolph/jeedom-plugins-themoalternateview/wiki/#language#",
-	"language" : ["fr_FR"],
+	"language" : ["fr_FR", "en_US"],
 	"link" : {
 		"forum":"https://www.jeedom.com/forum/viewtopic.php?f=143&t=31408"
 	},
