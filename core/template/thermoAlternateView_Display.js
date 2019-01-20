@@ -297,7 +297,7 @@ function fitTextTemp(template) {
     //Taille du texte
     $(".thermo" + template + "-temperature").fitText(0.165);
     $(".thermo" + template + "-consigne").fitText(0.165);
-    $(".thermo" + template + "-temperature-ext").fitText(0.165);
+    //$(".thermo" + template + "-temperature-ext").fitText(0.165);
 }
 
 String.prototype.capitalize = function () {

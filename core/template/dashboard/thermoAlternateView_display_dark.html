@@ -10,20 +10,30 @@
             <a href="index.php?v=d&amp;p=thermoAlternateView&amp;m=thermoAlternateView&amp;id=#id#" style="font-size : 1.2em;">#name#</a>
             <span style="font-size: 0.85em;position: relative;top:-2px;"></span>
         </div>
-        <div class="thermoDark-top-side-right thermoDark-col-2 thermoDark-flex">
-            <div class="thermoDark-row-2">
-                <div>Actuelle</div>
-                <div style="display:#tempExterieure-visible#" class="thermoDark-temp-externe">
+        <div class="thermoDark-top-side-right">
+            <div class="thermoDark-row-2 thermoDark-contents">
+                <div style="z-index:100;" class="#temperature-histo#" data-cmd_id="#tempInterieure-id#">
+                        <span class="thermoDark-degre">#thermo-unit#</span>
+                    <span class="thermoDark-temperature">#temperature-value#</span>
+                </div>
+                <div style="z-index:100;display:#tempExterieure-visible#" class="thermoDark-temp-externe">
                     <svg class="thermoDark-img">
                         <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-externe" />
                     </svg>
-                    <span style="z-index:100;" class="thermoDark-temperature-ext #tempExterieure-histo#" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span>
-                    <span>#thermo-unit#</span>
+                    <span style="width:36px;z-index:100; float: right;">
+                        <span class="thermoDark-degre">#thermo-unit#</span>
+                        <span class="thermoDark-temperature-ext #tempExterieure-histo#" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span>
+                    </span>
                 </div>
-            </div>
-            <div style="z-index:100;" class="thermoDark-flex #temperature-histo#" data-cmd_id="#tempInterieure-id#">
-                <span class="thermoDark-temperature">#temperature-value#</span>
-                <span class="thermoDark-degre">#thermo-unit#</span>
+                <div style="z-index:100;display:#hygrometrie-visible#" class="thermoDark-temp-externe">
+                    <svg class="thermoDark-img">
+                        <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-water" />
+                    </svg>
+                    <span style="width:36px;z-index:100; float: right;">
+                        <span class="thermoDark-degre">%</span>
+                        <span style="z-index:100; float: right;" class="thermoDark-temperature-ext #hygrometrie-histo#" data-cmd_id="#hygrometrie-id#">#hygrometrie-value#</span>
+                    </span>
+                </div>
             </div>
         </div>
         <div class="thermoDark-mode">

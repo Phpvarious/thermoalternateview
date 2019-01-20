@@ -33,13 +33,20 @@
                 <use xlink:href="plugins/thermoAlternateView/resources/images.svg#lock-icon#" />
             </svg>
         </div>
-        <div style="display:#tempExterieure-visible#" class="thermo-temp-externe thermo-temp-externe-mobile">
+        <div style="display:#tempExterieure-visible#" class="thermo-temp-externe-mobile">
             <svg class="thermo-img thermo-img-mobile">
                 <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-externe" />
             </svg>
             <span class="thermo-temperature-ext" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span>
-            <span>#thermo-unit#</span>
+            <span class="thermo-unit"">#thermo-unit#</span>
         </div>
+        <div style="display:#hygrometrie-visible#" class="thermo-hygrometrie-mobile">
+                <svg class="thermo-img">
+                    <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-water" />
+                </svg>
+                <span class="thermo-temperature-ext #hygrometrie-histo#" data-cmd_id="#hygrometrie-id#">#hygrometrie-value#</span>
+                <span class="thermo-unit">%</span>
+            </div>
     </div>
 </div>
 
