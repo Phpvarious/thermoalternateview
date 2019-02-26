@@ -38,11 +38,11 @@
             <span class="thermo-temperature-ext #tempExterieure-histo#" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span>
             <span class="thermo-unit">#thermo-unit#</span>
         </div>
-        <div style="display:#hygrometrie-visible#" class="thermo-hygrometrie">
+        <div style="display:#hygrometrie-visible#" class="thermo-hygrometrie-div">
             <svg class="thermo-img">
                 <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-water" />
             </svg>
-            <span class="thermo-temperature-ext #hygrometrie-histo#" data-cmd_id="#hygrometrie-id#">#hygrometrie-value#</span>
+            <span class="thermo-hygrometrie #hygrometrie-histo#" data-cmd_id="#hygrometrie-id#">#hygrometrie-value#</span>
             <span class="thermo-unit">%</span>
         </div>
         <div class="thermo-statistics">
@@ -74,6 +74,7 @@
         param.uid = "#uid#";
         param.tempInterieureId = "#tempInterieure-id#";
         param.tempExterieureId = "#tempExterieure-id#";
+        param.hygrometrieId = "#hygrometrie-id#";
         param.consigneId = "#thermostat-id#";
         param.statutId = "#statut-id#";
         param.lockId = "#lock-id#";
