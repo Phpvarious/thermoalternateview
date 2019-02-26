@@ -29,7 +29,8 @@
 
 .thermo-temperature,
 .thermo-widget-name,
-.thermo-temperature-ext {
+.thermo-temperature-ext,
+.thermo-hygrometrie {
     color: #444444;
 }
 
@@ -37,12 +38,13 @@
     color: white;
 }
 
-.thermo-temperature-ext {
+.thermo-temperature-ext,
+.thermo-hygrometrie {
     width: 50%;
 }
 
 .thermo-temp-externe,
-.thermo-hygrometrie {
+.thermo-hygrometrie-div {
     font-family: 'Saira', sans-serif;
     display: inline-flex;
     float: right;

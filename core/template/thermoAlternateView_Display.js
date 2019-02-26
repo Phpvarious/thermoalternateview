@@ -121,6 +121,11 @@ function initialize_Default_Template(parametres) {
                     $domElement.text(this.value);
                     break;
 
+                case parametres.hygrometrieId:
+                    var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-hygrometrie");
+                    $domElement.text(this.value);
+                    break;
+
                 case parametres.consigneId:
                     var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo-consigne").children();
                     $domElement.text("");
@@ -221,6 +226,11 @@ function initialize_Dark_Template(parametres, template) {
 
                 case parametres.tempExterieureId:
                     var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-temperature-ext");
+                    $domElement.text(this.value);
+                    break;
+
+                case parametres.hygrometrieId:
+                    var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-hygrometrie");
                     $domElement.text(this.value);
                     break;
 
