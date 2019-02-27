@@ -17,6 +17,7 @@
 }
 
 .thermoDark-top-side-right,
+.thermoDark-bottom-side-right,
 .thermoDark-top-side-right-mobile  {
     font-family: 'Work Sans', sans-serif;
     font-size: 2.5em;
@@ -36,6 +37,14 @@
 .thermoDark-top-side-right-mobile {
     width: 100%;
     float: none;
+}
+
+.thermoDark-bottom-side-right {
+    position: absolute;
+    top: calc(100% - 53px);
+    left: 66.7%;
+    height: 30px;
+    transform: translateX(-16px) translateY(-50%);
 }
 
 .thermoDark-degre,
@@ -74,6 +83,7 @@
 .thermoDark-temp-externe {
     font-size: 0.4em;
     display: block;
+    float: left;
 }
 
 .thermoDark-img,
@@ -172,7 +182,7 @@
 }
 
 .thermoDark-mode {
-    width: 40%;
+    width: 36%;
     position: absolute;
     top: calc(50% + 24px - 16px);
     transform: translateY(-50%);

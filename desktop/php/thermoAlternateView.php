@@ -24,7 +24,7 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
 
     <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
         <legend>{{Mes thermoAlternateView}}</legend>
-        <span style="float:right;">v2.1</span>
+        <span style="float:right;">v2.2</span>
         <legend><i class="fa fa-cog"></i>  {{Gestion}}</legend>
         <div class="eqLogicThumbnailContainer">
             <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
@@ -167,6 +167,12 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
                             <label class="col-sm-3 control-label">{{Hygrométrie visible}}</label>
                             <div class="col-sm-3 form-check-input">
                                 <input type="checkbox" required class="eqLogicAttr" data-l1key="configuration" data-l2key="isvisibleHygrometrie" checked>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">{{Puissance visible}}</label>
+                            <div class="col-sm-3 form-check-input">
+                                <input type="checkbox" required class="eqLogicAttr" data-l1key="configuration" data-l2key="isvisiblePuissance" checked>
                             </div>
                         </div>
                         <div class="form-group">

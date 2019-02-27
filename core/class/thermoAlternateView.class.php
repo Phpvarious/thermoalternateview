@@ -99,6 +99,7 @@ class thermoAlternateView extends eqLogic
         $template = $this->getConfiguration('template');
         $isVisibleTempExt = $this->getConfiguration('isvisibletempext');
         $isVisibleHygrometrie = $this->getConfiguration('isvisibleHygrometrie');
+        $isVisiblePuissance = $this->getConfiguration('isvisiblePuissance');
         $isVisibleConsigne = $this->getConfiguration('isVisibleConsigne');
         $isEnableBackColorStd = $this->getConfiguration('isEnableBackColorStd');
         $isDisabledMode = $this->getConfiguration('isDisabledMode');
@@ -113,7 +114,6 @@ class thermoAlternateView extends eqLogic
         $thermoUnit = $this->getConfiguration('thermoUnit');
         $isVisibleEvent = $this->getConfiguration('isVisibleEvent');
         $thermostat = eqLogic::byId($idThermostat);
-
 
         $islocked = 0;
         $mode = "";
@@ -182,6 +182,11 @@ class thermoAlternateView extends eqLogic
                     $cmdHygrometrieId = $commande->getId();
                     $hygrometrie= $commande->execCmd();
                     $cmdHygrometrieHisto = $commande->getIsHistorized();                    
+                    break;
+                case "power":
+                    $cmdPuissanceId = $commande->getId();
+                    $puissance= $commande->execCmd();
+                    $cmdPuissanceHisto = $commande->getIsHistorized();                    
                     break;
                 case "order":
                     $tempConsigneId = $commande->getId();
@@ -336,6 +341,12 @@ class thermoAlternateView extends eqLogic
         $replace['#hygrometrie-value#'] = $hygrometrie;
         $replace['#hygrometrie-visible#'] = $isVisibleHygrometrie == "1" ? "block" : "none";
         $replace['#hygrometrie-histo#'] = $cmdHygrometrieHisto == "1" ? "history cursor" : "";  
+
+        //Puissance
+        $replace['#puissance-id#'] = $cmdPuissanceId;
+        $replace['#puissance-value#'] = $puissance;
+        $replace['#puissance-visible#'] = $isVisiblePuissance == "1" ? "block" : "none";
+        $replace['#puissance-histo#'] = $cmdPuissanceHisto == "1" ? "history cursor" : "";  
 
         list($entier, $decimale) = explode(".", $tempConsigne);
         $replace['#tempConsigne1#'] = $entier;

@@ -39,21 +39,21 @@
 }
 
 .thermo-temperature-ext,
-.thermo-hygrometrie {
+.thermo-hygrometrie,
+.thermo-puissance {
     width: 50%;
 }
 
 .thermo-temp-externe,
-.thermo-hygrometrie-div {
+.thermo-hygrometrie-div,
+.thermo-puissance-div {
     font-family: 'Saira', sans-serif;
-    display: inline-flex;
+    clear: both;
     float: right;
     width: 25%;
-    height: 40px;
+    margin-right: 5px;
+    text-align: right;
     color: #444444;
-    position: absolute;
-    top: calc(100% - 5em - 10px);
-    left: calc(100% - 25% - 5px);
 }
 
 .thermo-temp-externe {
