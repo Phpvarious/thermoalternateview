@@ -35,15 +35,28 @@
             <svg class="thermo-img">
                 <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-externe" />
             </svg>
-            <span class="thermo-temperature-ext #tempExterieure-histo#" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span>
-            <span class="thermo-unit">#thermo-unit#</span>
+            <div style="width:30px;float: right;">
+                <span class="thermo-temperature-ext #tempExterieure-histo#" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span>
+                <span class="thermo-unit">#thermo-unit#</span>
+            </div>
         </div>
         <div style="display:#hygrometrie-visible#" class="thermo-hygrometrie-div">
             <svg class="thermo-img">
                 <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-water" />
             </svg>
-            <span class="thermo-hygrometrie #hygrometrie-histo#" data-cmd_id="#hygrometrie-id#">#hygrometrie-value#</span>
-            <span class="thermo-unit">%</span>
+            <div style="width:30px;float: right;">
+                <span class="thermo-hygrometrie #hygrometrie-histo#" data-cmd_id="#hygrometrie-id#">#hygrometrie-value#</span>
+                <span class="thermo-unit">%</span>
+        </div>
+        </div>
+        <div style="display:#puissance-visible#" class="thermo-puissance-div">
+            <svg class="thermo-img">
+                <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-power" />
+            </svg>
+            <div style="width:30px;float: right;">
+                <span class="thermo-puissance #puissance-histo#" data-cmd_id="#puissance-id#">#puissance-value#</span>
+                <span class="thermo-unit">%</span>
+            </div>
         </div>
         <div class="thermo-statistics">
             <svg class="thermo-button-statistics">
@@ -75,6 +88,7 @@
         param.tempInterieureId = "#tempInterieure-id#";
         param.tempExterieureId = "#tempExterieure-id#";
         param.hygrometrieId = "#hygrometrie-id#";
+        param.puissanceId = "#puissance-id#";
         param.consigneId = "#thermostat-id#";
         param.statutId = "#statut-id#";
         param.lockId = "#lock-id#";

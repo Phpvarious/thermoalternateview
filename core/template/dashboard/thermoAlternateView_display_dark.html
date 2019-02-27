@@ -20,7 +20,7 @@
                     <svg class="thermoDark-img">
                         <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-externe" />
                     </svg>
-                    <span style="width:36px;z-index:100; float: right;">
+                    <span style="z-index:100; float: right;width: 30px;">
                         <span class="thermoDark-degre">#thermo-unit#</span>
                         <span class="thermoDark-temperature-ext #tempExterieure-histo#" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span>
                     </span>
@@ -29,7 +29,7 @@
                     <svg class="thermoDark-img">
                         <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-water" />
                     </svg>
-                    <span style="width:36px;z-index:100; float: right;">
+                    <span style="z-index:100; float: right;width: 30px;">
                         <span class="thermoDark-degre">%</span>
                         <span style="z-index:100; float: right;" class="thermoDark-hygrometrie #hygrometrie-histo#" data-cmd_id="#hygrometrie-id#">#hygrometrie-value#</span>
                     </span>
@@ -63,6 +63,19 @@
                 <use xlink:href="plugins/thermoAlternateView/resources/images.svg#statut-icon#" />
             </svg>
         </div>
+        <div class="thermoDark-bottom-side-right">
+            <div class="thermoDark-row-2 thermoDark-contents">
+                <div style="z-index:100;display:#puissance-visible#" class="thermoDark-temp-externe">
+                    <svg class="thermoDark-img">
+                        <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-power" />
+                    </svg>
+                    <span style="z-index:100; float: right;width: 30px;">
+                        <span class="thermoDark-degre">%</span>
+                        <span style="z-index:100; float: right;" class="thermoDark-puissance #puissance-histo#" data-cmd_id="#puissance-id#">#puissance-value#</span>
+                    </span>
+                </div>
+            </div>
+        </div>
         <div class="thermoDark-statistics">
             <svg class="thermoDark-button-statistics">
                 <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-statistics" />
@@ -93,6 +106,7 @@
         param.tempInterieureId = "#tempInterieure-id#";
         param.tempExterieureId = "#tempExterieure-id#";
         param.hygrometrieId = "#hygrometrie-id#";
+        param.puissanceId = "#puissance-id#";
         param.consigneId = "#thermostat-id#";
         param.statutId = "#statut-id#";
         param.lockId = "#lock-id#";
