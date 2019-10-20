@@ -54,36 +54,28 @@ class thermoAlternateView extends eqLogic
     /*     * *********************Méthodes d'instance************************* */
 
     public function preInsert()
-    {
-    }
+    { }
 
     public function postInsert()
-    {
-    }
+    { }
 
     public function preSave()
-    {
-    }
+    { }
 
     public function postSave()
-    {
-    }
+    { }
 
     public function preUpdate()
-    {
-    }
+    { }
 
     public function postUpdate()
-    {
-    }
+    { }
 
     public function preRemove()
-    {
-    }
+    { }
 
     public function postRemove()
-    {
-    }
+    { }
 
     /*
      * Non obligatoire mais permet de modifier l'affichage du widget si vous en avez besoin */
@@ -100,6 +92,8 @@ class thermoAlternateView extends eqLogic
         $isVisibleTempExt = $this->getConfiguration('isvisibletempext');
         $isVisibleHygrometrie = $this->getConfiguration('isvisibleHygrometrie');
         $isVisiblePuissance = $this->getConfiguration('isvisiblePuissance');
+        $isvisibleVerrou = $this->getConfiguration('isvisibleVerrou');
+        $isvisibleStatistiques = $this->getConfiguration('isvisibleStatistiques');
         $isVisibleConsigne = $this->getConfiguration('isVisibleConsigne');
         $isEnableBackColorStd = $this->getConfiguration('isEnableBackColorStd');
         $isDisabledMode = $this->getConfiguration('isDisabledMode');
@@ -124,7 +118,6 @@ class thermoAlternateView extends eqLogic
         $cmdTempExterId = 0;
         $cmdHygrometrieId = 0;
         $tempConsigneId = 0;
-        $cmdThermostatHisto = "";        
         $cmdTempInterHisto = "";
         $cmdTempExterHisto = "";
         $cmdHygrometrieHisto = "";
@@ -175,18 +168,18 @@ class thermoAlternateView extends eqLogic
                     break;
                 case "temperature_outdoor":
                     $cmdTempExterId = $commande->getId();
-                    $tempExterieure= $commande->execCmd();
-                    $cmdTempExterHisto = $commande->getIsHistorized();                    
+                    $tempExterieure = $commande->execCmd();
+                    $cmdTempExterHisto = $commande->getIsHistorized();
                     break;
                 case "humidity":
                     $cmdHygrometrieId = $commande->getId();
-                    $hygrometrie= $commande->execCmd();
-                    $cmdHygrometrieHisto = $commande->getIsHistorized();                    
+                    $hygrometrie = $commande->execCmd();
+                    $cmdHygrometrieHisto = $commande->getIsHistorized();
                     break;
                 case "power":
                     $cmdPuissanceId = $commande->getId();
-                    $puissance= $commande->execCmd();
-                    $cmdPuissanceHisto = $commande->getIsHistorized();                    
+                    $puissance = $commande->execCmd();
+                    $cmdPuissanceHisto = $commande->getIsHistorized();
                     break;
                 case "order":
                     $tempConsigneId = $commande->getId();
@@ -215,10 +208,10 @@ class thermoAlternateView extends eqLogic
                 if ($modeFr != false) {
                     $modeIcon = $modeFr;
                 } else {
-                    switch ( $modeEscapeActionName ) {
+                    switch ($modeEscapeActionName) {
                         case 'vacance':
-                            $modeIcon = 'vacances'; 
-                            break;                       
+                            $modeIcon = 'vacances';
+                            break;
                         default:
                             $modeIcon = 'other';
                     }
@@ -237,8 +230,8 @@ class thermoAlternateView extends eqLogic
         //Prochaine consigne
         $replace['#nextConsigne-visible#'] = $isVisibleConsigne == "1" ? "bloc" : "none";
 
-        if ( $isVisibleConsigne == '1') {
-            $nextEvent = thermoAlternateView::getNextEventCalendar($thermostat, $isVisibleEvent);           
+        if ($isVisibleConsigne == '1') {
+            $nextEvent = thermoAlternateView::getNextEventCalendar($thermostat, $isVisibleEvent);
         }
 
         //Icone de verrouillage
@@ -251,20 +244,21 @@ class thermoAlternateView extends eqLogic
             $replace['#lock-id#'] = $cmdLockId;
             $replace['#lock-id2#'] = $cmdUnlockId;
         }
+        $replace['#lock-visible#'] = $isvisibleVerrou == "1" ? "block" : "none";
 
         //Couleur du cadenna
         $replace['#thermo-islockColor#'] = $isDefaultLockColor == "1" || $islocked == 0 ? "" : "fill:" . $lockColor;
         $replace['#thermo-lockColor#'] = $isDefaultLockColor == "1" ? "" : $lockColor;
 
         //Couleur du widget
-        empty($template) || $template === "default" ? $cssTempate = '': $cssTempate = ucfirst($template);
-        $replace['#thermo-cover#'] = $isEnableBackColorStd == "1" ? "" : "thermo". $cssTempate ."-cover-color";
-        $replace['#thermo-widget-name#'] = $isEnableBackColorStd == "1" ? "" : "thermo". $cssTempate ."-widget-name";
-        $replace['#thermo-back#'] = $isEnableBackColorStd == "1" ? "" : "thermo". $cssTempate ."-back-color";
+        empty($template) || $template === "default" ? $cssTempate = '' : $cssTempate = ucfirst($template);
+        $replace['#thermo-cover#'] = $isEnableBackColorStd == "1" ? "" : "thermo" . $cssTempate . "-cover-color";
+        $replace['#thermo-widget-name#'] = $isEnableBackColorStd == "1" ? "" : "thermo" . $cssTempate . "-widget-name";
+        $replace['#thermo-back#'] = $isEnableBackColorStd == "1" ? "" : "thermo" . $cssTempate . "-back-color";
 
         //Couleur de la flamme
         $replace['#thermo-flameColor#'] = $isDefaultFlameColor == "1" ? "" : $flameColor;
-        
+
         //Couleur du mode suspendu
         $replace['#thermo-waitColor#'] = $isDefaultWaitColor == "1" ? "" : $waitColor;
 
@@ -272,16 +266,29 @@ class thermoAlternateView extends eqLogic
         $replace['#thermo-fanColor#'] = $isDefaultFanColor == "1" ? "" : $fanColor;
 
         //Modes de chauffe
-        if (empty($template) || $template === "default") {
+        if ($template === "default") {
             $template = '';
+        }
+
+        if (empty($template)) {
+            // Light/ pas de mode sélectionné
+            if ($replace['#height#'] == "auto" && $replace['#width#'] == "auto") {
+                $replace['#height#'] = "300px";
+                $replace['#width#'] = "300px";
+            }
+        } elseif ($template === "darkatmo") {
+            //darkatmo
+            $htmlModes = str_replace("thermo-", "thermo" . ucfirst($template) . "-", $htmlModes);
+            $htmlModesMobile = str_replace("thermo-", "thermo" . ucfirst($template) . "-", $htmlModesMobile);
+            $template = '_' . $template;
 
             if ($replace['#height#'] == "auto" && $replace['#width#'] == "auto") {
                 $replace['#height#'] = "300px";
                 $replace['#width#'] = "300px";
             }
-            
         } else {
-            $htmlModes = str_replace("thermo-", "thermo" . $template . "-", $htmlModes);
+            //dark
+            $htmlModes = str_replace("thermo-", "thermo" . ucfirst($template) . "-", $htmlModes);
             $htmlModesMobile = str_replace("thermo-", "thermo" . ucfirst($template) . "-", $htmlModesMobile);
             $template = '_' . $template;
 
@@ -289,7 +296,6 @@ class thermoAlternateView extends eqLogic
                 $replace['#height#'] = "250px";
                 $replace['#width#'] = "380px";
             }
-            
         }
 
         //Commandes Info
@@ -300,7 +306,8 @@ class thermoAlternateView extends eqLogic
         $replace['#thermo-mode-mobile#'] = $htmlModesMobile;
         $replace['#thermostat-id#'] = $cmdThermostatId;
         $replace['#statistics-url#'] = "index.php?v=d&m=thermostat&p=panel&object_id=" . $thermostat->getObject_id();
-        
+        $replace['#statistics-visible#'] = $isvisibleStatistiques == "1" ? "block" : "none";
+
         //Statut
         switch ($statut) {
             case __('Chauffage', __FILE__):
@@ -329,34 +336,34 @@ class thermoAlternateView extends eqLogic
         $replace['#tempInterieure2#'] = $decimale;
         $replace['#tempInterieure-id#'] = $cmdTempInterId;
         $replace['#temperature-value#'] = $tempInterieure;
-        $replace['#temperature-histo#'] = $cmdTempInterHisto == "1" ? "history cursor" : "";        
+        $replace['#temperature-histo#'] = $cmdTempInterHisto == "1" ? "history cursor" : "";
 
         $replace['#tempExterieure-id#'] = $cmdTempExterId;
         $replace['#tempExterieure-value#'] = $tempExterieure;
         $replace['#tempExterieure-visible#'] = $isVisibleTempExt == "1" ? "block" : "none";
-        $replace['#tempExterieure-histo#'] = $cmdTempExterHisto == "1" ? "history cursor" : "";      
-        
+        $replace['#tempExterieure-histo#'] = $cmdTempExterHisto == "1" ? "history cursor" : "";
+
         //Humidité
         $replace['#hygrometrie-id#'] = $cmdHygrometrieId;
         $replace['#hygrometrie-value#'] = $hygrometrie;
         $replace['#hygrometrie-visible#'] = $isVisibleHygrometrie == "1" ? "block" : "none";
-        $replace['#hygrometrie-histo#'] = $cmdHygrometrieHisto == "1" ? "history cursor" : "";  
+        $replace['#hygrometrie-histo#'] = $cmdHygrometrieHisto == "1" ? "history cursor" : "";
 
         //Puissance
         $replace['#puissance-id#'] = $cmdPuissanceId;
         $replace['#puissance-value#'] = $puissance;
         $replace['#puissance-visible#'] = $isVisiblePuissance == "1" ? "block" : "none";
-        $replace['#puissance-histo#'] = $cmdPuissanceHisto == "1" ? "history cursor" : "";  
+        $replace['#puissance-histo#'] = $cmdPuissanceHisto == "1" ? "history cursor" : "";
 
         list($entier, $decimale) = explode(".", $tempConsigne);
         $replace['#tempConsigne1#'] = $entier;
         $replace['#tempConsigne2#'] = $decimale;
-        $replace['#consigne-id#'] = $tempConsigneId;        
+        $replace['#consigne-id#'] = $tempConsigneId;
         $replace['#consigne-value#'] = $tempConsigne;
-        $replace['#consigne-histo#'] = $cmdConsigneHisto == "1" ? "history cursor" : "";      
-    
-        $replace['#thermo-eqLogicId#'] = $idThermostat;      
-        $replace['#thermo-nextOccurence#'] = $nextEvent;      
+        $replace['#consigne-histo#'] = $cmdConsigneHisto == "1" ? "history cursor" : "";
+
+        $replace['#thermo-eqLogicId#'] = $idThermostat;
+        $replace['#thermo-nextOccurence#'] = $nextEvent;
 
         $parameters = $this->getDisplay('parameters');
         if (is_array($parameters)) {
@@ -368,14 +375,15 @@ class thermoAlternateView extends eqLogic
         return template_replace($replace, getTemplate('core', $version, 'thermoAlternateView_display' . $template, 'thermoAlternateView'));
     }
 
-    public static function getNextEventCalendar($thermostat, $displayName) {
+    public static function getNextEventCalendar($thermostat, $displayName)
+    {
 
         $return = "";
 
         try {
             $calendar_events = thermoAlternateView::getLinkCalendar($thermostat);
 
-            if ( count($calendar_events) > 0 ) {
+            if (count($calendar_events) > 0) {
                 //Récupération des évènements du calendrier
                 $startDate = date('Y-m-d H:i:s', strtotime('-1 days ' . date('Y-m-d H:i:s')));
                 $endDate = date('Y-m-d H:i:s', strtotime('+2 days ' . date('Y-m-d H:i:s')));
@@ -386,19 +394,18 @@ class thermoAlternateView extends eqLogic
                 $prevEventEnd = new DateTime(date('Y-m-d H:i:s', strtotime('+10 days ' . date('Y-m-d H:i:s'))));
 
                 //tri par date
-                usort($events, function($a, $b) {
+                usort($events, function ($a, $b) {
                     return strtotime($a['start']) - strtotime($b['start']);
                 });
 
                 foreach ($events as $event) {
                     $eventStart = new DateTime($event['start']);
                     $eventEnd = new DateTime($event['end']);
-                    if ( $eventStart <= $now && $eventEnd > $now ) {
+                    if ($eventStart <= $now && $eventEnd > $now) {
                         $return = $event['end'];
                         break;
-                    }
-                    else {
-                        if ( $eventStart >= $now && $prevEventEnd < $now ) {
+                    } else {
+                        if ($eventStart >= $now && $prevEventEnd < $now) {
                             $return = $event['start'];
                             break;
                         }
@@ -409,62 +416,64 @@ class thermoAlternateView extends eqLogic
 
                 if ($displayName == true)
                     $return = $return . " (" . trim($event["title"]) . ")";
-            }
-            else {
+            } else {
                 $return = "";
             }
-        }
-        catch (Exception $e){
+        } catch (Exception $e) {
             $return = "";
         }
-    
-        return $return;
 
+        return $return;
     }
 
-    private static function getHumanDelai($date){
+    private static function getHumanDelai($date)
+    {
         $return = "";
         $now = new DateTime();
         $dateRef = new DateTime($date);
 
-        $diffDays = (int)$dateRef->format('d') - (int)$now->format('d');
+        $diffDays = (int) $dateRef->format('d') - (int) $now->format('d');
 
-        switch( $diffDays ) {
+        switch ($diffDays) {
             case 0:
                 $return = __('à', __FILE__) . " " . $dateRef->format('H:i');
                 break;
             case +1:
-            $return =  __('demain à', __FILE__) . " " . $dateRef->format('H:i');
+                $return =  __('demain à', __FILE__) . " " . $dateRef->format('H:i');
                 break;
         }
 
         return $return;
     }
 
-    private static function getLinkCalendar($thermostat) {
-		try {
-			$plugin = plugin::byId('calendar');
-			if (!is_object($plugin) || $plugin->isActive() != 1) {
-			    throw new Exception("Le plugin agenda n'est pas installé !");
-			}
-		} catch (Exception $e) {
-			throw new Exception("Le plugin agenda n'est pas installé !");            
-		}
-		if (!class_exists('calendar_event')) {
-			throw new Exception("Le plugin agenda n'est pas installé !");
+    private static function getLinkCalendar($thermostat)
+    {
+        try {
+            $plugin = plugin::byId('calendar');
+            if (!is_object($plugin) || $plugin->isActive() != 1) {
+                throw new Exception("Le plugin agenda n'est pas installé !");
+            }
+        } catch (Exception $e) {
+            throw new Exception("Le plugin agenda n'est pas installé !");
+        }
+        if (!class_exists('calendar_event')) {
+            throw new Exception("Le plugin agenda n'est pas installé !");
         }
         /////// reste à filtrer par agenda actifs.
-		$eventsInProgress = array();
-		$eventsNotRunning = array();
-		foreach ($thermostat->getCmd(null, 'modeAction', null, true) as $mode) {
-			foreach (calendar_event::searchByCmd($mode->getId()) as $event) {
-                if ($event->getEqLogic()->getIsEnable() == 1) {
-                    if ($event->getCmd_param()["in_progress"] == 1)
-                        $eventsInProgress[$event->getId()] = $event;
-                    else
-                        $eventsNotRunning[$event->getId()] = $event;
+
+        if ($thermostat != null) {
+            $eventsInProgress = array();
+            $eventsNotRunning = array();
+            foreach ($thermostat->getCmd(null, 'modeAction', null, true) as $mode) {
+                foreach (calendar_event::searchByCmd($mode->getId()) as $event) {
+                    if ($event->getEqLogic()->getIsEnable() == 1) {
+                        if ($event->getCmd_param()["in_progress"] == 1)
+                            $eventsInProgress[$event->getId()] = $event;
+                        else
+                            $eventsNotRunning[$event->getId()] = $event;
+                    }
                 }
-			}
+            }
         }
         /*
 		$thermostat_cmd = $thermostat->getCmd(null, 'thermostat');
@@ -479,8 +488,8 @@ class thermoAlternateView extends eqLogic
         */
 
         // Retourne les évènements en cours, sinon les autres (consigne entre deux évènements)
-		return (sizeof($eventsInProgress) > 0 ? $eventsInProgress : $eventsNotRunning);
-	}
+        return (sizeof($eventsInProgress) > 0 ? $eventsInProgress : $eventsNotRunning);
+    }
 
     public static $_widgetPossibility = array('custom' => array(
         'visibility' => true,
@@ -492,7 +501,7 @@ class thermoAlternateView extends eqLogic
         'border-radius' => true,
         'border' => true,
     ));
-     
+
 
     /*     * **********************Getteur Setteur*************************** */
 }
@@ -515,8 +524,7 @@ class thermoAlternateViewCmd extends cmd
      */
 
     public function execute($_options = array())
-    {
-    }
+    { }
 
     /*     * **********************Getteur Setteur*************************** */
 }

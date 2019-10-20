@@ -78,4 +78,11 @@ $(document).ready(function () {
             $("#thermoUnit").val("°");
         }
     });
+
+    $(".eqLogicAttr[data-l2key=template]").change(function () {
+        if ($(this).value() !== null ) {
+            $("#templatePreview").attr('src', "/plugins/thermoAlternateView/desktop/images/" + $(this).value() + ".png");
+            $("#templatePreview").show();
+        }
+    });
 });

@@ -1,8 +1,7 @@
 <script type="text/javascript" src="plugins/thermoAlternateView/3rparty/svg4everybody.js"></script>
 <script type="text/javascript" src="plugins/thermoAlternateView/core/template/thermoAlternateView_Display.js"></script>
 
-<div class="eqLogic-widget eqLogic allowResize" style="width: #width#;height: #height#;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style# "
-    data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#">
+<div class="eqLogic-widget eqLogic allowResize" style="width: #width#;height: #height#;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style# " data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#">
 
 
     <div class="thermo-cover #thermo-cover#">
@@ -27,7 +26,7 @@
             <svg style="#statut-color#" class="thermo-mode-icon" data-cmd_id="#statut-id#">
                 <use xlink:href="plugins/thermoAlternateView/resources/images.svg#statut-icon#" />
             </svg>
-            <svg style="#thermo-islockColor#" class="thermo-button thermo-lock-icon" data-cmd_id="#lock-id#" data-cmd_id2="#lock-id2#">
+            <svg style="#thermo-islockColor#;display:#lock-visible#" class="thermo-button thermo-lock-icon" data-cmd_id="#lock-id#" data-cmd_id2="#lock-id2#">
                 <use xlink:href="plugins/thermoAlternateView/resources/images.svg#lock-icon#" />
             </svg>
         </div>
@@ -35,7 +34,7 @@
             <svg class="thermo-img">
                 <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-externe" />
             </svg>
-            <div style="width:30px;float: right;">
+            <div style="width:35px;float: right;">
                 <span class="thermo-temperature-ext #tempExterieure-histo#" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span>
                 <span class="thermo-unit">#thermo-unit#</span>
             </div>
@@ -44,21 +43,21 @@
             <svg class="thermo-img">
                 <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-water" />
             </svg>
-            <div style="width:30px;float: right;">
+            <div style="width:35px;float: right;">
                 <span class="thermo-hygrometrie #hygrometrie-histo#" data-cmd_id="#hygrometrie-id#">#hygrometrie-value#</span>
                 <span class="thermo-unit">%</span>
-        </div>
+            </div>
         </div>
         <div style="display:#puissance-visible#" class="thermo-puissance-div">
             <svg class="thermo-img">
                 <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-power" />
             </svg>
-            <div style="width:30px;float: right;">
+            <div style="width:35px;float: right;">
                 <span class="thermo-puissance #puissance-histo#" data-cmd_id="#puissance-id#">#puissance-value#</span>
                 <span class="thermo-unit">%</span>
             </div>
         </div>
-        <div class="thermo-statistics">
+        <div class="thermo-statistics" style="display:#statistics-visible#">
             <svg class="thermo-button-statistics">
                 <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-statistics" />
             </svg>
@@ -70,14 +69,14 @@
 </div>
 
 <script type="text/javascript">
-    $(document).change(function (e) {
+    $(document).change(function(e) {
 
         if (e.target.dataset.eqlogic_uid === "#uid#") {
             initDisplay#uid#();
         }
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         initDisplay#uid#();
     });
 

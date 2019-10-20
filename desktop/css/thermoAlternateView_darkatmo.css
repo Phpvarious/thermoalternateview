@@ -1,0 +1,272 @@
+@font-face {
+    font-family: Saira;
+    src: url(../../3rparty/fonts/Saira/Saira-Regular.ttf);
+}
+
+.thermoDarkatmo-consigne,
+.thermoDarkatmo-temperature {
+    font-family: 'Saira', sans-serif;
+    font-size: 4em;
+    line-height: 1.3em;
+    height: 39%;
+    clear: both;
+}
+.thermoDarkatmo-temperature {
+    margin-top: 10px;
+}
+
+.thermoDarkatmo-degre {
+    font-family: 'Saira', sans-serif;
+    font-size: 0.5em;
+    float: right
+}
+
+.thermoDarkatmo-unit {
+    color: #959595;
+    font-size: 0.7em;
+    vertical-align: top;
+    float: right;
+}
+
+.thermoDarkatmo-temperature,
+.thermoDarkatmo-widget-name,
+.thermoDarkatmo-temperature-ext,
+.thermoDarkatmo-hygrometrie {
+    color: #959595;
+}
+
+.thermoDarkatmo-consigne {
+    color: rgb(201, 201, 201);
+}
+
+.thermoDarkatmo-temperature-ext,
+.thermoDarkatmo-hygrometrie,
+.thermoDarkatmo-puissance {
+    width: 50%;
+}
+
+.thermoDarkatmo-temp-externe,
+.thermoDarkatmo-hygrometrie-div,
+.thermoDarkatmo-puissance-div {
+    font-family: 'Saira', sans-serif;
+    clear: both;
+    float: right;
+    width: 25%;
+    margin-right: 5px;
+    text-align: right;
+    color: #959595;
+}
+
+.thermoDarkatmo-temp-externe {
+    top: calc(100% - 3.5em - 10px);
+}
+
+.thermoDarkatmo-temp-externe-mobile,
+.thermoDarkatmo-hygrometrie-mobile {
+    font-family: 'Saira', sans-serif;
+    position: absolute;
+    top: calc(100% - 30px);
+    width: 40%;
+}
+
+.thermoDarkatmo-hygrometrie-mobile {
+    left: calc(100% - 40% - 5px);
+}
+
+.thermoDarkatmo-img {
+    height: 16px;
+    width: 30%;
+    margin-right: 5px;
+    fill: #61B872;
+}
+
+.thermoDarkatmo-img-mobile {
+    width: 30px;
+}
+
+.thermoDarkatmo-button {
+    font-family: 'Saira', sans-serif;
+    font-size: 2.5em;
+    margin-left: 5px;
+    float: left;
+    height: 10%;
+    width: 10%;
+    cursor: pointer;
+    color: #959595;
+    line-height: 20px;
+    position: relative;
+}
+
+.thermoDarkatmo-button-plus,
+.thermoDarkatmo-button-moins {
+    top: -10px;
+    line-height: 1em;
+}
+
+.thermoDarkatmo-button:hover {
+    color: #61B872;
+    fill: #61B872;
+}
+
+.thermoDarkatmo-button-statistics {
+    height: 2.2em;
+    width: 2.2em;
+    cursor: pointer;
+    fill: #959595;
+    position: absolute;
+    top: calc(100% - 2.2em - 5px);
+    left: calc(100% - 2.2em - 5px);
+}
+
+.thermoDarkatmo-button-statistics:hover {
+    fill: #61B872;
+}
+
+.thermoDarkatmo-next-consigne {
+    font-family: 'Saira', sans-serif;
+    color: #959595;
+    position: absolute;
+    top: calc(100% - 1em - 5px);
+    left: 5px;
+}
+
+.thermoDarkatmo-cover {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.thermoDarkatmo-cover-color {
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.75);
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#191919+0,212121+100 */
+    background: #191919;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #191919 0%, #212121 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #191919 0%, #212121 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #191919 0%, #212121 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#191919', endColorstr='#212121', GradientType=0);
+    /* IE6-9 */
+    border: 1px solid #2D2D2D;
+    border-width: 1px 4px 4px 1px;
+    border-radius: 5px;
+}
+
+.thermoDarkatmo-back {
+    border: 1px solid #2D2D2D;
+    border-width: 2px 1px 1px 2px;
+    border-radius: 5px;
+    width: 33.33%;
+    height: 66.67%;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.thermoDarkatmo-back-color {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#212121+0,191919+100 */
+    background: #212121;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #212121 0%, #191919 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #212121 0%, #191919 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #212121 0%, #191919 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#212121', endColorstr='#191919', GradientType=0);
+    /* IE6-9 */
+}
+
+.thermoDarkatmo-mode-icon,
+.thermoDarkatmo-wait-icon,
+.thermoDarkatmo-lock-icon {
+    margin: 0 0 0 5px;
+    width: 20%;
+    height: 10%;
+    fill: #959595;
+    float: right;
+}
+
+.thermoDarkatmo-mode {
+    width: 33.33%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.thermoDarkatmo-statistics {
+    width: 33.33%;
+    float: right;
+}
+
+.thermoDarkatmo-switch-off,
+.thermoDarkatmo-switch-on {
+    display: block;
+    text-align: center;
+}
+
+.thermoDarkatmo-switch-off {
+    cursor: pointer;
+}
+
+.thermoDarkatmo-mode-switch {
+    width: 35%;
+    height: 30px;
+    /* A refondre */
+}
+
+.thermoDarkatmo-mode-label {
+    width: 45%;
+    height: 25px;
+    /* A refondre */
+    line-height: 30px;
+    fill: #959595;
+}
+
+.thermoDarkatmo-mode-label-on {
+    fill: #61B872;
+}
+
+.thermoDarkatmo-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.thermoDarkatmo-tooltip .thermoDarkatmo-tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s 1s;
+}
+
+.thermoDarkatmo-tooltip .thermoDarkatmo-tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.thermoDarkatmo-tooltip:hover .thermoDarkatmo-tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
