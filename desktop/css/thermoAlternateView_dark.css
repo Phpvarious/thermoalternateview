@@ -193,6 +193,7 @@
     width: 100%;
     display: inline-flex;
     position: sticky;
+    margin-bottom: 5px;
     top: 100%;
 }
 

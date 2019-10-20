@@ -24,12 +24,12 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
 
     <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
         <legend>{{Mes thermoAlternateView}}</legend>
-        <span style="float:right;">v2.2</span>
+        <span style="float:right;">v2.3</span>
         <legend><i class="fa fa-cog"></i>  {{Gestion}}</legend>
         <div class="eqLogicThumbnailContainer">
             <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
                 <center>
-                    <i class="fa fa-plus-circle" style="width:63px;height:63px;line-height:0.84em;border-radius:30px;background-color:white; font-size : 6em;color:#642940;"></i>
+                    <i class="fa fa-plus-circle" style="line-height:0.84em;border-radius:30px;background-color:white; font-size : 6em;color:#642940;"></i>
                 </center>
                 <span style="font-size : 1.1em;position:relative; top : 23px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#CCC"><center>{{Ajouter}}</center></span>
             </div>
@@ -134,6 +134,7 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
                                     <option value="" disabled selected>{{Sélectionnez un Visuel}}</option>
                                     <option value="default">Light (Défaut)</option>
                                     <option value="dark">Dark</option>
+                                    <option value="darkatmo">Darkatmo</option>
                                 </select>
                             </div>
                         </div>
@@ -173,6 +174,18 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
                             <label class="col-sm-3 control-label">{{Puissance visible}}</label>
                             <div class="col-sm-3 form-check-input">
                                 <input type="checkbox" required class="eqLogicAttr" data-l1key="configuration" data-l2key="isvisiblePuissance" checked>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">{{Verrou visible}}</label>
+                            <div class="col-sm-3 form-check-input">
+                                <input type="checkbox" required class="eqLogicAttr" data-l1key="configuration" data-l2key="isvisibleVerrou" checked>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">{{Statistiques visible}}</label>
+                            <div class="col-sm-3 form-check-input">
+                                <input type="checkbox" required class="eqLogicAttr" data-l1key="configuration" data-l2key="isvisibleStatistiques" checked>
                             </div>
                         </div>
                         <div class="form-group">

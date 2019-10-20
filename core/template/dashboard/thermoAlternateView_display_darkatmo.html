@@ -1,0 +1,104 @@
+<script type="text/javascript" src="plugins/thermoAlternateView/3rparty/svg4everybody.js"></script>
+<script type="text/javascript" src="plugins/thermoAlternateView/core/template/thermoAlternateView_Display.js"></script>
+
+<div class="eqLogic-widget eqLogic allowResize" style="width: #width#;height: #height#;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style# " data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#">
+
+
+    <div class="thermoDarkatmo-cover #thermo-cover#">
+        <center style="#hideEqLogicName#" class="widget-name #thermo-widget-name#">
+            <a href="index.php?v=d&amp;p=thermoAlternateView&amp;m=thermoAlternateView&amp;id=#id#" style="font-size : 1.2em;">#name#</a>
+            <span style="font-size: 0.85em;position: relative;top:-2px;"></span>
+        </center>
+        <div class="thermoDarkatmo-mode">
+            #thermo-mode#
+        </div>
+        <div class="thermoDarkatmo-back #thermo-back#">
+            <div class="thermoDarkatmo-button thermoDarkatmo-button-plus" data-cmd_id="#thermostat-id#" data-cmd_val="#consigne-value#">+</div>
+            <div class="thermoDarkatmo-temperature #temperature-histo#" data-cmd_id="#tempInterieure-id#">
+                <span>#tempInterieure1#</span>
+                <span class="thermoDarkatmo-degre">#tempInterieure2#</span>
+            </div>
+            <div class="thermoDarkatmo-consigne #consigne-histo#" data-cmd_id="#consigne-id#">
+                <span>#tempConsigne1#</span>
+                <span class="thermoDarkatmo-degre">#tempConsigne2#</span>
+            </div>
+            <div class="thermoDarkatmo-button thermoDarkatmo-button-moins" data-cmd_id="#thermostat-id#" data-cmd_val="#consigne-value#">-</div>
+            <svg style="#statut-color#" class="thermoDarkatmo-mode-icon" data-cmd_id="#statut-id#">
+                <use xlink:href="plugins/thermoAlternateView/resources/images.svg#statut-icon#" />
+            </svg>
+            <svg style="#thermo-islockColor#;display:#lock-visible#" class="thermoDarkatmo-button thermoDarkatmo-lock-icon" data-cmd_id="#lock-id#" data-cmd_id2="#lock-id2#">
+                <use xlink:href="plugins/thermoAlternateView/resources/images.svg#lock-icon#" />
+            </svg>
+        </div>
+        <div style="display:#tempExterieure-visible#" class="thermoDarkatmo-temp-externe">
+            <svg class="thermoDarkatmo-img">
+                <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-externe" />
+            </svg>
+            <div style="width:35px;float: right;">
+                <span class="thermoDarkatmo-temperature-ext #tempExterieure-histo#" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span>
+                <span class="thermoDarkatmo-unit">#thermo-unit#</span>
+            </div>
+        </div>
+        <div style="display:#hygrometrie-visible#" class="thermoDarkatmo-hygrometrie-div">
+            <svg class="thermoDarkatmo-img">
+                <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-water" />
+            </svg>
+            <div style="width:35px;float: right;">
+                <span class="thermoDarkatmo-hygrometrie #hygrometrie-histo#" data-cmd_id="#hygrometrie-id#">#hygrometrie-value#</span>
+                <span class="thermoDarkatmo-unit">%</span>
+            </div>
+        </div>
+        <div style="display:#puissance-visible#" class="thermoDarkatmo-puissance-div">
+            <svg class="thermoDarkatmo-img">
+                <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-power" />
+            </svg>
+            <div style="width:35px;float: right;">
+                <span class="thermoDarkatmo-puissance #puissance-histo#" data-cmd_id="#puissance-id#">#puissance-value#</span>
+                <span class="thermoDarkatmo-unit">%</span>
+            </div>
+        </div>
+        <div class="thermoDarkatmo-statistics" style="display:#statistics-visible#">
+            <svg class="thermoDarkatmo-button-statistics">
+                <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-statistics" />
+            </svg>
+        </div>
+        <div style="display:#nextConsigne-visible#" class="thermoDarkatmo-next-consigne">
+            #thermo-nextOccurence#
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).change(function(e) {
+
+        if (e.target.dataset.eqlogic_uid === "#uid#") {
+            initDisplay#uid#();
+        }
+    });
+
+    $(document).ready(function() {
+        initDisplay#uid#();
+    });
+
+    function initDisplay#uid#() {
+        var param = {};
+
+        param.uid = "#uid#";
+        param.tempInterieureId = "#tempInterieure-id#";
+        param.tempExterieureId = "#tempExterieure-id#";
+        param.hygrometrieId = "#hygrometrie-id#";
+        param.puissanceId = "#puissance-id#";
+        param.consigneId = "#thermostat-id#";
+        param.statutId = "#statut-id#";
+        param.lockId = "#lock-id#";
+        param.modeId = "#mode-id#";
+        param.lockColor = "#thermo-lockColor#";
+        param.flameColor = "#thermo-flameColor#";
+        param.waitColor = "#thermo-waitColor#";
+        param.fanColor = "#thermo-fanColor#";
+        param.eqLogicId = "#thermo-eqLogicId#";
+        param.statisticsUrl = "#statistics-url#";
+
+        initialize(param, "darkatmo");
+    }
+</script>

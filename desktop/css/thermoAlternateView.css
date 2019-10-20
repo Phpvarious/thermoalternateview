@@ -9,8 +9,12 @@
     text-shadow: -1px 0 #444444, 0 1px #444444, 1px 0 #444444, 0 -1px #444444;
     font-size: 4em;
     line-height: 1.3em;
-    height: 40%;
+    height: 39%;
     clear: both;
+}
+
+.thermo-temperature {
+    margin-top: 10px;
 }
 
 .thermo-degre {
@@ -64,7 +68,7 @@
 .thermo-hygrometrie-mobile  {
     font-family: 'Saira', sans-serif;
     position: absolute;
-    top: calc(100% - 40px);
+    top: calc(100% - 30px);
     width: 40%;
 }
 
@@ -92,8 +96,14 @@
     width: 10%;
     cursor: pointer;
     color: #444444;
-    /* A refondre */
     line-height: 20px;
+    position: relative;
+}
+
+.thermo-button-plus,
+.thermo-button-moins {
+    top: -10px;
+    line-height: 1em;
 }
 
 .thermo-button:hover {
