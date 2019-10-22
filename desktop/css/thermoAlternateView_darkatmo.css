@@ -212,7 +212,7 @@
 }
 
 .thermoDarkatmo-switch-off {
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .thermoDarkatmo-mode-switch {
