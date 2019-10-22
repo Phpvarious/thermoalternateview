@@ -29,10 +29,10 @@
 }
 
 .thermoDarkatmo-temperature,
-.thermoDarkatmo-widget-name,
+.thermoDarkatmo-widget-name a,
 .thermoDarkatmo-temperature-ext,
 .thermoDarkatmo-hygrometrie {
-    color: #959595;
+    color: #959595 !important;
 }
 
 .thermoDarkatmo-consigne {

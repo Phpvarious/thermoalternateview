@@ -27,21 +27,15 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
         <span style="float:right;">v2.4</span>
         <legend><i class="fa fa-cog"></i> {{Gestion}}</legend>
         <div class="eqLogicThumbnailContainer">
-            <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
-                <center style="height:50px;">
-                    <i class="fa fa-plus-circle" style="line-height:0.84em;border-radius:30px;background-color:white; font-size : 6em;color:#642940;"></i>
-                </center>
-                <span style="font-size : 1.1em">
-                    <center>{{Ajouter}}</center>
-                </span>
+            <div class="cursor eqLogicAction" data-action="add">
+                <i class="fa fa-plus-circle" style="color:#642940;"></i>
+                <br>
+                <span>{{Ajouter}}</span>
             </div>
-            <div class="cursor eqLogicAction" data-action="gotoPluginConf" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
-                <center style="height:50px;">
-                    <i class="fa fa-wrench" style="font-size : 6em;color:#767676;"></i>
-                </center>
-                <span style="font-size : 1.1em;">
-                    <center>{{Configuration}}</center>
-                </span>
+            <div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
+                <i class="fa fa-wrench"></i>
+                <br>
+                <span>{{Configuration}}</span>
             </div>
         </div>
         <legend><i class="fa fa-table"></i> {{Configuration des widgets}}</legend>
