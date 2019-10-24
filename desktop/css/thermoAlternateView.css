@@ -32,10 +32,10 @@
 }
 
 .thermo-temperature,
-.thermo-widget-name,
+.thermo-widget-name a,
 .thermo-temperature-ext,
 .thermo-hygrometrie {
-    color: #444444;
+    color: #444444 !important;
 }
 
 .thermo-consigne {
