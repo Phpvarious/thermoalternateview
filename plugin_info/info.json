@@ -8,10 +8,10 @@
 	"require" : "3.0",
 	"category" : "wellness",
 	"changelog" : "https://bitbucket.org/supradolph/jeedom-plugins-themoalternateview/wiki/#language##markdown-header-changelog",
-	"documentation" : "https://bitbucket.org/supradolph/jeedom-plugins-themoalternateview/wiki/#language#",
+	"documentation" : "https://supradolph.github.io/index.html?content=plugins/thermoAlternateView",
 	"language" : ["fr_FR", "en_US"],
 	"link" : {
-		"forum":"https://www.jeedom.com/forum/viewtopic.php?f=143&t=31408"
+		"forum":"https://community.jeedom.com/t/plugin-tiers-thermoalternateview/4546"
 	},
 	"compatibility" : ["miniplus","smart","rpi","docker","diy"]
 }
