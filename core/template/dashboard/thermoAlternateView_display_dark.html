@@ -17,8 +17,8 @@
                     <span class="thermoDark-temperature">#temperature-value#</span>
                 </div>
                 <div style="z-index:100;display:#tempExterieure-visible#" class="thermoDark-temp-externe">
-                    <svg class="thermoDark-img">
-                        <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-externe" />
+                    <svg class="thermoDark-img" >
+                        <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-externe" />
                     </svg>
                     <span style="z-index:100; float: right;width: 35px;">
                         <span class="thermoDark-degre">#thermo-unit#</span>
@@ -27,8 +27,11 @@
                 </div>
                 <div style="z-index:100;display:#hygrometrie-visible#" class="thermoDark-temp-externe">
                     <svg class="thermoDark-img">
-                        <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-water" />
+                        <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-water" />
                     </svg>
+                    <!-- <object type="image/svg+xml" data="plugins/thermoAlternateView/resources/water.svg" class="thermoDark-img">
+                    </object> -->
+
                     <span style="z-index:100; float: right;width: 35px;">
                         <span class="thermoDark-degre">%</span>
                         <span style="z-index:100; float: right;" class="thermoDark-hygrometrie #hygrometrie-histo#" data-cmd_id="#hygrometrie-id#">#hygrometrie-value#</span>
@@ -42,7 +45,7 @@
         <div class="thermoDark-back">
             <div>
                 <svg class="thermoDark-button thermoDark-button-plus" data-cmd_id="#thermostat-id#" data-cmd_val="#consigne-value#">
-                    <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-up" />
+                    <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-up" />
                 </svg>
             </div>
             <div class="thermoDark-consigne #consigne-histo#" data-cmd_id="#consigne-id#">
@@ -51,23 +54,23 @@
             </div>
             <div>
                 <svg class="thermoDark-button thermoDark-button-moins" data-cmd_id="#thermostat-id#" data-cmd_val="#consigne-value#">
-                    <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-down" />
+                    <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-down" />
                 </svg>
             </div>
         </div>
         <div class="thermoDark-right-side">
             <svg style="#thermo-islockColor#;display:#lock-visible#" class="thermoDark-button thermoDark-lock-icon" data-cmd_id="#lock-id#" data-cmd_id2="#lock-id2#">
-                <use xlink:href="plugins/thermoAlternateView/resources/images.svg#lock-icon#" />
+                <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#lock-icon#" />
             </svg>
             <svg style="#statut-color#" class="thermoDark-mode-icon" data-cmd_id="#statut-id#">
-                <use xlink:href="plugins/thermoAlternateView/resources/images.svg#statut-icon#" />
+                <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#statut-icon#" />
             </svg>
         </div>
         <div class="thermoDark-bottom-side-right">
             <div class="thermoDark-row-2 thermoDark-contents">
                 <div style="z-index:100;display:#puissance-visible#" class="thermoDark-temp-externe">
                     <svg class="thermoDark-img">
-                        <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-power" />
+                        <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-power" />
                     </svg>
                     <span style="z-index:100; float: right;width: 35px;">
                         <span class="thermoDark-degre">%</span>
@@ -78,7 +81,7 @@
         </div>
         <div class="thermoDark-statistics" style="display:#statistics-visible#">
             <svg class="thermoDark-button-statistics">
-                <use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-statistics" />
+                <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-statistics" />
             </svg>
         </div>
         <div style="display:#nextConsigne-visible#" class="thermoDark-next-consigne">

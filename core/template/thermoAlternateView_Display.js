@@ -76,6 +76,9 @@ function initialize(parametres, template) {
 
     });
 
+    setTimeout(() => {
+        $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] use").css("visibility", "visible");
+    }, 50);
 }
 
 function toggleSwitchMode(switchElement, uid, template) {
