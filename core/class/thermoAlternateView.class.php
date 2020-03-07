@@ -131,6 +131,7 @@ class thermoAlternateView extends eqLogic
         $htmlModes = "";
         $htmlModesMobile = "";
         $modeIcon = "";
+        $nextEvent = "";
 
         //Parcours chaque commande du thermostat
         foreach (cmd::byEqLogicId($idThermostat) as $commande) {
@@ -355,7 +356,13 @@ class thermoAlternateView extends eqLogic
         $replace['#puissance-visible#'] = $isVisiblePuissance == "1" ? "block" : "none";
         $replace['#puissance-histo#'] = $cmdPuissanceHisto == "1" ? "history cursor" : "";
 
-        list($entier, $decimale) = explode(".", $tempConsigne);
+
+		if (stripos($tempConsigne,'.') === false) {
+			$entier = $tempConsigne;
+			$decimale = '';
+		}
+		else list($entier, $decimale) = explode(".", $tempConsigne);
+
         $replace['#tempConsigne1#'] = $entier;
         $replace['#tempConsigne2#'] = $decimale;
         $replace['#consigne-id#'] = $tempConsigneId;
