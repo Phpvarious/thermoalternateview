@@ -28,7 +28,7 @@ try {
     if (init('action') == 'getNextEventCalendar') {
         $thermostat = eqLogic::byId(init('eqLogic_id'));
 
-		ajax::success(thermoAlternateView::getNextEventCalendar($thermostat));
+		ajax::success(thermoAlternateView::getNextEventCalendar($thermostat, false));
 	}
 
 

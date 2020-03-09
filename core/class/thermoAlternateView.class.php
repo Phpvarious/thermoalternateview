@@ -131,6 +131,7 @@ class thermoAlternateView extends eqLogic
         $htmlModes = "";
         $htmlModesMobile = "";
         $modeIcon = "";
+        $nextEvent = "";
 
         //Parcours chaque commande du thermostat
         foreach (cmd::byEqLogicId($idThermostat) as $commande) {
@@ -218,10 +219,10 @@ class thermoAlternateView extends eqLogic
                 }
 
                 if ($mode == $modeActionName) {
-                    $htmlModes = $htmlModes . '<span class="thermo-switch-on thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeEscapeActionName . '" data-mode-humanname="' . $modeActionName . '" class="thermo-mode-label thermo-mode-label-on"><use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-' . $modeIcon . '" /></svg><svg class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-switch-on" /></svg></span>';
+                    $htmlModes = $htmlModes . '<span class="thermo-switch-on thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeEscapeActionName . '" data-mode-humanname="' . $modeActionName . '" class="thermo-mode-label thermo-mode-label-on"><use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-' . $modeIcon . '" /></svg><svg class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-switch-on" /></svg></span>';
                     $htmlModesMobile = $htmlModesMobile . '<span class="thermo-switch-on"><svg data-mode="' . $modeEscapeActionName . '" data-mode-humanname="' . $modeActionName . '" class="thermo-mode-label thermo-mode-label-on"><use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
                 } else {
-                    $htmlModes = $htmlModes . '<span class="thermo-switch-off thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeEscapeActionName . '" data-mode-humanname="' . $modeActionName . '" class="thermo-mode-label"><use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-' . $modeIcon . '" /></svg><svg class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-switch-off" /></svg></span>';
+                    $htmlModes = $htmlModes . '<span class="thermo-switch-off thermo-tooltip"><span class="thermo-tooltiptext">' . ucfirst($modeActionName) . '</span><svg data-mode="' . $modeEscapeActionName . '" data-mode-humanname="' . $modeActionName . '" class="thermo-mode-label"><use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-' . $modeIcon . '" /></svg><svg class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '><use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-switch-off" /></svg></span>';
                     $htmlModesMobile = $htmlModesMobile . '<span class="thermo-switch-off"><svg data-mode="' . $modeEscapeActionName . '" data-mode-humanname="' . $modeActionName . '" class="thermo-mode-label"><use xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-' . $modeIcon . '" /></svg><svg style="display:none;" class="thermo-mode-switch" data-cmd_id=' . $modeActionId . '></svg></span>';
                 }
             }
@@ -355,7 +356,13 @@ class thermoAlternateView extends eqLogic
         $replace['#puissance-visible#'] = $isVisiblePuissance == "1" ? "block" : "none";
         $replace['#puissance-histo#'] = $cmdPuissanceHisto == "1" ? "history cursor" : "";
 
-        list($entier, $decimale) = explode(".", $tempConsigne);
+
+		if (stripos($tempConsigne,'.') === false) {
+			$entier = $tempConsigne;
+			$decimale = '';
+		}
+		else list($entier, $decimale) = explode(".", $tempConsigne);
+
         $replace['#tempConsigne1#'] = $entier;
         $replace['#tempConsigne2#'] = $decimale;
         $replace['#consigne-id#'] = $tempConsigneId;
