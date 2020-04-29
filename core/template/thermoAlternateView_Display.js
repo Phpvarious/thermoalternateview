@@ -1,4 +1,5 @@
 function initialize(parametres, template) {
+    incrementTemperature = 0.5;
 
     //Gestion des fichiers SVG (pour IE)
     svg4everybody();
@@ -48,7 +49,7 @@ function initialize(parametres, template) {
 
         if ($(this).hasClass("thermo" + template + "-button-plus")) {
             var $self = $(this);
-            consigne = parseFloat(consigne) + 0.5;
+            consigne = parseFloat(consigne) + incrementTemperature;
 
             jeedom.cmd.execute({
                 id: cmdId,
@@ -59,7 +60,7 @@ function initialize(parametres, template) {
         } else {
             if ($(this).hasClass("thermo" + template + "-button-moins")) {
                 var $self = $(this);
-                consigne = parseFloat(consigne) - 0.5;
+                consigne = parseFloat(consigne) - incrementTemperature;
 
                 jeedom.cmd.execute({
                     id: cmdId,
