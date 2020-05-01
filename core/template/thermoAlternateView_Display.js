@@ -1,5 +1,5 @@
 function initialize(parametres, template) {
-    incrementTemperature = 0.5;
+    var incrementTemperature = 0.5;
 
     //Gestion des fichiers SVG (pour IE)
     svg4everybody();
@@ -16,6 +16,11 @@ function initialize(parametres, template) {
             break;
         case "Darkatmo":
             initialize_Default_Template(parametres, template);
+            break;
+        case "Simplelight":
+        case "Simpledark":
+            incrementTemperature = 1;
+            initialize_Simple_Template(parametres, template);
             break;
         default:
             initialize_Default_Template(parametres, "");
@@ -40,7 +45,6 @@ function initialize(parametres, template) {
             $("#md_modal #div_object").parent().removeClass("col-lg-10").addClass("col-lg-12");
         }).dialog('open');
     });
-
 
     //Plus / Moins
     $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-button").click(function() {
@@ -214,6 +218,153 @@ function initialize_Default_Template(parametres, template) {
 
 }
 
+function initialize_Simple_Template(parametres, template) {
+
+    if (!$("link[href='plugins/thermoAlternateView/desktop/css/thermoAlternateView" + (template.length > 0 ? "_" + template.toLowerCase() : "") + ".css']").length) {
+        $('<link rel="stylesheet" type="text/css" href="plugins/thermoAlternateView/desktop/css/thermoAlternateView' + (template.length > 0 ? "_" + template.toLowerCase() : "") + '.css">').appendTo("head");
+    }
+
+
+$(".thermo" + template + "-back").on('click', function(){
+
+    $(".thermo" + template + "-main-consigne").toggleClass("d-none");
+    $(".thermo" + template + "-main-temperature").toggleClass("d-none");
+
+    $(".thermo" + template + "-back").toggleClass("animation180");
+    if (! $(".thermo" + template + "-back").hasClass("animation180")) {
+        $(".thermo" + template + "-back").addClass("animation180Back");
+    }
+    else{
+        setTimeout(() => {
+            $(".thermo" + template + "-back").click();
+        }, 5000);
+        $(".thermo" + template + "-back").removeClass("animation180Back");
+    }
+    
+    });
+    
+
+    //Consigne supérieure et inférieure (labels)
+    var domElemOder = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-consigne > span").first();
+    setUpDownRef(parametres, template, domElemOder);
+
+    domElemOder.on('DOMSubtreeModified',function(){
+        setUpDownRef(parametres, template, $(this));
+    });
+                   
+
+    //Mise à jour des valeurs
+    $('body').on('cmd::update', function(_event, _options) {
+
+        $(_options).each(function() {
+
+            switch (this.cmd_id) {
+                case parametres.tempInterieureId:
+                    var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-temperature").children();
+                    $domElement.text("");
+
+                    this.value.toString().split(/\./).forEach(function(elem) {
+                        $domElement.first().text(elem);
+                        $domElement = $domElement.next("span").first();
+                    });
+                    break;
+
+                case parametres.tempExterieureId:
+                    var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-temperature-ext");
+                    $domElement.text(this.value);
+                    break;
+
+                case parametres.hygrometrieId:
+                    var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-hygrometrie");
+                    $domElement.text(this.value);
+                    break;
+
+                case parametres.puissanceId:
+                    var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-puissance");
+                    $domElement.text(this.value);
+                    break;
+
+                case parametres.consigneId:
+                    var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-consigne > span").first();
+                    //Consigne
+                    $domElement.text(this.value);
+
+                    /*$domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-consigne-m1 > span").first();
+                    //Consigne -1
+                    $domElement.text(this.value - 1);
+                    $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-consigne-p1 > span").first();
+                    //Consigne +1
+                    $domElement.text(this.value + 1);*/
+
+                    //Boutons +/-
+                    $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-button-plus, .eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-button-moins").attr("data-cmd_val", this.value);
+
+                    //Prochaine consigne
+                    setNextEventCalendar(parametres.eqLogicId, $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-next-consigne"));
+                    break;
+
+                case parametres.statutId:
+                    switch (this.value) {
+                        case "Chauffage":
+                            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").each( function () {
+                                $(this).css("border-color", parametres.flameColor);
+                                $(this).css("box-shadow", "-1px 0px 10px 0px " + parametres.flameColor + " inset");
+                            });
+                            break;
+
+                        case "Suspendu":
+                            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").each( function () {
+                                $(this).css("border-color", parametres.waitColor);
+                                $(this).css("box-shadow", "-1px 0px 10px 0px " + parametres.waitColor + " inset");
+                            });
+                            break;
+
+                        case "Climatisation":
+                            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").each( function () {
+                                $(this).css("border-color", parametres.fanColor);
+                                $(this).css("box-shadow", "-1px 0px 10px 0px " + parametres.fanColor + " inset");
+                            });
+                            break;
+
+                        default:
+                            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").css("border-color", "#2D2D2D");
+                            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").each( function () {
+                                $(this).css("border-color", "");
+                                $(this).css("box-shadow", "");
+                            });
+                    }
+                    break;
+
+                case parametres.lockId:
+                    var $lockIcon = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-lock-icon");
+                    var lockId1 = $lockIcon.attr("data-cmd_id");
+                    var lockId2 = $lockIcon.attr("data-cmd_id2");
+
+                    $lockIcon.attr("data-cmd_id", lockId2);
+                    $lockIcon.attr("data-cmd_id2", lockId1);
+                    if (this.value === 1) {
+                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-lock-on");
+                        $lockIcon.css("fill", parametres.lockColor);
+                    } else {
+                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-lock-off");
+                        $lockIcon.css("fill", "");
+                    }
+                    break;
+
+                case parametres.modeId:
+                    var escapeMode = this.value.toLowerCase().replace(/ /g, "");
+                    var $cmdMode = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] [data-mode=" + escapeMode + "]").nextAll(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-mode-switch");
+                    toggleSwitchMode($cmdMode, parametres.uid, template);
+                    break;
+            }
+
+        });
+
+
+    });
+
+}
+
 function initialize_Dark_Template(parametres, template) {
 
     if (!$("link[href='plugins/thermoAlternateView/desktop/css/thermoAlternateView_" + template.toLowerCase() + ".css']").length) {
@@ -320,6 +471,13 @@ function initialize_Dark_Template(parametres, template) {
 
     });
 
+}
+
+function setUpDownRef(parametres, template, reference) {
+    //Consigne -1
+    $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-consigne-m1 > span").first().text(parseFloat(reference.text()) - 1);
+    //Consigne +1
+    $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-consigne-p1 > span").first().text(parseFloat(reference.text()) + 1);
 }
 
 function fitTextTemp(template) {

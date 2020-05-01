@@ -1,0 +1,90 @@
+<script type="text/javascript" src="plugins/thermoAlternateView/3rparty/svg4everybody.js"></script>
+<script type="text/javascript" src="plugins/thermoAlternateView/core/template/thermoAlternateView_Display.js"></script>
+
+<div class="eqLogic-widget eqLogic allowResize" style="width: #width#;height: #height#;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style# "
+    data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#">
+
+
+    <div class="thermoSimpledark-cover #thermo-cover#">
+        <center style="#hideEqLogicName#" class="widget-name #thermo-widget-name#">
+            <span>#name#</span>
+            <span style="font-size: 0.85em;position: relative;top:-2px;"></span>
+        </center>
+        <div class="thermoSimpledark-mode-mobile">
+            #thermo-mode-mobile#
+        </div>
+        <svg class="thermoSimpledark-button thermoSimpledark-button-plus" data-cmd_id="#thermostat-id#" data-cmd_val="#consigne-value#">
+            <use style="visibility: visible;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-up"></use>
+        </svg>
+        <div class="thermoSimpledark-back #thermo-back#" style="width:130px; height:130px; box-shadow: -1px 0px 10px 0px #statut-color-init# inset; border-color: #statut-color-init#">
+            <div class="thermoSimpledark-main-consigne">
+                <div class="thermoSimpledark-consigne-p1" data-cmd_id="#consigne-id#">
+                    <span></span>
+                </div>
+                <div class="thermoSimpledark-consigne" data-cmd_id="#consigne-id#">
+                    <span>#consigne-value#</span>
+                    <span class="thermoSimpledark-degre">#thermo-unit#</span>
+                </div>
+                <div class="thermoSimpledark-consigne-m1" data-cmd_id="#consigne-id#">
+                    <span></span>
+                </div>
+            </div>
+            <div class="thermoSimpledark-main-temperature d-none">
+                <div class="thermoSimpledark-consigne-p1" data-cmd_id="#consigne-id#">
+                    <span></span>
+                </div>
+                <div class="thermoSimpledark-consigne" data-cmd_id="#tempInterieure-id#">
+                    <span>#temperature-value#</span>
+                    <span class="thermoSimpledark-degre">#thermo-unit#</span>
+                </div>
+                <div class="thermoSimpledark-consigne-m1" data-cmd_id="#consigne-id#">
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <svg class="thermoSimpledark-button thermoSimpledark-button-moins" data-cmd_id="#thermostat-id#" data-cmd_val="#consigne-value#">
+            <use style="visibility: visible;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-down"></use>
+        </svg>
+ 
+        <div class="thermoSimpledark-lock-icon">
+            <svg class="thermoSimpledark-button" style="#thermo-islockColor#;display:#lock-visible#" data-cmd_id="#lock-id#" data-cmd_id2="#lock-id2#">
+                <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#lock-icon#" />
+            </svg>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).change(function(e) {
+
+        if (e.target.dataset.eqlogic_uid === "#uid#") {
+            initDisplay#uid#();
+        }
+    });
+
+    $(document).ready(function() {
+        initDisplay#uid#();
+    });
+
+    function initDisplay#uid#() {
+        var param = {};
+
+        param.uid = "#uid#";
+        param.tempInterieureId = "#tempInterieure-id#";
+        param.tempExterieureId = "#tempExterieure-id#";
+        param.hygrometrieId = "#hygrometrie-id#";
+        param.puissanceId = "#puissance-id#";
+        param.consigneId = "#thermostat-id#";
+        param.statutId = "#statut-id#";
+        param.lockId = "#lock-id#";
+        param.modeId = "#mode-id#";
+        param.lockColor = "#thermo-lockColor#";
+        param.flameColor = "#thermo-flameColor#";
+        param.waitColor = "#thermo-waitColor#";
+        param.fanColor = "#thermo-fanColor#";
+        param.eqLogicId = "#thermo-eqLogicId#";
+        param.statisticsUrl = "#statistics-url#";
+
+        initialize(param, "simpledark");
+    }
+</script>

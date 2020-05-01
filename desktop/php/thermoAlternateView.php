@@ -24,7 +24,7 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
 
     <div class="col-md-10 col-md-9 col-md-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
         <legend>{{Mes thermoAlternateView}}</legend>
-        <span style="float:right;">v2.5</span>
+        <span style="float:right;">v2.6</span>
         <legend><i class="fa fa-cog"></i> {{Gestion}}</legend>
         <div class="eqLogicThumbnailContainer">
             <div class="cursor eqLogicAction" data-action="add">
@@ -133,8 +133,10 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
                                     <select required class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="template">
                                         <option value="" disabled selected>{{Sélectionnez un Visuel}}</option>
                                         <option value="default">Light (Défaut)</option>
-                                        <option value="dark">Dark</option>
                                         <option value="darkatmo">Darkatmo</option>
+                                        <option value="dark">Dark</option>
+                                        <option value="simplelight">Simple Light</option>
+                                        <option value="simpledark">Simple Dark</option>
                                     </select>
                                 </div>
                             </div>
