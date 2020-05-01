@@ -1,0 +1,356 @@
+@font-face {
+    font-family: Work Sans;
+    src: url(../../3rparty/fonts/Work_Sans/WorkSans-ExtraLight.ttf);
+}
+
+.thermoSimplelight-consigne,
+.thermoSimplelight-temperature {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 65px;
+    clear: both;
+    display: inline-flex;
+}
+.thermoSimplelight-temperature {
+    margin-top: 10px;
+}
+
+.thermoSimplelight-degre {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.5em;
+    margin-top: 0.3em;
+}
+
+.thermoSimplelight-unit {
+    color: rgb(90, 90, 90);
+    font-size: 0.7em;
+    vertical-align: top;
+    float: right;
+}
+
+.thermoSimplelight-temperature,
+.thermoSimplelight-widget-name a,
+.thermoSimplelight-temperature-ext,
+.thermoSimplelight-hygrometrie {
+    color: rgb(90, 90, 90) !important;
+}
+
+.thermoSimplelight-consigne {
+    color: rgb(90, 90, 90);
+}
+
+.thermoSimplelight-temperature-ext,
+.thermoSimplelight-hygrometrie,
+.thermoSimplelight-puissance {
+    width: 50%;
+}
+
+.thermoSimplelight-temp-externe,
+.thermoSimplelight-hygrometrie-div,
+.thermoSimplelight-puissance-div {
+    font-family: 'Work Sans', sans-serif;
+    clear: both;
+    float: right;
+    width: 25%;
+    margin-right: 5px;
+    text-align: right;
+    color: rgb(90, 90, 90);
+}
+
+.thermoSimplelight-temp-externe {
+    top: calc(100% - 3.5em - 10px);
+}
+
+.thermoSimplelight-temp-externe-mobile,
+.thermoSimplelight-hygrometrie-mobile {
+    font-family: 'Work Sans', sans-serif;
+    position: absolute;
+    top: calc(100% - 30px);
+    width: 40%;
+}
+
+.thermoSimplelight-hygrometrie-mobile {
+    left: calc(100% - 40% - 5px);
+}
+
+.thermoSimplelight-img {
+    height: 16px;
+    width: 30%;
+    margin-right: 5px;
+    fill: #61B872;
+}
+
+.thermoSimplelight-img-mobile {
+    width: 30px;
+}
+
+.thermoSimplelight-button {
+    float: left;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    color: rgb(90, 90, 90);
+}
+
+.thermoSimplelight-button-plus {
+    top: calc(50% - 90px);
+}
+
+.thermoSimplelight-button-moins {
+    top: calc(50% + 90px);
+}
+
+.thermoSimplelight-button-plus,
+.thermoSimplelight-button-moins {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 30px;
+    fill: rgb(90, 90, 90);
+}
+
+.thermoSimplelight-button:hover {
+    color: #61B872;
+    fill: #61B872;
+}
+
+.thermoSimplelight-button-statistics {
+    height: 2.2em;
+    width: 2.2em;
+    cursor: pointer;
+    fill: rgb(90, 90, 90);
+    position: absolute;
+    top: calc(100% - 2.2em - 5px);
+    left: calc(100% - 2.2em - 5px);
+}
+
+.thermoSimplelight-button-statistics:hover {
+    fill: #61B872;
+}
+
+.thermoSimplelight-next-consigne {
+    font-family: 'Work Sans', sans-serif;
+    color: rgb(90, 90, 90);
+    position: absolute;
+    top: calc(100% - 1em - 5px);
+    left: 5px;
+}
+
+.thermoSimplelight-cover {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.thermoSimplelight-cover-color {
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.75);
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,e5e5e5+100;White+3D */
+    background: #ffffff;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5', GradientType=0);
+    /* IE6-9 */
+
+}
+
+.thermoSimplelight-consigne-m1,
+.thermoSimplelight-consigne-p1 {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 35px;
+    line-height: 0em;
+    height: 8px;
+}
+
+.thermoSimplelight-consigne-p1 {
+    margin-top: 18px;
+}
+
+.thermoSimplelight-consigne-m1 {
+    margin-top: 7px;
+}
+
+.thermoSimplelight-consigne-m1 > span {
+    background: -webkit-linear-gradient(rgb(150, 150, 150), #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.thermoSimplelight-consigne-p1 > span{
+    background: -webkit-linear-gradient(#ffffff, rgb(150, 150, 150));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.thermoSimplelight-back {
+    border: 4px solid rgb(90, 90, 90);
+    box-shadow: -1px 0px 10px 0px rgb(90, 90, 90) inset;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    cursor: pointer;
+}
+
+.thermoSimplelight-back-color {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,e5e5e5+100;White+3D */
+    background: #ffffff;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5', GradientType=0);
+    /* IE6-9 */
+}
+
+.thermoSimplelight-mode-icon,
+.thermoSimplelight-wait-icon,
+.thermoSimplelight-lock-icon {
+    fill: rgb(90, 90, 90);
+    left: calc(100% - 35px);
+    width: 100%;
+    position: absolute;
+    top: calc(50% - 15px);
+}
+
+.thermoSimplelight-mode {
+    width: 25%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.thermoSimplelight-mode-mobile {
+    z-index: 99;
+    width: 100%;
+    display: inline-flex;
+    position: sticky;
+    margin-bottom: 5px;
+    top: 100%;
+}
+
+.thermoSimplelight-statistics {
+    width: 33.33%;
+    float: right;
+}
+
+.thermoSimplelight-switch-off,
+.thermoSimplelight-switch-on {
+    display: block;
+    text-align: center;
+}
+
+.thermoSimplelight-switch-off {
+    cursor: pointer !important;
+}
+
+.thermoSimplelight-mode-switch {
+    width: 35%;
+    height: 30px;
+    /* A refondre */
+}
+
+.thermoSimplelight-mode-label {
+    width: 45%;
+    height: 25px;
+    /* A refondre */
+    line-height: 30px;
+    fill: rgb(90, 90, 90);
+}
+
+.thermoSimplelight-mode-label-on {
+    fill: #61B872;
+}
+
+.thermoSimplelight-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.thermoSimplelight-tooltip .thermoSimplelight-tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s 1s;
+}
+
+.thermoSimplelight-tooltip .thermoSimplelight-tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.thermoSimplelight-tooltip:hover .thermoSimplelight-tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.thermoSimplelight-main-consigne {
+    transform: translateZ(1px);
+}
+
+.thermoSimplelight-main-temperature {
+    transform: translateZ(-1px) rotateY(180deg);
+    }
+
+.animation180 {
+    -webkit-animation: rotate180 0.5s linear forwards; 
+    animation: rotate180 0.5s linear forwards;
+}
+
+.animation180Back {
+    -webkit-animation: rotate180Back 0.5s linear forwards; 
+    animation: rotate180Back 0.5s linear forwards;
+}
+
+@-webkit-keyframes rotate180 {
+    from { -webkit-transform: rotateY(0) translateX(-50%) translateY(-50%); -moz-transform: rotateY(0) translateX(-50%) translateY(-50%); transform: rotateY(0) translateX(-50%) translateY(-50%); }
+    to { -webkit-transform: rotateY(180deg) translateX(50%) translateY(-50%); -moz-transform: rotateY(180deg) translateX(50%) translateY(-50%); transform: rotateY(180deg) translateX(50%) translateY(-50%); }
+}
+
+@-webkit-keyframes rotate180Back {
+    from { -webkit-transform: rotateY(180deg) translateX(50%) translateY(-50%); -moz-transform: rotateY(180deg) translateX(50%) translateY(-50%); transform: rotateY(180deg) translateX(50%) translateY(-50%); }
+    to {  -webkit-transform: rotateY(0) translateX(-50%) translateY(-50%); -moz-transform: rotateY(0) translateX(-50%) translateY(-50%); transform: rotateY(0) translateX(-50%) translateY(-50%); }
+}
+
+
+@keyframes rotate180 {
+from { -webkit-transform: rotateY(0) translateX(-50%) translateY(-50%); -moz-transform: rotateY(0) translateX(-50%) translateY(-50%); transform: rotateY(0) translateX(-50%) translateY(-50%); }
+to { -webkit-transform: rotateY(180deg) translateX(50%) translateY(-50%); -moz-transform: rotateY(180deg) translateX(50%) translateY(-50%); transform: rotateY(180deg) translateX(50%) translateY(-50%); }
+}
+
+@keyframes rotate180Back {
+    from { -webkit-transform: rotateY(180deg) translateX(50%) translateY(-50%); -moz-transform: rotateY(180deg) translateX(50%) translateY(-50%); transform: rotateY(180deg) translateX(50%) translateY(-50%); }
+    to {  -webkit-transform: rotateY(0) translateX(-50%) translateY(-50%); -moz-transform: rotateY(0) translateX(-50%) translateY(-50%); transform: rotateY(0) translateX(-50%) translateY(-50%); }
+}
+
+.d-none {
+    display: none;
+}

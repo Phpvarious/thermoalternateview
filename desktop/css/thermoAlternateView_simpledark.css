@@ -1,0 +1,356 @@
+@font-face {
+    font-family: Work Sans;
+    src: url(../../3rparty/fonts/Work_Sans/WorkSans-ExtraLight.ttf);
+}
+
+.thermoSimpledark-consigne,
+.thermoSimpledark-temperature {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 65px;
+    clear: both;
+    display: inline-flex;
+}
+.thermoSimpledark-temperature {
+    margin-top: 10px;
+}
+
+.thermoSimpledark-degre {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.5em;
+    margin-top: 0.3em;
+}
+
+.thermoSimpledark-unit {
+    color: #959595;
+    font-size: 0.7em;
+    vertical-align: top;
+    float: right;
+}
+
+.thermoSimpledark-temperature,
+.thermoSimpledark-widget-name a,
+.thermoSimpledark-temperature-ext,
+.thermoSimpledark-hygrometrie {
+    color: #959595 !important;
+}
+
+.thermoSimpledark-consigne {
+    color: rgb(201, 201, 201);
+}
+
+.thermoSimpledark-temperature-ext,
+.thermoSimpledark-hygrometrie,
+.thermoSimpledark-puissance {
+    width: 50%;
+}
+
+.thermoSimpledark-temp-externe,
+.thermoSimpledark-hygrometrie-div,
+.thermoSimpledark-puissance-div {
+    font-family: 'Work Sans', sans-serif;
+    clear: both;
+    float: right;
+    width: 25%;
+    margin-right: 5px;
+    text-align: right;
+    color: #959595;
+}
+
+.thermoSimpledark-temp-externe {
+    top: calc(100% - 3.5em - 10px);
+}
+
+.thermoSimpledark-temp-externe-mobile,
+.thermoSimpledark-hygrometrie-mobile {
+    font-family: 'Work Sans', sans-serif;
+    position: absolute;
+    top: calc(100% - 30px);
+    width: 40%;
+}
+
+.thermoSimpledark-hygrometrie-mobile {
+    left: calc(100% - 40% - 5px);
+}
+
+.thermoSimpledark-img {
+    height: 16px;
+    width: 30%;
+    margin-right: 5px;
+    fill: #61B872;
+}
+
+.thermoSimpledark-img-mobile {
+    width: 30px;
+}
+
+.thermoSimpledark-button {
+    float: left;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    color: #959595;
+}
+
+.thermoSimpledark-button-plus {
+    top: calc(50% - 90px);
+}
+
+.thermoSimpledark-button-moins {
+    top: calc(50% + 90px);
+}
+
+.thermoSimpledark-button-plus,
+.thermoSimpledark-button-moins {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 30px;
+    fill: rgb(201, 201, 201);
+}
+
+.thermoSimpledark-button:hover {
+    color: #61B872;
+    fill: #61B872;
+}
+
+.thermoSimpledark-button-statistics {
+    height: 2.2em;
+    width: 2.2em;
+    cursor: pointer;
+    fill: #959595;
+    position: absolute;
+    top: calc(100% - 2.2em - 5px);
+    left: calc(100% - 2.2em - 5px);
+}
+
+.thermoSimpledark-button-statistics:hover {
+    fill: #61B872;
+}
+
+.thermoSimpledark-next-consigne {
+    font-family: 'Work Sans', sans-serif;
+    color: #959595;
+    position: absolute;
+    top: calc(100% - 1em - 5px);
+    left: 5px;
+}
+
+.thermoSimpledark-cover {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.thermoSimpledark-cover-color {
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.75);
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#191919+0,212121+100 */
+    background: #191919;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #191919 0%, #212121 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #191919 0%, #212121 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #191919 0%, #212121 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#191919', endColorstr='#212121', GradientType=0);
+    /* IE6-9 */
+
+}
+
+.thermoSimpledark-consigne-m1,
+.thermoSimpledark-consigne-p1 {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 35px;
+    line-height: 0em;
+    height: 8px;
+}
+
+.thermoSimpledark-consigne-p1 {
+    margin-top: 18px;
+}
+
+.thermoSimpledark-consigne-m1 {
+    margin-top: 7px;
+}
+
+.thermoSimpledark-consigne-m1 > span {
+    background: -webkit-linear-gradient(#959595, #191919);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.thermoSimpledark-consigne-p1 > span{
+    background: -webkit-linear-gradient(#191919, #959595);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.thermoSimpledark-back {
+    border: 4px solid #2D2D2D;
+    box-shadow: -1px 0px 10px 0px #2D2D2D inset;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    cursor: pointer;
+}
+
+.thermoSimpledark-back-color {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#212121+0,191919+100 */
+    background: #212121;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #212121 0%, #191919 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #212121 0%, #191919 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #212121 0%, #191919 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#212121', endColorstr='#191919', GradientType=0);
+    /* IE6-9 */
+}
+
+.thermoSimpledark-mode-icon,
+.thermoSimpledark-wait-icon,
+.thermoSimpledark-lock-icon {
+    fill: #959595;
+    left: calc(100% - 35px);
+    width: 100%;
+    position: absolute;
+    top: calc(50% - 15px);
+}
+
+.thermoSimpledark-mode {
+    width: 25%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.thermoSimpledark-mode-mobile {
+    z-index: 99;
+    width: 100%;
+    display: inline-flex;
+    position: sticky;
+    margin-bottom: 5px;
+    top: 100%;
+}
+
+.thermoSimpledark-statistics {
+    width: 33.33%;
+    float: right;
+}
+
+.thermoSimpledark-switch-off,
+.thermoSimpledark-switch-on {
+    display: block;
+    text-align: center;
+}
+
+.thermoSimpledark-switch-off {
+    cursor: pointer !important;
+}
+
+.thermoSimpledark-mode-switch {
+    width: 35%;
+    height: 30px;
+    /* A refondre */
+}
+
+.thermoSimpledark-mode-label {
+    width: 45%;
+    height: 25px;
+    /* A refondre */
+    line-height: 30px;
+    fill: #959595;
+}
+
+.thermoSimpledark-mode-label-on {
+    fill: #61B872;
+}
+
+.thermoSimpledark-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.thermoSimpledark-tooltip .thermoSimpledark-tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s 1s;
+}
+
+.thermoSimpledark-tooltip .thermoSimpledark-tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.thermoSimpledark-tooltip:hover .thermoSimpledark-tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.thermoSimpledark-main-consigne {
+    transform: translateZ(1px);
+}
+
+.thermoSimpledark-main-temperature {
+    transform: translateZ(-1px) rotateY(180deg);
+    }
+
+.animation180 {
+    -webkit-animation: rotate180 0.5s linear forwards; 
+    animation: rotate180 0.5s linear forwards;
+}
+
+.animation180Back {
+    -webkit-animation: rotate180Back 0.5s linear forwards; 
+    animation: rotate180Back 0.5s linear forwards;
+}
+
+@-webkit-keyframes rotate180 {
+    from { -webkit-transform: rotateY(0) translateX(-50%) translateY(-50%); -moz-transform: rotateY(0) translateX(-50%) translateY(-50%); transform: rotateY(0) translateX(-50%) translateY(-50%); }
+    to { -webkit-transform: rotateY(180deg) translateX(50%) translateY(-50%); -moz-transform: rotateY(180deg) translateX(50%) translateY(-50%); transform: rotateY(180deg) translateX(50%) translateY(-50%); }
+}
+
+@-webkit-keyframes rotate180Back {
+    from { -webkit-transform: rotateY(180deg) translateX(50%) translateY(-50%); -moz-transform: rotateY(180deg) translateX(50%) translateY(-50%); transform: rotateY(180deg) translateX(50%) translateY(-50%); }
+    to {  -webkit-transform: rotateY(0) translateX(-50%) translateY(-50%); -moz-transform: rotateY(0) translateX(-50%) translateY(-50%); transform: rotateY(0) translateX(-50%) translateY(-50%); }
+}
+
+
+@keyframes rotate180 {
+from { -webkit-transform: rotateY(0) translateX(-50%) translateY(-50%); -moz-transform: rotateY(0) translateX(-50%) translateY(-50%); transform: rotateY(0) translateX(-50%) translateY(-50%); }
+to { -webkit-transform: rotateY(180deg) translateX(50%) translateY(-50%); -moz-transform: rotateY(180deg) translateX(50%) translateY(-50%); transform: rotateY(180deg) translateX(50%) translateY(-50%); }
+}
+
+@keyframes rotate180Back {
+    from { -webkit-transform: rotateY(180deg) translateX(50%) translateY(-50%); -moz-transform: rotateY(180deg) translateX(50%) translateY(-50%); transform: rotateY(180deg) translateX(50%) translateY(-50%); }
+    to {  -webkit-transform: rotateY(0) translateX(-50%) translateY(-50%); -moz-transform: rotateY(0) translateX(-50%) translateY(-50%); transform: rotateY(0) translateX(-50%) translateY(-50%); }
+}
+
+.d-none {
+    display: none;
+}

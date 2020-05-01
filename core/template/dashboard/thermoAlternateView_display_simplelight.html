@@ -1,0 +1,123 @@
+<script type="text/javascript" src="plugins/thermoAlternateView/3rparty/svg4everybody.js"></script>
+<script type="text/javascript" src="plugins/thermoAlternateView/core/template/thermoAlternateView_Display.js"></script>
+
+<div class="eqLogic-widget eqLogic allowResize" style="width: #width#;height: #height#;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style# " data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#">
+
+
+    <div class="thermoSimplelight-cover #thermo-cover#">
+        <center style="#hideEqLogicName#" class="widget-name #thermo-widget-name#">
+            <a href="index.php?v=d&amp;p=thermoAlternateView&amp;m=thermoAlternateView&amp;id=#id#" style="font-size : 1.2em;">#name#</a>
+            <span style="font-size: 0.85em;position: relative;top:-2px;"></span>
+        </center>
+        <div class="thermoSimplelight-mode">
+            #thermo-mode-mobile#
+        </div>
+        <svg class="thermoSimplelight-button thermoSimplelight-button-plus" data-cmd_id="#thermostat-id#" data-cmd_val="#consigne-value#">
+            <use style="visibility: visible;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-up"></use>
+        </svg>
+        <div class="thermoSimplelight-back #thermo-back#" style="box-shadow: -1px 0px 10px 0px #statut-color-init# inset; border-color: #statut-color-init#">
+            <div class="thermoSimplelight-main-consigne">
+                <div class="thermoSimplelight-consigne-p1" data-cmd_id="#consigne-id#">
+                    <span class="cursor"></span>
+                </div>
+                <div class="thermoSimplelight-consigne" data-cmd_id="#consigne-id#">
+                    <span class="cursor">#consigne-value#</span>
+                    <span class="cursor thermoSimplelight-degre">#thermo-unit#</span>
+                </div>
+                <div class="thermoSimplelight-consigne-m1" data-cmd_id="#consigne-id#">
+                    <span class="cursor"></span>
+                </div>
+            </div>
+            <div class="thermoSimplelight-main-temperature d-none">
+                <div class="thermoSimplelight-consigne-p1" data-cmd_id="#consigne-id#">
+                    <span class="cursor"></span>
+                </div>
+                <div class="thermoSimplelight-consigne" data-cmd_id="#tempInterieure-id#">
+                    <span class="cursor">#temperature-value#</span>
+                    <span class="cursor thermoSimplelight-degre">#thermo-unit#</span>
+                </div>
+                <div class="thermoSimplelight-consigne-m1" data-cmd_id="#consigne-id#">
+                    <span class="cursor"></span>
+                </div>
+            </div>
+        </div>
+        <svg class="thermoSimplelight-button thermoSimplelight-button-moins" data-cmd_id="#thermostat-id#" data-cmd_val="#consigne-value#">
+            <use style="visibility: visible;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-down"></use>
+        </svg>
+        <div style="display:#tempExterieure-visible#" class="thermoSimplelight-temp-externe">
+            <svg class="thermoSimplelight-img">
+                <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-externe" />
+            </svg>
+            <div style="width:40px;float: right;">
+                <span class="thermoSimplelight-temperature-ext #tempExterieure-histo#" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span>
+                <span class="thermoSimplelight-unit">#thermo-unit#</span>
+            </div>
+        </div>
+        <div style="display:#hygrometrie-visible#" class="thermoSimplelight-hygrometrie-div">
+            <svg class="thermoSimplelight-img">
+                <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-water" />
+            </svg>
+            <div style="width:40px;float: right;">
+                <span class="thermoSimplelight-hygrometrie #hygrometrie-histo#" data-cmd_id="#hygrometrie-id#">#hygrometrie-value#</span>
+                <span class="thermoSimplelight-unit">%</span>
+            </div>
+        </div>
+        <div style="display:#puissance-visible#" class="thermoSimplelight-puissance-div">
+            <svg class="thermoSimplelight-img">
+                <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-icon-power" />
+            </svg>
+            <div style="width:40px;float: right;">
+                <span class="thermoSimplelight-puissance #puissance-histo#" data-cmd_id="#puissance-id#">#puissance-value#</span>
+                <span class="thermoSimplelight-unit">%</span>
+            </div>
+        </div>
+        <div class="thermoSimplelight-lock-icon">
+            <svg class="thermoSimplelight-button" style="#thermo-islockColor#;display:#lock-visible#" data-cmd_id="#lock-id#" data-cmd_id2="#lock-id2#">
+                <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#lock-icon#" />
+            </svg>
+        </div>
+        <div class="thermoSimplelight-statistics" style="display:#statistics-visible#">
+            <svg class="thermoSimplelight-button-statistics">
+                <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/resources/images.svg#shape-statistics" />
+            </svg>
+        </div>
+        <div style="display:#nextConsigne-visible#" class="thermoSimplelight-next-consigne">
+            #thermo-nextOccurence#
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).change(function(e) {
+
+        if (e.target.dataset.eqlogic_uid === "#uid#") {
+            initDisplay#uid#();
+        }
+    });
+
+    $(document).ready(function() {
+        initDisplay#uid#();
+    });
+
+    function initDisplay#uid#() {
+        var param = {};
+
+        param.uid = "#uid#";
+        param.tempInterieureId = "#tempInterieure-id#";
+        param.tempExterieureId = "#tempExterieure-id#";
+        param.hygrometrieId = "#hygrometrie-id#";
+        param.puissanceId = "#puissance-id#";
+        param.consigneId = "#thermostat-id#";
+        param.statutId = "#statut-id#";
+        param.lockId = "#lock-id#";
+        param.modeId = "#mode-id#";
+        param.lockColor = "#thermo-lockColor#";
+        param.flameColor = "#thermo-flameColor#";
+        param.waitColor = "#thermo-waitColor#";
+        param.fanColor = "#thermo-fanColor#";
+        param.eqLogicId = "#thermo-eqLogicId#";
+        param.statisticsUrl = "#statistics-url#";
+
+        initialize(param, "simplelight");
+    }
+</script>

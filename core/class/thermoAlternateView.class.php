@@ -229,7 +229,7 @@ class thermoAlternateView extends eqLogic
         }
 
         //Prochaine consigne
-        $replace['#nextConsigne-visible#'] = $isVisibleConsigne == "1" ? "bloc" : "none";
+        $replace['#nextConsigne-visible#'] = $isVisibleConsigne == "1" ? "block" : "none";
 
         if ($isVisibleConsigne == '1') {
             $nextEvent = thermoAlternateView::getNextEventCalendar($thermostat, $isVisibleEvent);
@@ -265,8 +265,8 @@ class thermoAlternateView extends eqLogic
 
         //Couleur du mode climatisation
         $replace['#thermo-fanColor#'] = $isDefaultFanColor == "1" ? "" : $fanColor;
-
-        //Modes de chauffe
+        
+        //Taille par défaut du widget
         if ($template === "default") {
             $template = '';
         }
@@ -277,7 +277,7 @@ class thermoAlternateView extends eqLogic
                 $replace['#height#'] = "300px";
                 $replace['#width#'] = "300px";
             }
-        } elseif ($template === "darkatmo") {
+        } elseif ($template === "darkatmo" || $template === "simplelight" || $template === "simpledark") {
             //darkatmo
             $htmlModes = str_replace("thermo-", "thermo" . ucfirst($template) . "-", $htmlModes);
             $htmlModesMobile = str_replace("thermo-", "thermo" . ucfirst($template) . "-", $htmlModesMobile);
@@ -314,16 +314,19 @@ class thermoAlternateView extends eqLogic
             case __('Chauffage', __FILE__):
                 $replace['#statut-icon#'] = "#shape-icon-flame";
                 $replace['#statut-color#'] = $isDefaultFlameColor == "1" ? "" : "fill:" . $flameColor;
+                $replace['#statut-color-init#'] = $isDefaultFlameColor == "1" ? "" : $flameColor;
                 break;
 
             case __('Suspendu', __FILE__):
                 $replace['#statut-icon#'] = "#shape-icon-wait";
                 $replace['#statut-color#'] = $isDefaultWaitColor == "1" ? "" : "fill:" . $waitColor;
+                $replace['#statut-color-init#'] = $isDefaultWaitColor == "1" ? "" : $waitColor;
                 break;
 
             case __('Climatisation', __FILE__):
                 $replace['#statut-icon#'] = "#shape-icon-fan";
                 $replace['#statut-color#'] = $isDefaultFanColor == "1" ? "" : "fill:" . $fanColor;
+                $replace['#statut-color-init#'] = $isDefaultFanColor == "1" ? "" : $fanColor;
                 break;
 
             default:

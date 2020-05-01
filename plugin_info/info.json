@@ -7,7 +7,7 @@
 	"author" : "SupraDolph",
 	"require" : "3.0",
 	"category" : "wellness",
-	"changelog" : "https://bitbucket.org/supradolph/jeedom-plugins-themoalternateview/wiki/#language##markdown-header-changelog",
+	"changelog" : "https://supradolph.github.io/index.html?content=plugins%2FthermoAlternateView&language=#language##markdown-header-changelog",
 	"documentation" : "https://supradolph.github.io/index.html?content=plugins/thermoAlternateView",
 	"language" : ["fr_FR", "en_US"],
 	"link" : {
