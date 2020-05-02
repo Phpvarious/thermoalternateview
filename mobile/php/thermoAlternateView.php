@@ -132,7 +132,7 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
                                 <div class="col-md-6">
                                     <select required class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="template">
                                         <option value="" disabled selected>{{Sélectionnez un Visuel}}</option>
-                                        <option value="default">Light (Défaut)</option>
+                                        <option value="default">Lightatmo (Défaut)</option>
                                         <option value="dark">Dark</option>
                                         <option value="darkatmo">Darkatmo</option>
                                     </select>
