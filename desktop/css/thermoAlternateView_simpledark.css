@@ -220,7 +220,6 @@
 .thermoSimpledark-lock-icon {
     fill: #959595;
     left: calc(100% - 35px);
-    width: 100%;
     position: absolute;
     top: calc(50% - 15px);
 }
