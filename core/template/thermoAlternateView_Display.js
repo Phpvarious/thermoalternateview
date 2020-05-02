@@ -218,6 +218,9 @@ function initialize_Default_Template(parametres, template) {
 
 }
 
+
+var animTimeout = [];
+
 function initialize_Simple_Template(parametres, template) {
 
     if (!$("link[href='plugins/thermoAlternateView/desktop/css/thermoAlternateView" + (template.length > 0 ? "_" + template.toLowerCase() : "") + ".css']").length) {
@@ -225,20 +228,22 @@ function initialize_Simple_Template(parametres, template) {
     }
 
 
-$(".thermo" + template + "-back").on('click', function(){
+$(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").on('click', function(){
+    $(this).children(".thermo" + template + "-main-consigne").toggleClass("d-none");
+    $(this).children(".thermo" + template + "-main-temperature").toggleClass("d-none");
 
-    $(".thermo" + template + "-main-consigne").toggleClass("d-none");
-    $(".thermo" + template + "-main-temperature").toggleClass("d-none");
-
-    $(".thermo" + template + "-back").toggleClass("animation180");
-    if (! $(".thermo" + template + "-back").hasClass("animation180")) {
-        $(".thermo" + template + "-back").addClass("animation180Back");
+    $(this).toggleClass("animation180");
+    if (! $(this).hasClass("animation180")) {
+        if (animTimeout[parametres.uid] !== undefined) {
+            clearTimeout(animTimeout[parametres.uid]);
+        }
+        $(this).addClass("animation180Back");
     }
     else{
-        setTimeout(() => {
-            $(".thermo" + template + "-back").click();
+        animTimeout[parametres.uid] = setTimeout(() => {
+            $(this).click();
         }, 5000);
-        $(".thermo" + template + "-back").removeClass("animation180Back");
+        $(this).removeClass("animation180Back");
     }
     
     });
