@@ -480,9 +480,9 @@ function initialize_Dark_Template(parametres, template) {
 
 function setUpDownRef(parametres, template, reference) {
     //Consigne -1
-    $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-consigne-m1 > span").first().text(parseFloat(reference.text()) - 1);
+    $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-consigne-m1 > span").first().text((parseFloat(reference.text()) - 1).round(1));
     //Consigne +1
-    $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-consigne-p1 > span").first().text(parseFloat(reference.text()) + 1);
+    $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-consigne-p1 > span").first().text((parseFloat(reference.text()) + 1).round(1));
 }
 
 function fitTextTemp(template) {
@@ -496,6 +496,11 @@ function fitTextTemp(template) {
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
+
+Number.prototype.round = function(p) {
+    p = p || 10;
+    return parseFloat( this.toFixed(p) );
+  };
 
 // Récupère l'heure de la prochaine consigne
 function setNextEventCalendar(eqLogicId, $domElement) {
