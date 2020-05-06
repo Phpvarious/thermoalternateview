@@ -218,7 +218,6 @@ function initialize_Default_Template(parametres, template) {
 
 }
 
-
 var animTimeout = [];
 
 function initialize_Simple_Template(parametres, template) {
@@ -227,36 +226,57 @@ function initialize_Simple_Template(parametres, template) {
         $('<link rel="stylesheet" type="text/css" href="plugins/thermoAlternateView/desktop/css/thermoAlternateView' + (template.length > 0 ? "_" + template.toLowerCase() : "") + '.css">').appendTo("head");
     }
 
+    //Affichage de la température si le thermostat est coupé
 
-$(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").on('click', function(){
-    $(this).children(".thermo" + template + "-main-consigne").toggleClass("d-none");
-    $(this).children(".thermo" + template + "-main-temperature").toggleClass("d-none");
 
-    $(this).toggleClass("animation180");
-    if (! $(this).hasClass("animation180")) {
-        if (animTimeout[parametres.uid] !== undefined) {
-            clearTimeout(animTimeout[parametres.uid]);
+    if ($(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-mode-label-on").attr("data-mode") === 'off') {
+        let domElem = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-main-consigne")
+        if (!domElem.hasClass("d-none")) {
+            domElem.addClass("d-none")
+            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-main-temperature").removeClass("d-none");
+            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").css("transform", "rotateY(180deg) translateX(50%) translateY(-50%)");
+            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").addClass("animation180")
         }
-        $(this).addClass("animation180Back");
     }
-    else{
-        animTimeout[parametres.uid] = setTimeout(() => {
-            $(this).click();
-        }, 5000);
-        $(this).removeClass("animation180Back");
-    }
-    
+
+    $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").on('click', function() {
+
+        switchConsigneTemperature($(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-mode-label-on").attr("data-mode"),
+                                  $(this));
+
+        if ($(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-mode-label-on").attr("data-mode") === 'off') {
+            if ($(this).hasClass("animation180")) {
+                if (animTimeout[parametres.uid] !== undefined) {
+                    clearTimeout(animTimeout[parametres.uid]);
+                }
+            } else {
+                animTimeout[parametres.uid] = setTimeout(() => {
+                    $(this).click();
+                }, 5000);
+            }
+        } else {
+            if (!$(this).hasClass("animation180")) {
+                if (animTimeout[parametres.uid] !== undefined) {
+                    clearTimeout(animTimeout[parametres.uid]);
+                }
+            } else {
+                animTimeout[parametres.uid] = setTimeout(() => {
+                    $(this).click();
+                }, 5000);
+            }
+        }
+
     });
-    
+
 
     //Consigne supérieure et inférieure (labels)
     var domElemOder = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-consigne > span").first();
     setUpDownRef(parametres, template, domElemOder);
 
-    domElemOder.on('DOMSubtreeModified',function(){
+    domElemOder.on('DOMSubtreeModified', function() {
         setUpDownRef(parametres, template, $(this));
     });
-                   
+
 
     //Mise à jour des valeurs
     $('body').on('cmd::update', function(_event, _options) {
@@ -311,21 +331,21 @@ $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-bac
                 case parametres.statutId:
                     switch (this.value) {
                         case "Chauffage":
-                            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").each( function () {
+                            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").each(function() {
                                 $(this).css("border-color", parametres.flameColor);
                                 $(this).css("box-shadow", "-1px 0px 10px 0px " + parametres.flameColor + " inset");
                             });
                             break;
 
                         case "Suspendu":
-                            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").each( function () {
+                            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").each(function() {
                                 $(this).css("border-color", parametres.waitColor);
                                 $(this).css("box-shadow", "-1px 0px 10px 0px " + parametres.waitColor + " inset");
                             });
                             break;
 
                         case "Climatisation":
-                            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").each( function () {
+                            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").each(function() {
                                 $(this).css("border-color", parametres.fanColor);
                                 $(this).css("box-shadow", "-1px 0px 10px 0px " + parametres.fanColor + " inset");
                             });
@@ -333,7 +353,7 @@ $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-bac
 
                         default:
                             $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").css("border-color", "#2D2D2D");
-                            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").each( function () {
+                            $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back").each(function() {
                                 $(this).css("border-color", "");
                                 $(this).css("box-shadow", "");
                             });
@@ -360,6 +380,10 @@ $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-bac
                     var escapeMode = this.value.toLowerCase().replace(/ /g, "");
                     var $cmdMode = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] [data-mode=" + escapeMode + "]").nextAll(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-mode-switch");
                     toggleSwitchMode($cmdMode, parametres.uid, template);
+
+                    //Affichage de la température si le thermostat est coupé
+                    selectConsigneTemperature (escapeMode, 
+                                               $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-back"))
                     break;
             }
 
@@ -478,6 +502,60 @@ function initialize_Dark_Template(parametres, template) {
 
 }
 
+function selectConsigneTemperature (mode, back) {
+    let consigne = back.find('[class*="-main-consigne"]');
+    let temperature = back.find('[class*="-main-temperature"]');
+
+    if (mode === 'off') {
+        if (!consigne.hasClass("d-none")) {
+            consigne.addClass("d-none")
+            temperature.removeClass("d-none");
+            back.addClass("animation180")
+            back.removeClass("animation180Back")
+        }
+    } else {
+        if (!temperature.hasClass("d-none")) {
+            temperature.addClass("d-none")
+            consigne.removeClass("d-none");
+            back.addClass("animation180Back")
+            back.removeClass("animation180")
+        }
+    }
+}
+
+function switchConsigneTemperature (mode, back) {
+    let consigne = back.find('[class*="-main-consigne"]');
+    let temperature = back.find('[class*="-main-temperature"]');
+
+    if (mode === 'off') {
+        if (!consigne.hasClass("d-none")) {
+            consigne.addClass("d-none")
+            temperature.removeClass("d-none");
+            back.addClass("animation180")
+            back.removeClass("animation180Back")
+        }
+        else {
+            temperature.addClass("d-none")
+            consigne.removeClass("d-none");
+            back.addClass("animation180Back")
+            back.removeClass("animation180")
+        }
+    } else {
+        if (!temperature.hasClass("d-none")) {
+            temperature.addClass("d-none")
+            consigne.removeClass("d-none");
+            back.addClass("animation180Back")
+            back.removeClass("animation180")
+        }
+        else {
+            consigne.addClass("d-none")
+            temperature.removeClass("d-none");
+            back.addClass("animation180")
+            back.removeClass("animation180Back")
+        }
+    }
+}
+
 function setUpDownRef(parametres, template, reference) {
     //Consigne -1
     $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-consigne-m1 > span").first().text((parseFloat(reference.text()) - 1).round(1));
@@ -499,8 +577,8 @@ String.prototype.capitalize = function() {
 
 Number.prototype.round = function(p) {
     p = p || 10;
-    return parseFloat( this.toFixed(p) );
-  };
+    return parseFloat(this.toFixed(p));
+};
 
 // Récupère l'heure de la prochaine consigne
 function setNextEventCalendar(eqLogicId, $domElement) {

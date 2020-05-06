@@ -24,7 +24,7 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
 
     <div class="col-md-10 col-md-9 col-md-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
         <legend>{{Mes thermoAlternateView}}</legend>
-        <span style="float:right;">v2.7</span>
+        <span style="float:right;">v2.8</span>
         <legend><i class="fa fa-cog"></i> {{Gestion}}</legend>
         <div class="eqLogicThumbnailContainer">
             <div class="cursor eqLogicAction" data-action="add">
