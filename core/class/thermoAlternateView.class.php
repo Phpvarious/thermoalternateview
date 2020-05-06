@@ -128,6 +128,7 @@ class thermoAlternateView extends eqLogic
         $tempExterieure = 0;
         $hygrometrie = 0;
         $modes = array();
+        $modesoff = array();
         $htmlModes = "";
         $htmlModesMobile = "";
         $modeIcon = "";
@@ -137,9 +138,13 @@ class thermoAlternateView extends eqLogic
         foreach (cmd::byEqLogicId($idThermostat) as $commande) {
             switch ($commande->getLogicalId()) {
                 case "modeAction":
-                case "off":
                     if ($commande->getIsVisible()) {
                         $modes[strtolower($commande->getName())] = $commande->getId();
+                    }
+                    break;
+               case "off":
+                    if ($commande->getIsVisible()) {
+                        $modesoff[strtolower($commande->getName())] = $commande->getId();
                     }
                     break;
                 case "lock":
@@ -200,6 +205,10 @@ class thermoAlternateView extends eqLogic
             'confort-2' => __('confort-2', __FILE__),
             'horsgel' => __('horsgel', __FILE__)
         );
+
+        //modes dans l'ordre de création
+        asort($modes);
+        $modes = array_merge($modes, $modesoff);
 
         if ($isDisabledMode != "1") {
             foreach ($modes as $modeActionName => $modeActionId) {
