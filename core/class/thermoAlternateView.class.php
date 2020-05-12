@@ -344,7 +344,12 @@ class thermoAlternateView extends eqLogic
         }
 
         //Températures
-        list($entier, $decimale) = explode(".", $tempInterieure);
+		if (stripos($tempInterieure,'.') === false) {
+			$entier = $tempInterieure;
+			$decimale = '';
+		}
+		else list($entier, $decimale) = explode(".", $tempInterieure);
+
         $replace['#tempInterieure1#'] = $entier;
         $replace['#tempInterieure2#'] = $decimale;
         $replace['#tempInterieure-id#'] = $cmdTempInterId;
