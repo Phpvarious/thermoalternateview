@@ -285,13 +285,8 @@ function initialize_Simple_Template(parametres, template) {
 
             switch (this.cmd_id) {
                 case parametres.tempInterieureId:
-                    var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-temperature").children();
-                    $domElement.text("");
-
-                    this.value.toString().split(/\./).forEach(function(elem) {
-                        $domElement.first().text(elem);
-                        $domElement = $domElement.next("span").first();
-                    });
+                    var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-main-temperature .thermo" + template + "-consigne").children().first();
+                    $domElement.text(this.value);
                     break;
 
                 case parametres.tempExterieureId:
