@@ -7,8 +7,8 @@
 	"author" : "SupraDolph",
 	"require" : "3.0",
 	"category" : "wellness",
-	"changelog" : "https://supradolph.github.io/index.html?content=plugins%2FthermoAlternateView&language=#language##markdown-header-changelog",
-	"documentation" : "https://supradolph.github.io/index.html?content=plugins/thermoAlternateView",
+	"changelog" : "https://supradolph.github.io/posts/thermoAlternateView_#language#/#changelog",
+	"documentation" : "https://supradolph.github.io/posts/thermoAlternateView_#language#",
 	"language" : ["fr_FR", "en_US"],
 	"link" : {
 		"forum":"https://community.jeedom.com/t/plugin-tiers-thermoalternateview/4546"
