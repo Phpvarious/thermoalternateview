@@ -24,7 +24,7 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
 
     <div class="col-md-10 col-md-9 col-md-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
         <legend>{{Mes thermoAlternateView}}</legend>
-        <span style="float:right;">v2.9</span>
+        <span style="float:right;">v3.0</span>
         <legend><i class="fa fa-cog"></i> {{Gestion}}</legend>
         <div class="eqLogicThumbnailContainer">
             <div class="cursor eqLogicAction" data-action="add">
@@ -154,7 +154,7 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
                         <legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i> {{Général}}</legend>
                         <div class="form-group">
                             <label class="col-md-3 control-label">{{Unité}}</label>
-                            <div class="col-md-3">
+                            <div class="col-md-1">
                                 <input type="text" id="thermoUnit" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="thermoUnit" placeholder="{{Unité du thermostat}}" />
                             </div>
                         </div>
@@ -176,6 +176,15 @@ $eqLogics = eqLogic::byType('thermoAlternateView');
                                 <input type="checkbox" required class="eqLogicAttr" data-l1key="configuration" data-l2key="isvisibleHygrometrie" checked>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">{{Commande d'hygrométrie}}</label>
+                            <div class="col-md-6 input-group">
+                                <input class="eqLogicAttr form-control input-sm" data-l1key="configuration" data-l2key="cmdHygrometrie"></input>
+                                <a class="btn btn-default listEquipementInfo cursor btn-sm input-group-addon" data-input="cmdHygrometrie"><i class="fas fa-list-alt"></i></a>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label class="col-md-3 control-label">{{Puissance visible}}</label>
                             <div class="col-md-3 form-check-input">

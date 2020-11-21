@@ -79,10 +79,22 @@ $(document).ready(function () {
         }
     });
 
+    $(".eqLogicAttr[data-l2key=isvisibleHygrometrie]").change(function () {
+        $(this).closest('.form-group').next('.form-group').css('display', $(this).is(':checked') ? 'inherit' : 'none');
+    });
+
     $(".eqLogicAttr[data-l2key=template]").change(function () {
         if ($(this).value() !== null ) {
             $("#templatePreview").attr('src', "/plugins/thermoAlternateView/desktop/images/" + $(this).value() + ".png");
             $("#templatePreview").show();
         }
     });
+
+    $(".listEquipementInfo").click(function () {
+        var el = $(this);
+        jeedom.cmd.getSelectModal({cmd: {type: 'info'}}, function (result) {
+          var calcul = el.closest('div').find('.eqLogicAttr[data-l1key=configuration][data-l2key=' + el.data('input') + ']');
+          calcul.atCaret('insert', result.human);
+        });
+      });
 });
