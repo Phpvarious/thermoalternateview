@@ -91,6 +91,7 @@ class thermoAlternateView extends eqLogic
         $template = $this->getConfiguration('template');
         $isVisibleTempExt = $this->getConfiguration('isvisibletempext');
         $isVisibleHygrometrie = $this->getConfiguration('isvisibleHygrometrie');
+        $cmdHygrometrie = $this->getConfiguration('cmdHygrometrie');
         $isVisiblePuissance = $this->getConfiguration('isvisiblePuissance');
         $isvisibleVerrou = $this->getConfiguration('isvisibleVerrou');
         $isvisibleStatistiques = $this->getConfiguration('isvisibleStatistiques');
@@ -134,6 +135,14 @@ class thermoAlternateView extends eqLogic
         $modeIcon = "";
         $nextEvent = "";
 
+        //Commande d'hygrométrie
+        $commande = cmd::byId(str_replace('#', '', $cmdHygrometrie));
+        if ($commande) {
+            $cmdHygrometrieId = $commande->getId();
+            $hygrometrie = $commande->execCmd();
+            $cmdHygrometrieHisto = $commande->getIsHistorized();
+        }
+
         //Parcours chaque commande du thermostat
         foreach (cmd::byEqLogicId($idThermostat) as $commande) {
             switch ($commande->getLogicalId()) {
@@ -176,11 +185,6 @@ class thermoAlternateView extends eqLogic
                     $cmdTempExterId = $commande->getId();
                     $tempExterieure = $commande->execCmd();
                     $cmdTempExterHisto = $commande->getIsHistorized();
-                    break;
-                case "humidity":
-                    $cmdHygrometrieId = $commande->getId();
-                    $hygrometrie = $commande->execCmd();
-                    $cmdHygrometrieHisto = $commande->getIsHistorized();
                     break;
                 case "power":
                     $cmdPuissanceId = $commande->getId();
