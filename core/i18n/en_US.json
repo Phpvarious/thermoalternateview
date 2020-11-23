@@ -55,6 +55,7 @@
         "nuit": "night",
         "jour": "day",
         "confort-2": "comfort-2",
-        "horsgel": "nofrost"
+        "horsgel": "nofrost",
+        "boost": "boost"
     }
 }

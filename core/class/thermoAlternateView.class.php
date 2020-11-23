@@ -207,7 +207,8 @@ class thermoAlternateView extends eqLogic
             'nuit' => __('nuit', __FILE__),
             'jour' => __('jour', __FILE__),
             'confort-2' => __('confort-2', __FILE__),
-            'horsgel' => __('horsgel', __FILE__)
+            'horsgel' => __('horsgel', __FILE__),
+            'boost' => __('boost', __FILE__)
         );
 
         //modes dans l'ordre de création
