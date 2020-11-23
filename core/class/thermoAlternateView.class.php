@@ -139,7 +139,7 @@ class thermoAlternateView extends eqLogic
         $commande = cmd::byId(str_replace('#', '', $cmdHygrometrie));
         if ($commande) {
             $cmdHygrometrieId = $commande->getId();
-            $hygrometrie = $commande->execCmd();
+            $hygrometrie = round($commande->execCmd(), 1);
             $cmdHygrometrieHisto = $commande->getIsHistorized();
         }
 
