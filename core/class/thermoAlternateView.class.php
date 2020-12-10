@@ -54,28 +54,36 @@ class thermoAlternateView extends eqLogic
     /*     * *********************Méthodes d'instance************************* */
 
     public function preInsert()
-    { }
+    {
+    }
 
     public function postInsert()
-    { }
+    {
+    }
 
     public function preSave()
-    { }
+    {
+    }
 
     public function postSave()
-    { }
+    {
+    }
 
     public function preUpdate()
-    { }
+    {
+    }
 
     public function postUpdate()
-    { }
+    {
+    }
 
     public function preRemove()
-    { }
+    {
+    }
 
     public function postRemove()
-    { }
+    {
+    }
 
     /*
      * Non obligatoire mais permet de modifier l'affichage du widget si vous en avez besoin */
@@ -151,7 +159,7 @@ class thermoAlternateView extends eqLogic
                         $modes[strtolower($commande->getName())] = $commande->getId();
                     }
                     break;
-               case "off":
+                case "off":
                     if ($commande->getIsVisible()) {
                         $modesoff[strtolower($commande->getName())] = $commande->getId();
                     }
@@ -279,7 +287,7 @@ class thermoAlternateView extends eqLogic
 
         //Couleur du mode climatisation
         $replace['#thermo-fanColor#'] = $isDefaultFanColor == "1" ? "" : $fanColor;
-        
+
         //Taille par défaut du widget
         if ($template === "default") {
             $template = '';
@@ -349,11 +357,10 @@ class thermoAlternateView extends eqLogic
         }
 
         //Températures
-		if (stripos($tempInterieure,'.') === false) {
-			$entier = $tempInterieure;
-			$decimale = '';
-		}
-		else list($entier, $decimale) = explode(".", $tempInterieure);
+        if (stripos($tempInterieure, '.') === false) {
+            $entier = $tempInterieure;
+            $decimale = '';
+        } else list($entier, $decimale) = explode(".", $tempInterieure);
 
         $replace['#tempInterieure1#'] = $entier;
         $replace['#tempInterieure2#'] = $decimale;
@@ -379,11 +386,10 @@ class thermoAlternateView extends eqLogic
         $replace['#puissance-histo#'] = $cmdPuissanceHisto == "1" ? "history cursor" : "";
 
 
-		if (stripos($tempConsigne,'.') === false) {
-			$entier = $tempConsigne;
-			$decimale = '';
-		}
-		else list($entier, $decimale) = explode(".", $tempConsigne);
+        if (stripos($tempConsigne, '.') === false) {
+            $entier = $tempConsigne;
+            $decimale = '';
+        } else list($entier, $decimale) = explode(".", $tempConsigne);
 
         $replace['#tempConsigne1#'] = $entier;
         $replace['#tempConsigne2#'] = $decimale;
@@ -504,17 +510,19 @@ class thermoAlternateView extends eqLogic
                 }
             }
         }
-        /*
-		$thermostat_cmd = $thermostat->getCmd(null, 'thermostat');
-		if (is_object($thermostat_cmd)) {
-			foreach (calendar_event::searchByCmd($thermostat_cmd->getId()) as $event) {
-                if ($event->getCmd_param()["in_progress"] == 1)
-                    $eventsInProgress[$event->getId()] = $event;
-                else
-                    $eventsNotRunning[$event->getId()] = $event;
-			}
+
+        $thermostat_cmd = $thermostat->getCmd(null, 'thermostat');
+        if (is_object($thermostat_cmd)) {
+            foreach (calendar_event::searchByCmd($thermostat_cmd->getId()) as $event) {
+                if ($event->getEqLogic()->getIsEnable() == 1) {
+                    if ($event->getCmd_param()["in_progress"] == 1)
+                        $eventsInProgress[$event->getId()] = $event;
+                    else
+                        $eventsNotRunning[$event->getId()] = $event;
+                }
+            }
         }
-        */
+
 
         // Retourne les évènements en cours, sinon les autres (consigne entre deux évènements)
         return (sizeof($eventsInProgress) > 0 ? $eventsInProgress : $eventsNotRunning);
@@ -553,7 +561,8 @@ class thermoAlternateViewCmd extends cmd
      */
 
     public function execute($_options = array())
-    { }
+    {
+    }
 
     /*     * **********************Getteur Setteur*************************** */
 }
