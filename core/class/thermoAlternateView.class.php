@@ -217,7 +217,8 @@ class thermoAlternateView extends eqLogic
             'confort-2' => __('confort-2', __FILE__),
             'horsgel' => __('horsgel', __FILE__),
             'boost' => __('boost', __FILE__),
-            'homework' => __('télétravail', __FILE__)
+            'homework' => __('télétravail', __FILE__),
+            'chimney' => __('cheminée', __FILE__)
         );
 
         //modes dans l'ordre de création
