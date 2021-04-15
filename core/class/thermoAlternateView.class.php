@@ -376,12 +376,22 @@ class thermoAlternateView extends eqLogic
         $replace['#tempExterieure-histo#'] = $cmdTempExterHisto == "1" ? "history cursor" : "";
 
         //Humidité
+        if (!isset($cmdHygrometrieId)) {
+            $cmdHygrometrieId = '';
+            $hygrometrie = '';
+            $cmdHygrometrieHisto = '';
+        }
         $replace['#hygrometrie-id#'] = $cmdHygrometrieId;
         $replace['#hygrometrie-value#'] = $hygrometrie;
         $replace['#hygrometrie-visible#'] = $isVisibleHygrometrie == "1" ? "block" : "none";
         $replace['#hygrometrie-histo#'] = $cmdHygrometrieHisto == "1" ? "history cursor" : "";
 
         //Puissance
+        if (!isset($cmdPuissanceId)) {
+            $cmdPuissanceId = '';
+            $puissance = '';
+            $cmdPuissanceHisto = '';
+        }
         $replace['#puissance-id#'] = $cmdPuissanceId;
         $replace['#puissance-value#'] = $puissance;
         $replace['#puissance-visible#'] = $isVisiblePuissance == "1" ? "block" : "none";
@@ -425,7 +435,7 @@ class thermoAlternateView extends eqLogic
                 $startDate = date('Y-m-d H:i:s', strtotime('-1 days ' . date('Y-m-d H:i:s')));
                 $endDate = date('Y-m-d H:i:s', strtotime('+2 days ' . date('Y-m-d H:i:s')));
                 $events = calendar_event::calculeEvents($calendar_events, $startDate, $endDate);
-
+                
                 //Récupération de l'évènement en court
                 $now = new DateTime();
                 $prevEventEnd = new DateTime(date('Y-m-d H:i:s', strtotime('+10 days ' . date('Y-m-d H:i:s'))));
@@ -435,18 +445,35 @@ class thermoAlternateView extends eqLogic
                     return strtotime($a['start']) - strtotime($b['start']);
                 });
 
+                $prevEventHasEndCmd = true;
+                
                 foreach ($events as $event) {
+                    
+                    //Récupération de l'évènement associé à l'occurrence
+                    $searchedValue = $event['id'];
+                    $mainEvent = array_filter(
+                        $calendar_events,
+                        function ($e) use (&$searchedValue) {
+                            return $e->getid() == $searchedValue;
+                        }
+                    );
+                    //Vérifie si une commande de fin est présente
+                    $curEventHasEndCmd = sizeof($mainEvent[$searchedValue]->getcmd_param()['end']) > 0;
+
                     $eventStart = new DateTime($event['start']);
                     $eventEnd = new DateTime($event['end']);
-                    if ($eventStart <= $now && $eventEnd > $now) {
+                    // Si on est en plein dans l'évènement trouvé => On prend la date de fin de l'évènement
+                    if ($eventStart <= $now && $eventEnd > $now && $curEventHasEndCmd == true) {
                         $return = $event['end'];
                         break;
                     } else {
-                        if ($eventStart >= $now && $prevEventEnd < $now) {
+                        // Si on est entre l'évènement précédent et le courant => Prise en compte de la date de début du prochain évènement
+                        if (($eventStart >= $now && $prevEventEnd < $now) || ($eventStart >= $now && $prevEventHasEndCmd == false)) {
                             $return = $event['start'];
                             break;
                         }
                     }
+                    $prevEventHasEndCmd = $curEventHasEndCmd;
                     $prevEventEnd = $eventEnd;
                 }
                 $return = __('Prochaine consigne', __FILE__) . " " . thermoAlternateView::getHumanDelai($return);
@@ -504,10 +531,10 @@ class thermoAlternateView extends eqLogic
             foreach ($thermostat->getCmd(null, 'modeAction', null, true) as $mode) {
                 foreach (calendar_event::searchByCmd($mode->getId()) as $event) {
                     if ($event->getEqLogic()->getIsEnable() == 1) {
-                        if ($event->getCmd_param()["in_progress"] == 1)
+                        //if ($event->getCmd_param()["in_progress"] == 1)
                             $eventsInProgress[$event->getId()] = $event;
-                        else
-                            $eventsNotRunning[$event->getId()] = $event;
+                        //else
+                        //    $eventsNotRunning[$event->getId()] = $event;
                     }
                 }
             }
@@ -517,10 +544,10 @@ class thermoAlternateView extends eqLogic
         if (is_object($thermostat_cmd)) {
             foreach (calendar_event::searchByCmd($thermostat_cmd->getId()) as $event) {
                 if ($event->getEqLogic()->getIsEnable() == 1) {
-                    if ($event->getCmd_param()["in_progress"] == 1)
+                    //if ($event->getCmd_param()["in_progress"] == 1)
                         $eventsInProgress[$event->getId()] = $event;
-                    else
-                        $eventsNotRunning[$event->getId()] = $event;
+                    //else
+                    //    $eventsNotRunning[$event->getId()] = $event;
                 }
             }
         }
