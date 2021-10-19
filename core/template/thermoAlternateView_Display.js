@@ -92,7 +92,7 @@ function toggleSwitchMode(switchElement, uid, template) {
     $(".eqLogic[data-eqlogic_uid=" + uid + "] .thermo" + template + "-switch-on").each(function() {
         $(this).removeClass("thermo" + template + "-switch-on");
         $(this).addClass("thermo" + template + "-switch-off");
-        $(this).find(".thermo" + template + "-mode-switch use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-switch-off");
+        $(this).find(".thermo" + template + "-mode-switch use").attr("xlink:href", "plugins/thermoAlternateView/desktop/images/images.svg#shape-switch-off");
         $(this).find(".thermo" + template + "-mode-label").removeClass("thermo" + template + "-mode-label-on");
     });
 
@@ -100,7 +100,7 @@ function toggleSwitchMode(switchElement, uid, template) {
     var $parentSwitch = $(switchElement).closest(".thermo" + template + "-switch-off");
     $parentSwitch.removeClass("thermo" + template + "-switch-off");
     $parentSwitch.addClass("thermo" + template + "-switch-on");
-    $(switchElement).find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-switch-on");
+    $(switchElement).find("use").attr("xlink:href", "plugins/thermoAlternateView/desktop/images/images.svg#shape-switch-on");
     $(switchElement).prevAll(".thermo" + template + "-mode-label").addClass("thermo" + template + "-mode-label-on");
 }
 
@@ -165,17 +165,17 @@ function initialize_Default_Template(parametres, template) {
 
                     switch (this.value) {
                         case "Chauffage":
-                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-icon-flame");
+                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/desktop/images/images.svg#shape-icon-flame");
                             $domElement.css("fill", parametres.flameColor);
                             break;
 
                         case "Suspendu":
-                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-icon-wait");
+                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/desktop/images/images.svg#shape-icon-wait");
                             $domElement.css("fill", parametres.waitColor);
                             break;
 
                         case "Climatisation":
-                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-icon-fan");
+                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/desktop/images/images.svg#shape-icon-fan");
                             $domElement.css("fill", parametres.fanColor);
                             break;
 
@@ -192,10 +192,10 @@ function initialize_Default_Template(parametres, template) {
                     $lockIcon.attr("data-cmd_id", lockId2);
                     $lockIcon.attr("data-cmd_id2", lockId1);
                     if (this.value === 1) {
-                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-lock-on");
+                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/desktop/images/images.svg#shape-lock-on");
                         $lockIcon.css("fill", parametres.lockColor);
                     } else {
-                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-lock-off");
+                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/desktop/images/images.svg#shape-lock-off");
                         $lockIcon.css("fill", "");
                     }
                     break;
@@ -363,10 +363,10 @@ function initialize_Simple_Template(parametres, template) {
                     $lockIcon.attr("data-cmd_id", lockId2);
                     $lockIcon.attr("data-cmd_id2", lockId1);
                     if (this.value === 1) {
-                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-lock-on");
+                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/desktop/images/images.svg#shape-lock-on");
                         $lockIcon.css("fill", parametres.lockColor);
                     } else {
-                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-lock-off");
+                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/desktop/images/images.svg#shape-lock-off");
                         $lockIcon.css("fill", "");
                     }
                     break;
@@ -446,17 +446,17 @@ function initialize_Dark_Template(parametres, template) {
 
                     switch (this.value) {
                         case "Chauffage":
-                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-icon-flame");
+                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/desktop/images/images.svg#shape-icon-flame");
                             $domElement.css("fill", parametres.flameColor);
                             break;
 
                         case "Suspendu":
-                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-icon-wait");
+                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/desktop/images/images.svg#shape-icon-wait");
                             $domElement.css("fill", parametres.waitColor);
                             break;
 
                         case "Climatisation":
-                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-icon-fan");
+                            $domElement.find("use").attr("xlink:href", "plugins/thermoAlternateView/desktop/images/images.svg#shape-icon-fan");
                             $domElement.css("fill", parametres.fanColor);
                             break;
 
@@ -474,10 +474,10 @@ function initialize_Dark_Template(parametres, template) {
                     $lockIcon.attr("data-cmd_id", lockId2);
                     $lockIcon.attr("data-cmd_id2", lockId1);
                     if (this.value === 1) {
-                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-lock-on");
+                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/desktop/images/images.svg#shape-lock-on");
                         $lockIcon.css("fill", parametres.lockColor);
                     } else {
-                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/resources/images.svg#shape-lock-off");
+                        $lockIcon.find("use").attr("xlink:href", "plugins/thermoAlternateView/desktop/images/images.svg#shape-lock-off");
                         $lockIcon.css("fill", "");
                     }
 
