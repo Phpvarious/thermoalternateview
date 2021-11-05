@@ -218,7 +218,10 @@ class thermoAlternateView extends eqLogic
             'horsgel' => __('horsgel', __FILE__),
             'boost' => __('boost', __FILE__),
             'homework' => __('télétravail', __FILE__),
-            'chimney' => __('cheminée', __FILE__)
+            'chimney' => __('cheminée', __FILE__),
+            'shower' => __('douche', __FILE__),
+            'towel' => __('serviettes', __FILE__),
+            'bath' => __('bain', __FILE__)
         );
 
         //modes dans l'ordre de création
@@ -236,6 +239,9 @@ class thermoAlternateView extends eqLogic
                     switch ($modeEscapeActionName) {
                         case 'vacance':
                             $modeIcon = 'vacances';
+                            break;
+                        case 'serviette':
+                            $modeIcon = 'towel';
                             break;
                         default:
                             $modeIcon = 'other';

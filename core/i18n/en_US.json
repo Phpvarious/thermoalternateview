@@ -58,6 +58,9 @@
         "horsgel": "nofrost",
         "boost": "boost",
         "télétravail": "homework",
-        "cheminée": "chimney"
+        "cheminée": "chimney",
+        "douche": "shower",
+        "towel": "serviettes",
+        "bath": "bain"
     }
 }
