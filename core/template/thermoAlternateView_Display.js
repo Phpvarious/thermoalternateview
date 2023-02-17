@@ -116,7 +116,11 @@ function initialize_Default_Template(parametres, template) {
 
     //Mise à jour des valeurs
     $('body').on('cmd::update', function(_event, _options) {
-
+        //Jeedom <4.4 _options est passé en paramètre
+        //Jeedom >4.4 _event.originalEvent.detail
+        if (_options === undefined) {
+            _options = _event.originalEvent.detail;
+        }
         $(_options).each(function() {
 
             switch (this.cmd_id) {
@@ -280,7 +284,11 @@ function initialize_Simple_Template(parametres, template) {
 
     //Mise à jour des valeurs
     $('body').on('cmd::update', function(_event, _options) {
-
+        //Jeedom <4.4 _options est passé en paramètre
+        //Jeedom >4.4 _event.originalEvent.detail
+        if (_options === undefined) {
+            _options = _event.originalEvent.detail;
+        }
         $(_options).each(function() {
 
             switch (this.cmd_id) {
@@ -404,7 +412,11 @@ function initialize_Dark_Template(parametres, template) {
 
     //Mise à jour des valeurs
     $('body').on('cmd::update', function(_event, _options) {
-
+        //Jeedom <4.4 _options est passé en paramètre
+        //Jeedom >4.4 _event.originalEvent.detail
+        if (_options === undefined) {
+            _options = _event.originalEvent.detail;
+        }
         $(_options).each(function() {
 
             switch (this.cmd_id) {
