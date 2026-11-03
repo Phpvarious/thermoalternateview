@@ -1,8 +1,7 @@
 @font-face {
-    font-family: Work Sans;
+    font-family: 'Work Sans';
     src: url(../../3rparty/fonts/Work_Sans/WorkSans-ExtraLight.ttf);
 }
-
 
 [class*=thermoDark-] {
     color: #FEFEFE;
@@ -14,8 +13,8 @@
     font-size: 5em;
     line-height: 0.9;
     height: 40%;
-
 }
+
 .thermoDark-consigne-mobile {
     font-size: 4em;
     line-height: 0.7;
@@ -23,17 +22,18 @@
 
 .thermoDark-top-side-right,
 .thermoDark-bottom-side-right,
-.thermoDark-top-side-right-mobile  {
+.thermoDark-top-side-right-mobile {
     font-family: 'Work Sans', sans-serif;
     font-size: 2.5em;
     height: 25%;
-    width: 33.33%;
-    fill: #FEFEFE;
-    position: relative;
-    top: -8px;
-    float: right;
-    margin-right: 16px;
+    width: 40%;
+    white-space: nowrap;  /* empêche le retour à la ligne */
+    color: #FEFEFE;
+    position: absolute;
+    top: 24px;
+    right: 20px;  /* changez cette valeur, était 8px */
     text-align: right;
+    overflow: visible;
 }
 
 .thermoDark-top-side-right span,
@@ -42,13 +42,18 @@
 }
 
 #thermoDark-temp-ext {
-    margin-bottom: 10px;
+    margin-bottom: 4px;
+      display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-end !important;
+    align-items: flex-start !important;
 }
 
 .thermoDark-top-side-right-mobile>div:first-child {
     font-size: 0.4em;
     margin-right: 10px;
 }
+
 .thermoDark-top-side-right-mobile {
     width: 100%;
     float: none;
@@ -68,7 +73,8 @@
     font-family: 'Work Sans', sans-serif;
     font-size: 0.7em;
     vertical-align: top;
-    float: right;
+    display: inline;
+    float: none;
 }
 
 .thermoDark-degre-mobile {
@@ -85,7 +91,8 @@
 }
 
 .thermoDark-temperature {
-    float: right;
+    display: inline-block;
+    float: none !important;
 }
 
 .thermoDark-temperature-mobile {
@@ -93,28 +100,34 @@
 }
 
 .thermoDark-temp-externe {
-    font-size: 0.4em;
-    display: block;
-    float: left;
+    font-size: 0.55em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    clear: both;
+    white-space: nowrap;
 }
 
-.thermoDark-img,
-.thermoDark-img-mobile {
-    height: 16px;
-    width: 30%;
+.thermoDark-img {
+    height: 14px;
+    width: 14px;
     fill: #61B872;
+    flex-shrink: 0;
+    margin-right: 4px;
 }
+
 .thermoDark-img-mobile {
     width: 20%;
 }
 
 .thermoDark-button,
 .thermoDark-button-mobile {
-    height: 40px;
+    height: 30px;
     width: 100%;
     cursor: pointer;
     fill: #959595;
-    margin: 8px 0;
+    margin: 4px 0;
 }
 
 .thermoDark-button-mobile {
@@ -152,6 +165,8 @@
     width: 100%;
     height: 100%;
     position: relative;
+    overflow: visible;
+    display: block;
 }
 
 .thermoDark-cover-color {
@@ -161,15 +176,22 @@
     background: #1D1D1D;
 }
 
-.thermoDark-back,
-.thermoDark-back-mobile {
-    height: 66.67%;
+/* CORRECTION : la consigne est repositionnée en tenant compte
+   du widget-name (~24px) en haut. On décale top de 50% à 55%
+   pour compenser et recentrer visuellement dans l'espace restant */
+.thermoDark-back {
+    height: auto;          /* FIX iOS 26 : hauteur fixe en % mal calculée */
     text-align: center;
     position: absolute;
-    top: 50%;
+    top: calc(50% + 12px);
     left: 55%;
     transform: translateX(-50%) translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+
 .thermoDark-back-mobile {
     height: 50%;
     left: 45%;
@@ -183,23 +205,35 @@
 .thermoDark-mode-icon,
 .thermoDark-wait-icon,
 .thermoDark-lock-icon {
-    margin: 0 0 0 5px;
-    width: 20%;
     height: 30px;
     fill: #959595;
-    float: right;
+    display: inline-block;
+}
+
+.thermoDark-lock-icon {
+    width: 35px;
+    height: 35px;
+    margin-left: 60px;
 }
 
 .thermoDark-mode-icon {
-    fill: #61B872
+    fill: #61B872;
+      width: 30px;
+    margin-left: 0;
 }
 
+/* CORRECTION : top ajusté pour aligner les boutons mode
+   avec le nouveau centrage de la consigne */
 .thermoDark-mode {
-    width: 36%;
+    width: 35%;
     position: absolute;
-    top: calc(50% + 24px - 16px);
+    top: 50%;
+    left: 0;
     transform: translateY(-50%);
-    line-height: 1.5em;
+    line-height: 1.3em;
+    box-sizing: border-box;
+    font-size: 1.3em;  /* augmentez cette valeur pour grossir */
+    padding-left: 8px;
 }
 
 .thermoDark-mode-mobile {
@@ -211,26 +245,31 @@
     top: 100%;
 }
 
-.thermoDark-mode-mobile > span{
+.thermoDark-mode-mobile > span {
     width: auto;
     height: auto;
     margin: auto;
 }
-.thermoDark-mode-mobile svg{
+
+.thermoDark-mode-mobile svg {
     width: 40px;
 }
 
 .thermoDark-right-side {
     position: absolute;
     top: calc(50% + 24px);
-    left: 66.7%;
+    right: 75px;
+    left: auto;
     height: 30px;
-    transform: translateX(-16px) translateY(-50%);
+    width: 30px;
+    transform: translateY(-50%);
+}
 }
 
 .thermoDark-statistics {
     width: 33.33%;
-    float: right;
+    display: inline-block;
+    margin-left: auto;
 }
 
 .thermoDark-switch-off,
@@ -242,8 +281,10 @@
 .thermoDark-switch-on {
     background-color: #595959;
     border-radius: 8px;
-    margin: 4px 15px 4px 15px;
-    display: inline-block;
+    margin: 16px 8px;
+    display: block;
+    box-sizing: border-box;
+    width: calc(100% - 16px);
 }
 
 .thermoDark-switch-on {
@@ -271,6 +312,7 @@
 .thermoDark-row-2>div:first-child {
     height: 75%;
 }
+
 .thermoDark-row-2>div:last-child {
     height: 25%;
 }
@@ -285,4 +327,38 @@
 
 .thermoDark-contents {
     display: contents;
+}
+/* FIX iOS 26 : visibilité des SVG forcée car le setTimeout JS
+   ne fonctionne plus correctement */
+.thermoDark-cover use {
+    visibility: visible !important;
+}
+.thermoDark-cover {
+    overflow: visible !important;
+}
+
+.thermoDark-back {
+    overflow: visible !important;
+}
+.thermoDark-button-plus,
+.thermoDark-button-moins {
+    display: block !important;
+    height: 40px !important;
+    width: 60px !important;
+    margin: 12px 0 !important;
+    fill: #959595 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.thermoDark-button-plus use,
+.thermoDark-button-moins use {
+    visibility: visible !important;
+} 
+  .thermoDark-temp-externe {
+    flex-direction: row;
+    justify-content: flex-end;
+}
+#thermoDark-temp-ext .thermoDark-degre {
+    float: right !important;
 }
