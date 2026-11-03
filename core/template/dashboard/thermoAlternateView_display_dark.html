@@ -12,17 +12,15 @@
         </div>
         <div class="thermoDark-top-side-right">
             <div class="thermoDark-row-2 thermoDark-contents">
-                <div id="thermoDark-temp-ext" style="z-index:100;" class="#temperature-histo#" data-cmd_id="#tempInterieure-id#">
-                        <span class="thermoDark-degre">#thermo-unit#</span>
-                    <span class="thermoDark-temperature">#temperature-value#</span>
+              <div id="thermoDark-temp-ext" style="z-index:100;" class="#temperature-histo#" data-cmd_id="#tempInterieure-id#">
+                         <span class="thermoDark-temperature">#temperature-value#</span><span class="thermoDark-degre">#thermo-unit#</span>
                 </div>
                 <div style="z-index:100;display:#tempExterieure-visible#" class="thermoDark-temp-externe">
                     <svg class="thermoDark-img" >
                         <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/desktop/images/images.svg#shape-icon-externe" />
                     </svg>
                     <span style="z-index:100; float: right;width: 35px;">
-                        <span class="thermoDark-degre">#thermo-unit#</span>
-                        <span class="thermoDark-temperature-ext #tempExterieure-histo#" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span>
+                        <span class="thermoDark-temperature-ext #tempExterieure-histo#" data-cmd_id="#tempExterieure-id#">#tempExterieure-value#</span><span class="thermoDark-degre">#thermo-unit#</span>
                     </span>
                 </div>
                 <div style="z-index:100;display:#hygrometrie-visible#" class="thermoDark-temp-externe">
@@ -33,8 +31,7 @@
                     </object> -->
 
                     <span style="z-index:100; float: right;width: 35px;">
-                        <span class="thermoDark-degre">%</span>
-                        <span style="z-index:100; float: right;" class="thermoDark-hygrometrie #hygrometrie-histo#" data-cmd_id="#hygrometrie-id#">#hygrometrie-value#</span>
+                        <span class="thermoDark-hygrometrie #hygrometrie-histo#" data-cmd_id="#hygrometrie-id#">#hygrometrie-value#</span><span class="thermoDark-degre">%</span>
                     </span>
                 </div>
             </div>
@@ -45,7 +42,7 @@
         <div class="thermoDark-back">
             <div>
                 <svg class="thermoDark-button thermoDark-button-plus" data-cmd_id="#thermostat-id#" data-cmd_val="#consigne-value#">
-                    <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/desktop/images/images.svg#shape-icon-up" />
+                    <use style="visibility: visible;" xlink:href="plugins/thermoAlternateView/desktop/images/images.svg#shape-icon-up" />
                 </svg>
             </div>
             <div class="thermoDark-consigne #consigne-histo#" data-cmd_id="#consigne-id#">
@@ -54,7 +51,7 @@
             </div>
             <div>
                 <svg class="thermoDark-button thermoDark-button-moins" data-cmd_id="#thermostat-id#" data-cmd_val="#consigne-value#">
-                    <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/desktop/images/images.svg#shape-icon-down" />
+                    <use style="visibility: visible;" xlink:href="plugins/thermoAlternateView/desktop/images/images.svg#shape-icon-down" />
                 </svg>
             </div>
         </div>
@@ -73,8 +70,7 @@
                         <use style="visibility: hidden;" xlink:href="plugins/thermoAlternateView/desktop/images/images.svg#shape-icon-power" />
                     </svg>
                     <span style="z-index:100; float: right;width: 35px;">
-                        <span class="thermoDark-degre">%</span>
-                        <span style="z-index:100; float: right;" class="thermoDark-puissance #puissance-histo#" data-cmd_id="#puissance-id#">#puissance-value#</span>
+                        <span style="z-index:100; float: right;" class="thermoDark-puissance #puissance-histo#" data-cmd_id="#puissance-id#">#puissance-value#</span><span class="thermoDark-degre">%</span>
                     </span>
                 </div>
             </div>
