@@ -9,7 +9,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 
 <div class="row row-overflow">
 	<div class="col-xs-12 eqLogicThumbnailDisplay">
-        <span style="float:right;">v4.1</span>
+        <span style="float:right;">v4.2</span>
         <legend><i class="fa fa-cog"></i> {{Gestion}}</legend>
         <div class="eqLogicThumbnailContainer">
             <div class="cursor eqLogicAction" data-action="add">
@@ -104,7 +104,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                     <select required class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="thermostat">
                                         <option value="" disabled selected>{{Sélectionnez un thermostat}}</option>
                                         <?php
-                                        foreach (eqLogic::byType("Thermostat") as $eqLogic) {
+                                        foreach (eqLogic::byType("thermostat") as $eqLogic) {
                                             if ($eqLogic->getIsEnable()) {
                                                 echo '<option value="' . $eqLogic->getId() . '">' . $eqLogic->getName() . '</option>';
                                             }
