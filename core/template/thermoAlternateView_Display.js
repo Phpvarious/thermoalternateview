@@ -122,7 +122,7 @@ function initialize_Default_Template(parametres, template) {
             _options = _event.originalEvent.detail;
         }
         $(_options).each(function() {
-
+            this.cmd_id = this.cmd_id.toString()
             switch (this.cmd_id) {
                 case parametres.tempInterieureId:
                     var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-temperature").children();
@@ -290,7 +290,7 @@ function initialize_Simple_Template(parametres, template) {
             _options = _event.originalEvent.detail;
         }
         $(_options).each(function() {
-
+            this.cmd_id = this.cmd_id.toString()
             switch (this.cmd_id) {
                 case parametres.tempInterieureId:
                     var $domElement = $(".eqLogic[data-eqlogic_uid=" + parametres.uid + "] .thermo" + template + "-main-temperature .thermo" + template + "-consigne").children().first();
@@ -418,7 +418,7 @@ function initialize_Dark_Template(parametres, template) {
             _options = _event.originalEvent.detail;
         }
         $(_options).each(function() {
-
+            this.cmd_id = this.cmd_id.toString()
             switch (this.cmd_id) {
 
                 case parametres.tempInterieureId:
